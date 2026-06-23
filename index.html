@@ -16,86 +16,70 @@
     --white: #FFFFFF;
     --border: #E5E7EB;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Sarabun', 'Arial', sans-serif;
     font-size: 14px;
     color: var(--black);
-    background: #F0F4F8;
-    line-height: 1.5;
+    background: #EEF2F7;
+    line-height: 1.55;
   }
 
-  /* ── SCREEN WRAPPER ── */
+  /* ── WRAPPER ── */
   .page-wrapper {
-    max-width: 860px;
-    margin: 32px auto;
+    max-width: 880px;
+    margin: 28px auto;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    border-radius: 14px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.11);
     overflow: hidden;
   }
 
-  /* ── TITLE BLOCK ── */
+  /* ── TITLE ── */
   .title-block {
     background: var(--dark);
-    padding: 36px 40px 28px;
+    padding: 34px 40px 26px;
   }
-  .title-block .brand {
-    font-size: 13px;
+  .title-brand {
+    font-size: 12px;
     font-weight: 700;
     color: var(--cyan);
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
   .title-block h1 {
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 800;
     color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 6px;
+    line-height: 1.25;
+    margin-bottom: 7px;
   }
-  .title-block .subtitle {
-    font-size: 14px;
-    color: #9CA3AF;
-    font-style: italic;
-  }
-  .title-block .sub2 {
-    margin-top: 4px;
-    font-size: 13px;
-    color: var(--cyan);
-  }
+  .title-sub  { font-size: 13px; color: #9CA3AF; font-style: italic; }
+  .title-sub2 { margin-top: 5px; font-size: 13px; color: var(--cyan); }
 
   /* ── META ROW ── */
   .meta-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
+    grid-template-columns: 1fr 1fr 1.4fr;
     border-bottom: 1px solid var(--border);
   }
   .meta-cell {
-    padding: 14px 20px;
-    border-right: 1px solid var(--border);
+    padding: 13px 20px;
     background: var(--cyan-light);
+    border-right: 1px solid var(--border);
   }
   .meta-cell:last-child { border-right: none; }
   .meta-cell label {
     display: block;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: var(--dark);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 5px;
   }
-  .meta-cell .meta-input {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .meta-input { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .meta-input input[type="text"] {
     border: none;
     border-bottom: 1.5px solid var(--cyan);
@@ -103,64 +87,56 @@
     font-size: 13px;
     color: var(--dark);
     padding: 2px 4px;
-    width: 130px;
+    width: 145px;
     outline: none;
+    font-family: inherit;
   }
-  .meta-check { display: flex; align-items: center; gap: 5px; font-size: 13px; }
+  .meta-check { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
 
   /* ── BODY ── */
-  .survey-body { padding: 0 40px 40px; }
+  .survey-body { padding: 0 40px 44px; }
 
   /* ── SECTION HEADER ── */
-  .section-header {
+  .section-hdr {
     display: flex;
     align-items: center;
     gap: 14px;
     background: var(--cyan);
     color: white;
-    padding: 12px 20px;
-    margin: 32px -40px 20px;
-    font-size: 15px;
+    padding: 11px 22px;
+    margin: 30px -40px 18px;
+    font-size: 14.5px;
     font-weight: 700;
+    letter-spacing: 0.2px;
   }
-  .section-header .sec-num {
-    background: var(--cyan-dark);
+  .sec-num {
+    background: rgba(0,0,0,0.18);
     border-radius: 6px;
     padding: 2px 10px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 1px;
   }
 
-  /* ── QUESTION BLOCK ── */
+  /* ── QUESTION ── */
   .q-block {
-    margin-bottom: 24px;
-    padding-bottom: 20px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
     border-bottom: 1px dashed var(--border);
   }
-  .q-block:last-child { border-bottom: none; }
-
-  .q-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
+  .q-block:last-of-type { border-bottom: none; }
+  .q-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
   .q-num {
     flex-shrink: 0;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 800;
     color: var(--cyan);
+    min-width: 40px;
     line-height: 1;
-    min-width: 38px;
+    padding-top: 1px;
   }
-  .q-text {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--dark);
-    flex: 1;
-  }
-  .q-text .q-tag {
+  .q-text { font-size: 14px; font-weight: 700; color: var(--dark); flex: 1; }
+  .q-tag {
     display: inline-block;
     font-size: 10px;
     font-weight: 700;
@@ -168,107 +144,94 @@
     background: var(--lgray);
     border-radius: 4px;
     padding: 1px 6px;
-    margin-left: 6px;
+    margin-left: 7px;
     vertical-align: middle;
     letter-spacing: 0.5px;
   }
   .q-hint {
+    display: block;
     font-size: 12px;
     color: var(--gray);
     font-style: italic;
-    margin-top: 3px;
     font-weight: 400;
+    margin-top: 3px;
   }
 
   /* ── OPTIONS ── */
-  .options {
-    padding-left: 50px;
-    display: grid;
-    gap: 6px;
-  }
-  .options.cols-2 { grid-template-columns: 1fr 1fr; }
-  .options.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-  .options.cols-1 { grid-template-columns: 1fr; }
+  .options { padding-left: 52px; display: grid; gap: 7px; }
+  .cols-1 { grid-template-columns: 1fr; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
 
-  .opt-item {
+  .opt {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    padding: 7px 10px;
-    border-radius: 6px;
+    gap: 9px;
+    padding: 8px 12px;
+    border-radius: 7px;
     border: 1.5px solid var(--border);
     cursor: pointer;
-    transition: all 0.15s;
     font-size: 13px;
     color: var(--black);
     background: white;
+    transition: border-color 0.13s, background 0.13s;
+    user-select: none;
   }
-  .opt-item:hover { border-color: var(--cyan); background: var(--cyan-light); }
-  .opt-item input[type="checkbox"],
-  .opt-item input[type="radio"] {
-    margin-top: 1px;
-    accent-color: var(--cyan);
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-  .opt-item span { flex: 1; line-height: 1.4; }
+  .opt:hover { border-color: var(--cyan); background: var(--cyan-light); }
+  .opt input { margin-top: 2px; accent-color: var(--cyan); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer; }
+  .opt span { flex: 1; line-height: 1.4; }
 
-  /* ── ANSWER LINES ── */
-  .answer-lines { padding-left: 50px; }
-  .answer-line {
+  /* ── OPEN ANSWER ── */
+  .ans-label { padding-left: 52px; font-size: 12px; color: var(--gray); font-style: italic; margin-bottom: 6px; }
+  .ans-lines { padding-left: 52px; }
+  .ans-line {
+    display: block;
+    width: 100%;
     border: none;
     border-bottom: 1.5px solid var(--border);
     background: transparent;
-    width: 100%;
     font-size: 13px;
     color: var(--dark);
     padding: 6px 4px;
-    outline: none;
     margin-bottom: 8px;
+    outline: none;
     font-family: inherit;
+    transition: border-color 0.15s;
   }
-  .answer-line:focus { border-bottom-color: var(--cyan); }
-  .answer-label {
-    padding-left: 50px;
-    font-size: 12px;
-    color: var(--gray);
-    font-style: italic;
-    margin-bottom: 6px;
-  }
+  .ans-line:focus { border-bottom-color: var(--cyan); }
 
-  /* ── INTERVIEWER NOTES ── */
+  /* ── NOTES BLOCK ── */
   .notes-block {
-    margin-top: 36px;
+    margin-top: 32px;
     border: 2px solid var(--dark);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
   }
-  .notes-header {
+  .notes-hdr {
     background: var(--dark);
     color: white;
-    padding: 12px 18px;
+    padding: 12px 20px;
     font-size: 14px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .notes-header span { font-size: 12px; font-weight: 400; color: #9CA3AF; }
+  .notes-hdr small { font-size: 12px; font-weight: 400; color: #9CA3AF; }
   .notes-body { padding: 18px; background: var(--lgray); }
   .notes-body textarea {
     width: 100%;
     border: 1.5px solid var(--border);
-    border-radius: 6px;
+    border-radius: 7px;
     background: white;
     font-size: 13px;
     color: var(--dark);
-    padding: 10px;
-    min-height: 80px;
+    padding: 10px 12px;
+    min-height: 78px;
     resize: vertical;
     outline: none;
     font-family: inherit;
+    transition: border-color 0.15s;
   }
   .notes-body textarea:focus { border-color: var(--cyan); }
   .sentiment-row {
@@ -279,9 +242,9 @@
     flex-wrap: wrap;
   }
   .sentiment-row label { font-size: 13px; font-weight: 700; color: var(--dark); }
-  .sentiment-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sent-opts { display: flex; gap: 8px; flex-wrap: wrap; }
   .sent-btn {
-    padding: 5px 14px;
+    padding: 5px 16px;
     border-radius: 20px;
     border: 1.5px solid var(--border);
     background: white;
@@ -289,97 +252,79 @@
     cursor: pointer;
     font-family: inherit;
     transition: all 0.15s;
+    font-weight: 600;
   }
-  .sent-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .sent-btn:hover { border-color: var(--cyan); color: var(--cyan-dark); }
   .sent-btn.active { background: var(--cyan); border-color: var(--cyan); color: white; }
 
-  /* ── FOOTER ── */
-  .survey-footer {
-    text-align: center;
-    padding: 18px 40px;
-    background: var(--dark);
-    color: #9CA3AF;
-    font-size: 12px;
-  }
-  .survey-footer span { color: var(--cyan); font-weight: 700; }
-
-  /* ── PRINT BUTTON ── */
-  .print-bar {
+  /* ── ACTION BAR ── */
+  .action-bar {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 12px;
     padding: 16px 40px;
     background: var(--cyan-light);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid #C7EEF6;
   }
-  .btn-print {
-    background: var(--cyan);
-    color: white;
-    border: none;
+  .action-note { font-size: 12px; color: var(--gray); margin-right: auto; }
+  .btn {
     border-radius: 8px;
-    padding: 10px 24px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 13px;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
+    border: none;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: background 0.15s;
-  }
-  .btn-print:hover { background: var(--cyan-dark); }
-  .btn-reset {
-    background: white;
-    color: var(--gray);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 18px;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
+    gap: 7px;
     transition: all 0.15s;
   }
+  .btn-reset { background: white; color: var(--gray); border: 1.5px solid var(--border); }
   .btn-reset:hover { border-color: var(--gray); color: var(--dark); }
-  .print-note { font-size: 12px; color: var(--gray); }
+  .btn-print { background: var(--cyan); color: white; }
+  .btn-print:hover { background: var(--cyan-dark); }
 
-  /* ── PRINT STYLES ── */
+  /* ── FOOTER ── */
+  .survey-footer {
+    text-align: center;
+    padding: 16px 40px;
+    background: var(--dark);
+    color: #6B7280;
+    font-size: 12px;
+  }
+  .survey-footer b { color: var(--cyan); }
+
+  /* ── PRINT ── */
   @media print {
-    body { background: white; font-size: 12px; }
+    body { background: white; font-size: 12.5px; }
     .page-wrapper { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; }
-    .print-bar { display: none; }
+    .action-bar { display: none; }
     .title-block { padding: 20px 28px 16px; }
     .title-block h1 { font-size: 20px; }
     .survey-body { padding: 0 28px 28px; }
-    .section-header { margin: 20px -28px 14px; padding: 8px 16px; font-size: 13px; }
-    .q-block { margin-bottom: 16px; padding-bottom: 14px; }
-    .opt-item { padding: 5px 8px; }
-    .opt-item:hover { border-color: var(--border); background: white; }
-    .notes-block { margin-top: 20px; }
-    .survey-footer { padding: 12px 28px; }
-
-    /* Page breaks */
-    .page-break-before { page-break-before: always; }
-    .section-header { page-break-after: avoid; }
+    .section-hdr { margin: 20px -28px 14px; padding: 9px 18px; font-size: 13px; }
+    .q-block { margin-bottom: 15px; padding-bottom: 12px; }
+    .opt { padding: 5px 9px; }
+    .opt:hover { border-color: var(--border); background: white; }
+    .notes-block { margin-top: 22px; }
+    .pb { page-break-before: always; }
+    .section-hdr { page-break-after: avoid; }
     .q-block { page-break-inside: avoid; }
   }
-
-  @page {
-    size: A4;
-    margin: 15mm 12mm;
-  }
+  @page { size: A4; margin: 14mm 12mm; }
 </style>
 </head>
 <body>
-
 <div class="page-wrapper">
 
   <!-- TITLE -->
   <div class="title-block">
-    <div class="brand">UFicon &nbsp;|&nbsp; Confidential</div>
+    <div class="title-brand">UFicon &nbsp;·&nbsp; Confidential</div>
     <h1>Customer Insight Survey<br>iPhone NPI 2026</h1>
-    <div class="subtitle">สำหรับหน้าร้านและ Agency — กรุณากรอกให้ครบทุกข้อ</div>
-    <div class="sub2">ใช้เวลาประมาณ 5–7 นาทีต่อคน &nbsp;·&nbsp; Focus Group & In-Store Research</div>
+    <div class="title-sub">สำหรับหน้าร้านและ Agency — กรุณากรอกให้ครบทุกข้อ</div>
+    <div class="title-sub2">ใช้เวลาประมาณ 5–7 นาทีต่อคน &nbsp;·&nbsp; Focus Group &amp; In-Store Research</div>
   </div>
 
   <!-- META -->
@@ -389,10 +334,8 @@
       <div class="meta-input"><input type="text" placeholder="DD / MM / YYYY"></div>
     </div>
     <div class="meta-cell">
-      <label>สาขา</label>
-      <div class="meta-input">
-        <input type="text" placeholder="FI / TM / TA / KBI / KKC / SWU / PN">
-      </div>
+      <label>สาขา (Branch)</label>
+      <div class="meta-input"><input type="text" placeholder="FI / TM / TA / KBI / KKC / SWU / PN"></div>
     </div>
     <div class="meta-cell">
       <label>ประเภทลูกค้า</label>
@@ -404,517 +347,392 @@
     </div>
   </div>
 
-  <!-- BODY -->
   <div class="survey-body">
 
-    <!-- ═══════ SECTION 01 ═══════ -->
-    <div class="section-header">
-      <span class="sec-num">01</span>
-      Customer Profile &nbsp;·&nbsp; ข้อมูลพื้นฐานลูกค้า
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 01 ══ -->
+    <div class="section-hdr"><span class="sec-num">01</span> Customer Profile &nbsp;·&nbsp; ข้อมูลพื้นฐานลูกค้า</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q1</div>
-        <div class="q-text">อายุของคุณอยู่ในช่วงใด <span class="q-tag">AGE</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q1</div>
+        <div class="q-text">อายุของคุณอยู่ในช่วงใด <span class="q-tag">AGE</span></div></div>
       <div class="options cols-3">
-        <label class="opt-item"><input type="radio" name="q1"><span>Under 18 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q1"><span>18–24 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q1"><span>25–34 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q1"><span>35–44 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q1"><span>45 ปีขึ้นไป</span></label>
+        <label class="opt"><input type="radio" name="q1"><span>Under 18 ปี</span></label>
+        <label class="opt"><input type="radio" name="q1"><span>18–24 ปี</span></label>
+        <label class="opt"><input type="radio" name="q1"><span>25–34 ปี</span></label>
+        <label class="opt"><input type="radio" name="q1"><span>35–44 ปี</span></label>
+        <label class="opt"><input type="radio" name="q1"><span>45 ปีขึ้นไป</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q2</div>
-        <div class="q-text">iPhone รุ่นที่คุณใช้อยู่ปัจจุบัน <span class="q-tag">DEVICE</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q2</div>
+        <div class="q-text">iPhone รุ่นที่คุณใช้อยู่ปัจจุบัน <span class="q-tag">DEVICE</span></div></div>
       <div class="options cols-3">
-        <label class="opt-item"><input type="radio" name="q2"><span>iPhone 12 หรือเก่ากว่า</span></label>
-        <label class="opt-item"><input type="radio" name="q2"><span>iPhone 13</span></label>
-        <label class="opt-item"><input type="radio" name="q2"><span>iPhone 14</span></label>
-        <label class="opt-item"><input type="radio" name="q2"><span>iPhone 15</span></label>
-        <label class="opt-item"><input type="radio" name="q2"><span>iPhone 16</span></label>
-        <label class="opt-item"><input type="radio" name="q2"><span>ใช้ Android / ไม่แน่ใจ</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 12 หรือเก่ากว่า</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 13 Series</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 14 Series</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 15 Series</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 16 Series</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>iPhone 17 Series / iPhone Air</span></label>
+        <label class="opt"><input type="radio" name="q2"><span>ไม่ได้ใช้ iPhone (ใช้ Android)</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q3</div>
-        <div class="q-text">คุณใช้ iPhone มานานแค่ไหนแล้ว <span class="q-tag">DURATION</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q3</div>
+        <div class="q-text">คุณใช้ iPhone มานานแค่ไหนแล้ว <span class="q-tag">DURATION</span></div></div>
       <div class="options cols-3">
-        <label class="opt-item"><input type="radio" name="q3"><span>น้อยกว่า 1 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q3"><span>1–2 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q3"><span>3–4 ปี</span></label>
-        <label class="opt-item"><input type="radio" name="q3"><span>5 ปีขึ้นไป</span></label>
-        <label class="opt-item"><input type="radio" name="q3"><span>เพิ่งเริ่มใช้ครั้งแรก</span></label>
+        <label class="opt"><input type="radio" name="q3"><span>น้อยกว่า 1 ปี</span></label>
+        <label class="opt"><input type="radio" name="q3"><span>1–2 ปี</span></label>
+        <label class="opt"><input type="radio" name="q3"><span>3–4 ปี</span></label>
+        <label class="opt"><input type="radio" name="q3"><span>5 ปีขึ้นไป</span></label>
+        <label class="opt"><input type="radio" name="q3"><span>เพิ่งเริ่มใช้ครั้งแรก</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q4</div>
-        <div class="q-text">ก่อนใช้ iPhone คุณเคยใช้ Android ไหม <span class="q-tag">SWITCH</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q4</div>
+        <div class="q-text">ก่อนใช้ iPhone คุณใช้ Android ไหม <span class="q-tag">SWITCH</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q4"><span>ใช่ เคยใช้ Android มาก่อน</span></label>
-        <label class="opt-item"><input type="radio" name="q4"><span>ไม่ ใช้ iPhone มาตลอด</span></label>
-        <label class="opt-item"><input type="radio" name="q4"><span>ยังคงใช้ Android คู่กัน</span></label>
+        <label class="opt"><input type="radio" name="q4"><span>ใช่ เคยใช้ Android มาก่อน</span></label>
+        <label class="opt"><input type="radio" name="q4"><span>ไม่ ใช้ iPhone มาตลอด</span></label>
+        <label class="opt"><input type="radio" name="q4"><span>ยังคงใช้ Android คู่กัน</span></label>
       </div>
     </div>
 
-    <!-- ═══════ SECTION 02 ═══════ -->
-    <div class="section-header">
-      <span class="sec-num">02</span>
-      Purchase Behavior &nbsp;·&nbsp; พฤติกรรมการซื้อ
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 02 ══ -->
+    <div class="section-hdr"><span class="sec-num">02</span> Purchase Behavior &nbsp;·&nbsp; พฤติกรรมการซื้อ</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q5</div>
-        <div class="q-text">ครั้งล่าสุดที่ซื้อ iPhone — ซื้อจากที่ไหน <span class="q-tag">CHANNEL</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q5</div>
+        <div class="q-text">ครั้งล่าสุดที่ซื้อ iPhone — ซื้อจากที่ไหน <span class="q-tag">CHANNEL</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q5"><span>ร้าน UFicon สาขาใดสาขาหนึ่ง</span></label>
-        <label class="opt-item"><input type="radio" name="q5"><span>iStudio / Apple Reseller อื่น</span></label>
-        <label class="opt-item"><input type="radio" name="q5"><span>ออนไลน์ (Lazada / Shopee / JD)</span></label>
-        <label class="opt-item"><input type="radio" name="q5"><span>Apple.com หรือ Apple Store</span></label>
-        <label class="opt-item"><input type="radio" name="q5"><span>มือสอง</span></label>
-        <label class="opt-item"><input type="radio" name="q5"><span>ให้คนอื่นซื้อให้</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>ร้าน UFicon สาขาใดสาขาหนึ่ง</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>iStudio / Apple Reseller อื่น</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>ซื้อออนไลน์ (Lazada / Shopee)</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>Apple.com หรือ Apple Store</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>มือสอง</span></label>
+        <label class="opt"><input type="radio" name="q5"><span>ให้คนอื่นซื้อให้</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q6</div>
+      <div class="q-header"><div class="q-num">Q6</div>
         <div class="q-text">เหตุผลหลักที่เลือกซื้อที่นั้น <span class="q-tag">REASON</span>
-          <div class="q-hint">เลือกได้มากกว่า 1 ข้อ</div>
-        </div>
-      </div>
+          <span class="q-hint">เลือกได้มากกว่า 1 ข้อ</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="checkbox" name="q6"><span>ใกล้บ้าน / สะดวก</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>โปรโมชันดีกว่าที่อื่น</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>ราคาถูกกว่า</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>ไว้วางใจในบริการ</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>มีสินค้าครบ / สีที่ต้องการ</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>เพื่อน/ครอบครัวแนะนำ</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>เคยซื้อที่นี่มาก่อน</span></label>
-        <label class="opt-item"><input type="checkbox" name="q6"><span>อื่นๆ</span></label>
+        <label class="opt"><input type="checkbox"><span>ใกล้บ้าน / สะดวก</span></label>
+        <label class="opt"><input type="checkbox"><span>โปรโมชันดีกว่าที่อื่น</span></label>
+        <label class="opt"><input type="checkbox"><span>ราคาถูกกว่า</span></label>
+        <label class="opt"><input type="checkbox"><span>ไว้วางใจในบริการ</span></label>
+        <label class="opt"><input type="checkbox"><span>มีสินค้าครบ / มีสีที่ต้องการ</span></label>
+        <label class="opt"><input type="checkbox"><span>เพื่อน/ครอบครัวแนะนำ</span></label>
+        <label class="opt"><input type="checkbox"><span>เคยซื้อที่นี่มาก่อน</span></label>
+        <label class="opt"><input type="checkbox"><span>อื่นๆ</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q7</div>
-        <div class="q-text">บ้านของคุณห่างจากสาขา UFicon ที่ใกล้ที่สุดประมาณเท่าไหร่ <span class="q-tag">DISTANCE</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q7</div>
+        <div class="q-text">บ้านของคุณห่างจากสาขา UFicon ที่ใกล้ที่สุดประมาณเท่าไหร่ <span class="q-tag">DISTANCE</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q7"><span>ไม่เกิน 5 กม.</span></label>
-        <label class="opt-item"><input type="radio" name="q7"><span>5–15 กม.</span></label>
-        <label class="opt-item"><input type="radio" name="q7"><span>16–30 กม.</span></label>
-        <label class="opt-item"><input type="radio" name="q7"><span>มากกว่า 30 กม.</span></label>
+        <label class="opt"><input type="radio" name="q7"><span>ไม่เกิน 5 กม.</span></label>
+        <label class="opt"><input type="radio" name="q7"><span>5–15 กม.</span></label>
+        <label class="opt"><input type="radio" name="q7"><span>16–30 กม.</span></label>
+        <label class="opt"><input type="radio" name="q7"><span>มากกว่า 30 กม.</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q8</div>
-        <div class="q-text">ถ้าโปรโมชันดีกว่า คุณยินดีไปซื้อที่สาขาที่ไกลขึ้นไหม <span class="q-tag">TRAVEL</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q8</div>
+        <div class="q-text">ถ้าโปรโมชันดีกว่า คุณยินดีไปซื้อที่สาขาที่ไกลขึ้นไหม <span class="q-tag">TRAVEL</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q8"><span>ยินดีมาก — ถ้าโปรดีกว่าชัดเจน</span></label>
-        <label class="opt-item"><input type="radio" name="q8"><span>ยินดี — แต่ต้องไม่ไกลเกิน 20 กม.</span></label>
-        <label class="opt-item"><input type="radio" name="q8"><span>ไม่ยินดี — ซื้อสาขาใกล้บ้านดีกว่า</span></label>
-        <label class="opt-item"><input type="radio" name="q8"><span>ขึ้นอยู่กับส่วนต่างราคา</span></label>
+        <label class="opt"><input type="radio" name="q8"><span>ยินดีมาก — ถ้าโปรดีกว่าชัดเจน</span></label>
+        <label class="opt"><input type="radio" name="q8"><span>ยินดี — แต่ต้องไม่ไกลเกิน 20 กม.</span></label>
+        <label class="opt"><input type="radio" name="q8"><span>ไม่ยินดี — ซื้อสาขาใกล้บ้านดีกว่า</span></label>
+        <label class="opt"><input type="radio" name="q8"><span>ขึ้นอยู่กับส่วนต่างราคา</span></label>
       </div>
     </div>
 
-    <!-- ═══════ SECTION 03 ═══════ -->
-    <div class="section-header page-break-before">
-      <span class="sec-num">03</span>
-      Upgrade Decision &nbsp;·&nbsp; การตัดสินใจเปลี่ยนเครื่อง
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 03 ══ -->
+    <div class="section-hdr pb"><span class="sec-num">03</span> Upgrade Decision &nbsp;·&nbsp; การตัดสินใจเปลี่ยนเครื่อง</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q9</div>
-        <div class="q-text">คุณวางแผนจะเปลี่ยน iPhone ในปี 2026 นี้ไหม <span class="q-tag">INTENT</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q9</div>
+        <div class="q-text">คุณวางแผนจะเปลี่ยน iPhone ในปี 2026 นี้ไหม <span class="q-tag">INTENT</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q9"><span>ใช่ วางแผนแล้ว</span></label>
-        <label class="opt-item"><input type="radio" name="q9"><span>ใช่ รอดูรุ่นใหม่ก่อน</span></label>
-        <label class="opt-item"><input type="radio" name="q9"><span>ยังไม่แน่ใจ</span></label>
-        <label class="opt-item"><input type="radio" name="q9"><span>ไม่ได้วางแผน</span></label>
+        <label class="opt"><input type="radio" name="q9"><span>ใช่ วางแผนแล้ว ช่วงนี้เลย</span></label>
+        <label class="opt"><input type="radio" name="q9"><span>ใช่ รอดูรุ่นใหม่ก่อน</span></label>
+        <label class="opt"><input type="radio" name="q9"><span>ยังไม่แน่ใจ</span></label>
+        <label class="opt"><input type="radio" name="q9"><span>ไม่ได้วางแผน</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q10</div>
+      <div class="q-header"><div class="q-num">Q10</div>
         <div class="q-text">อะไรที่ทำให้คุณตัดสินใจเปลี่ยน iPhone <span class="q-tag">TRIGGER</span>
-          <div class="q-hint">เลือกได้มากกว่า 1 ข้อ</div>
-        </div>
-      </div>
+          <span class="q-hint">เลือกได้มากกว่า 1 ข้อ</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="checkbox"><span>เครื่องเก่าช้า / มีปัญหา</span></label>
-        <label class="opt-item"><input type="checkbox"><span>อยากได้ฟีเจอร์ใหม่</span></label>
-        <label class="opt-item"><input type="checkbox"><span>แบตเสื่อม</span></label>
-        <label class="opt-item"><input type="checkbox"><span>กล้องดีขึ้นมาก</span></label>
-        <label class="opt-item"><input type="checkbox"><span>โปรโมชันน่าสนใจ</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ครบสัญญาผ่อน</span></label>
-        <label class="opt-item"><input type="checkbox"><span>มีเงินพอดี</span></label>
-        <label class="opt-item"><input type="checkbox"><span>เพื่อน/ครอบครัวเปลี่ยนด้วยกัน</span></label>
+        <label class="opt"><input type="checkbox"><span>เครื่องเก่าช้า / มีปัญหา</span></label>
+        <label class="opt"><input type="checkbox"><span>อยากได้ฟีเจอร์ใหม่</span></label>
+        <label class="opt"><input type="checkbox"><span>แบตเสื่อม</span></label>
+        <label class="opt"><input type="checkbox"><span>กล้องดีขึ้นมาก</span></label>
+        <label class="opt"><input type="checkbox"><span>โปรโมชันน่าสนใจ</span></label>
+        <label class="opt"><input type="checkbox"><span>ครบสัญญาผ่อน</span></label>
+        <label class="opt"><input type="checkbox"><span>อยากอัพเกรดเป็นรุ่นล่าสุด</span></label>
+        <label class="opt"><input type="checkbox"><span>เพื่อน/ครอบครัวเปลี่ยนด้วยกัน</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q11</div>
-        <div class="q-text">ถ้าจะซื้อ iPhone ใหม่ คุณสนใจรุ่นไหนมากกว่า <span class="q-tag">SERIES</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q11</div>
+        <div class="q-text">ถ้าจะซื้อ iPhone ใหม่ คุณสนใจรุ่นไหนมากกว่า <span class="q-tag">SERIES</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q11"><span>iPhone 18 / 18e &nbsp;(รุ่น Consumer ราคาปกติ)</span></label>
-        <label class="opt-item"><input type="radio" name="q11"><span>iPhone 18 Pro / Pro Max &nbsp;(รุ่น Pro)</span></label>
-        <label class="opt-item"><input type="radio" name="q11"><span>iPhone Fold / Ultra &nbsp;(รุ่น Foldable ใหม่)</span></label>
-        <label class="opt-item"><input type="radio" name="q11"><span>ยังไม่แน่ใจ</span></label>
+        <label class="opt"><input type="radio" name="q11"><span>iPhone 18</span></label>
+        <label class="opt"><input type="radio" name="q11"><span>iPhone 18 Pro / Pro Max</span></label>
+        <label class="opt"><input type="radio" name="q11"><span>iPhone อื่นๆ ที่จะมาใหม่</span></label>
+        <label class="opt"><input type="radio" name="q11"><span>ยังไม่แน่ใจ</span></label>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════ SECTION 04 ══ -->
+    <div class="section-hdr"><span class="sec-num">04</span> Financial Preference &nbsp;·&nbsp; ความชอบในการชำระเงิน</div>
+
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q12</div>
-        <div class="q-text">ถ้าเลือกรุ่น Pro สิ่งที่สำคัญที่สุดคืออะไร <span class="q-tag">PRO-WHY</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q13</div>
+        <div class="q-text">วิธีชำระเงินที่คุณชอบที่สุด <span class="q-tag">PAYMENT</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q12"><span>กล้องดีกว่า / Variable Aperture</span></label>
-        <label class="opt-item"><input type="radio" name="q12"><span>Chip เร็วกว่า (A20)</span></label>
-        <label class="opt-item"><input type="radio" name="q12"><span>Battery อึดกว่า</span></label>
-        <label class="opt-item"><input type="radio" name="q12"><span>Display ดีกว่า</span></label>
-        <label class="opt-item"><input type="radio" name="q12"><span>Status / ความดูดี</span></label>
-        <label class="opt-item"><input type="radio" name="q12"><span>ไม่ได้สนใจรุ่น Pro</span></label>
-      </div>
-    </div>
-
-    <!-- ═══════ SECTION 04 ═══════ -->
-    <div class="section-header">
-      <span class="sec-num">04</span>
-      Financial Preference &nbsp;·&nbsp; ความชอบในการชำระเงิน
-    </div>
-
-    <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q13</div>
-        <div class="q-text">วิธีชำระเงินที่คุณชอบที่สุด <span class="q-tag">PAYMENT</span></div>
-      </div>
-      <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q13"><span>เงินสด / โอนจ่ายเต็ม</span></label>
-        <label class="opt-item"><input type="radio" name="q13"><span>บัตรเครดิตผ่อน 0%</span></label>
-        <label class="opt-item"><input type="radio" name="q13"><span>ผ่อนไม่ใช้บัตร (Financing)</span></label>
-        <label class="opt-item"><input type="radio" name="q13"><span>Trade-in แล้วจ่ายส่วนต่าง</span></label>
-        <label class="opt-item"><input type="radio" name="q13"><span>Combo ผ่อน + Trade-in</span></label>
-        <label class="opt-item"><input type="radio" name="q13"><span>ยังไม่แน่ใจ</span></label>
+        <label class="opt"><input type="radio" name="q13"><span>เงินสด / โอนจ่ายเต็ม</span></label>
+        <label class="opt"><input type="radio" name="q13"><span>บัตรเครดิตผ่อน 0%</span></label>
+        <label class="opt"><input type="radio" name="q13"><span>ผ่อนไม่ใช้บัตร (SPaylater / Pay Next Extra / อื่นๆ)</span></label>
+        <label class="opt"><input type="radio" name="q13"><span>ยังไม่แน่ใจ</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q14</div>
-        <div class="q-text">ระยะผ่อนที่ทำให้คุณสนใจมากที่สุด <span class="q-tag">INSTALL</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q14</div>
+        <div class="q-text">ระยะผ่อนที่ทำให้คุณสนใจมากที่สุด <span class="q-tag">INSTALL</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q14"><span>6 เดือน (เดือนละมากหน่อย แต่จบเร็ว)</span></label>
-        <label class="opt-item"><input type="radio" name="q14"><span>12 เดือน</span></label>
-        <label class="opt-item"><input type="radio" name="q14"><span>18 เดือน</span></label>
-        <label class="opt-item"><input type="radio" name="q14"><span>24 เดือน (เดือนละหลักร้อย)</span></label>
-        <label class="opt-item"><input type="radio" name="q14"><span>ไม่สนใจผ่อน ชอบจ่ายครั้งเดียว</span></label>
+        <label class="opt"><input type="radio" name="q14"><span>6 เดือน</span></label>
+        <label class="opt"><input type="radio" name="q14"><span>12 เดือน</span></label>
+        <label class="opt"><input type="radio" name="q14"><span>24 เดือน</span></label>
+        <label class="opt"><input type="radio" name="q14"><span>36 เดือน</span></label>
+        <label class="opt"><input type="radio" name="q14"><span>ไม่สนใจผ่อน ชอบจ่ายครั้งเดียว</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q15</div>
-        <div class="q-text">ปัจจุบันคุณมีบัตรเครดิตไหม <span class="q-tag">CARD</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q15</div>
+        <div class="q-text">ปัจจุบันคุณมีบัตรเครดิตไหม <span class="q-tag">CARD</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q15"><span>มี และใช้ประจำ</span></label>
-        <label class="opt-item"><input type="radio" name="q15"><span>มี แต่ใช้น้อย</span></label>
-        <label class="opt-item"><input type="radio" name="q15"><span>ไม่มีบัตรเครดิต</span></label>
+        <label class="opt"><input type="radio" name="q15"><span>มี และใช้ประจำ</span></label>
+        <label class="opt"><input type="radio" name="q15"><span>มี แต่ใช้น้อย</span></label>
+        <label class="opt"><input type="radio" name="q15"><span>ไม่มีบัตรเครดิต</span></label>
       </div>
     </div>
 
-    <!-- ═══════ SECTION 05 ═══════ -->
-    <div class="section-header page-break-before">
-      <span class="sec-num">05</span>
-      Trade-In Awareness &nbsp;·&nbsp; การรับรู้เรื่อง Trade-In
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 05 ══ -->
+    <div class="section-hdr pb"><span class="sec-num">05</span> Trade-In Awareness &nbsp;·&nbsp; การรับรู้เรื่อง Trade-In</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q16</div>
-        <div class="q-text">คุณรู้จักบริการ Trade-In iPhone ที่ UFicon ไหม <span class="q-tag">AWARE</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q16</div>
+        <div class="q-text">คุณรู้จักบริการ Trade-In iPhone ที่ UFicon ไหม <span class="q-tag">AWARE</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q16"><span>รู้จักดี และเคยใช้</span></label>
-        <label class="opt-item"><input type="radio" name="q16"><span>รู้จัก แต่ไม่เคยใช้</span></label>
-        <label class="opt-item"><input type="radio" name="q16"><span>เพิ่งรู้ว่ามีบริการนี้</span></label>
-        <label class="opt-item"><input type="radio" name="q16"><span>ไม่รู้จักเลย</span></label>
+        <label class="opt"><input type="radio" name="q16"><span>รู้จักดี และเคยใช้</span></label>
+        <label class="opt"><input type="radio" name="q16"><span>รู้จัก แต่ไม่เคยใช้</span></label>
+        <label class="opt"><input type="radio" name="q16"><span>เพิ่งรู้ว่ามีบริการนี้</span></label>
+        <label class="opt"><input type="radio" name="q16"><span>ไม่รู้จักเลย</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q17</div>
+      <div class="q-header"><div class="q-num">Q17</div>
         <div class="q-text">ถ้าไม่เคย Trade-In เหตุผลหลักคืออะไร <span class="q-tag">BARRIER</span>
-          <div class="q-hint">เลือกได้มากกว่า 1 ข้อ</div>
-        </div>
-      </div>
+          <span class="q-hint">เลือกได้มากกว่า 1 ข้อ</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="checkbox"><span>ไม่รู้ว่าทำได้</span></label>
-        <label class="opt-item"><input type="checkbox"><span>กลัวได้ราคาต่ำเกินไป</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ขายมือสองเองได้ราคาดีกว่า</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ขั้นตอนยุ่งยาก</span></label>
-        <label class="opt-item"><input type="checkbox"><span>เครื่องเก่าให้ลูกหลานแล้ว</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ไม่สะดวกนำเครื่องมา</span></label>
-        <label class="opt-item"><input type="checkbox"><span>เคย Trade-In แล้ว (ไม่ตอบข้อนี้)</span></label>
-        <label class="opt-item"><input type="checkbox"><span>อื่นๆ</span></label>
+        <label class="opt"><input type="checkbox"><span>ไม่รู้ว่าทำได้</span></label>
+        <label class="opt"><input type="checkbox"><span>กลัวได้ราคาต่ำเกินไป</span></label>
+        <label class="opt"><input type="checkbox"><span>ขายมือสองเองได้ราคาดีกว่า</span></label>
+        <label class="opt"><input type="checkbox"><span>ขั้นตอนยุ่งยาก</span></label>
+        <label class="opt"><input type="checkbox"><span>เครื่องเก่าให้ลูกหลานแล้ว</span></label>
+        <label class="opt"><input type="checkbox"><span>ไม่สะดวกนำเครื่องมา</span></label>
+        <label class="opt"><input type="checkbox"><span>เคย Trade-In แล้ว (ไม่ตอบข้อนี้)</span></label>
+        <label class="opt"><input type="checkbox"><span>อื่นๆ</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q18</div>
-        <div class="q-text">ราคาประเมิน Trade-In ที่คุณคาดหวังสำหรับ iPhone ปัจจุบัน <span class="q-tag">PRICE</span></div>
-      </div>
-      <div class="answer-label">ตอบ:</div>
-      <div class="answer-lines">
-        <input class="answer-line" type="text" placeholder="พิมพ์ตอบ หรือเขียนเมื่อพิมพ์...">
-      </div>
+      <div class="q-header"><div class="q-num">Q18</div>
+        <div class="q-text">ราคาประเมิน Trade-In ที่คุณคาดหวังสำหรับ iPhone ปัจจุบัน <span class="q-tag">PRICE</span></div></div>
+      <div class="ans-label">ตอบ:</div>
+      <div class="ans-lines"><input class="ans-line" type="text"></div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q19</div>
-        <div class="q-text">ถ้าได้รับข้อเสนอ Trade-In + ผ่อน + AIS รวมกัน คุณสนใจไหม <span class="q-tag">COMBO</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q19</div>
+        <div class="q-text">ถ้าได้รับข้อเสนอ Trade-In + ผ่อน + AIS รวมกัน คุณสนใจไหม <span class="q-tag">COMBO</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q19"><span>สนใจมาก — อยากรู้รายละเอียด</span></label>
-        <label class="opt-item"><input type="radio" name="q19"><span>สนใจ — ถ้าตัวเลขคุ้ม</span></label>
-        <label class="opt-item"><input type="radio" name="q19"><span>ไม่สนใจ — ชอบดูทีละอย่าง</span></label>
-        <label class="opt-item"><input type="radio" name="q19"><span>ขึ้นอยู่กับโปรโมชัน</span></label>
+        <label class="opt"><input type="radio" name="q19"><span>สนใจมาก — อยากรู้รายละเอียด</span></label>
+        <label class="opt"><input type="radio" name="q19"><span>สนใจ — ถ้าตัวเลขคุ้ม</span></label>
+        <label class="opt"><input type="radio" name="q19"><span>ไม่สนใจ — ชอบดูทีละอย่าง</span></label>
+        <label class="opt"><input type="radio" name="q19"><span>ขึ้นอยู่กับโปรโมชัน</span></label>
       </div>
     </div>
 
-    <!-- ═══════ SECTION 06 ═══════ -->
-    <div class="section-header">
-      <span class="sec-num">06</span>
-      AIS Bundle & Info Sources &nbsp;·&nbsp; แพ็คเกจและแหล่งข้อมูล
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 06 ══ -->
+    <div class="section-hdr"><span class="sec-num">06</span> AIS Bundle &amp; Info Sources &nbsp;·&nbsp; แพ็คเกจและแหล่งข้อมูล</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q20</div>
-        <div class="q-text">ปัจจุบันคุณใช้เครือข่ายอะไร <span class="q-tag">CARRIER</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q20</div>
+        <div class="q-text">ปัจจุบันคุณใช้เครือข่ายอะไร <span class="q-tag">CARRIER</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q20"><span>AIS</span></label>
-        <label class="opt-item"><input type="radio" name="q20"><span>TRUE / DTAC</span></label>
-        <label class="opt-item"><input type="radio" name="q20"><span>NT / ทรู มูฟ</span></label>
-        <label class="opt-item"><input type="radio" name="q20"><span>Prepaid / ไม่มีสัญญาผูก</span></label>
+        <label class="opt"><input type="radio" name="q20"><span>AIS</span></label>
+        <label class="opt"><input type="radio" name="q20"><span>TRUE / DTAC</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q21</div>
-        <div class="q-text">ถ้าซื้อ iPhone ใหม่และมีโปร AIS ราคาพิเศษมาด้วย คุณสนใจไหม <span class="q-tag">AIS-INT</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q21</div>
+        <div class="q-text">ถ้าซื้อ iPhone ใหม่และมีโปรแพ็ค AIS ราคาพิเศษมาให้ด้วย คุณสนใจไหม <span class="q-tag">AIS-INT</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q21"><span>สนใจมาก — สะดวกซื้อพร้อมกันเลย</span></label>
-        <label class="opt-item"><input type="radio" name="q21"><span>สนใจ — ถ้าราคาดีจริง</span></label>
-        <label class="opt-item"><input type="radio" name="q21"><span>ไม่สนใจ — มีแพ็คอยู่แล้ว</span></label>
-        <label class="opt-item"><input type="radio" name="q21"><span>ไม่สนใจ — ไม่ใช้ AIS</span></label>
+        <label class="opt"><input type="radio" name="q21"><span>สนใจมาก — สะดวกซื้อพร้อมกันเลย</span></label>
+        <label class="opt"><input type="radio" name="q21"><span>สนใจ — ถ้าราคาดีจริง</span></label>
+        <label class="opt"><input type="radio" name="q21"><span>ไม่สนใจ — มีแพ็คอยู่แล้ว</span></label>
+        <label class="opt"><input type="radio" name="q21"><span>ไม่สนใจ — ไม่ใช้ AIS</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q22</div>
+      <div class="q-header"><div class="q-num">Q22</div>
         <div class="q-text">คุณรู้จักข่าว iPhone ใหม่จากที่ไหนมากที่สุด <span class="q-tag">INFO</span>
-          <div class="q-hint">เลือกได้มากกว่า 1 ข้อ</div>
-        </div>
-      </div>
+          <span class="q-hint">เลือกได้มากกว่า 1 ข้อ</span></div></div>
       <div class="options cols-3">
-        <label class="opt-item"><input type="checkbox"><span>TikTok</span></label>
-        <label class="opt-item"><input type="checkbox"><span>YouTube</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Facebook</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Instagram</span></label>
-        <label class="opt-item"><input type="checkbox"><span>เว็บรีวิว (Notebookspec ฯลฯ)</span></label>
-        <label class="opt-item"><input type="checkbox"><span>เพื่อน/ครอบครัว</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ป้ายโฆษณา / OOH</span></label>
-        <label class="opt-item"><input type="checkbox"><span>LINE / LINE OA</span></label>
+        <label class="opt"><input type="checkbox"><span>TikTok</span></label>
+        <label class="opt"><input type="checkbox"><span>YouTube</span></label>
+        <label class="opt"><input type="checkbox"><span>Facebook</span></label>
+        <label class="opt"><input type="checkbox"><span>Instagram</span></label>
+        <label class="opt"><input type="checkbox"><span>เว็บรีวิว (Notebookspec ฯลฯ)</span></label>
+        <label class="opt"><input type="checkbox"><span>เพื่อน/ครอบครัว</span></label>
+        <label class="opt"><input type="checkbox"><span>ป้ายโฆษณา / OOH</span></label>
+        <label class="opt"><input type="checkbox"><span>Line / LINE OA</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q23</div>
-        <div class="q-text">คุณติดตาม Social Media ของ UFicon ไหม <span class="q-tag">FOLLOW</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q23</div>
+        <div class="q-text">คุณติดตาม Social Media ของ UFicon ไหม <span class="q-tag">FOLLOW</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="checkbox"><span>ติดตาม Facebook UFicon</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ติดตาม TikTok UFicon หลัก</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ติดตาม TikTok สาขา</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ติดตาม Instagram</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ไม่ได้ติดตามเลย</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ไม่รู้ว่ามี Social</span></label>
+        <label class="opt"><input type="checkbox"><span>ติดตาม Facebook</span></label>
+        <label class="opt"><input type="checkbox"><span>ติดตาม TikTok (Official)</span></label>
+        <label class="opt"><input type="checkbox"><span>ติดตาม TikTok (สาขา)</span></label>
+        <label class="opt"><input type="checkbox"><span>ติดตาม Instagram</span></label>
+        <label class="opt"><input type="checkbox"><span>ไม่ได้ติดตามเลย</span></label>
+        <label class="opt"><input type="checkbox"><span>ไม่รู้ว่ามี Social</span></label>
       </div>
     </div>
 
-    <!-- ═══════ SECTION 07 ═══════ -->
-    <div class="section-header page-break-before">
-      <span class="sec-num">07</span>
-      Workshop Interest &nbsp;·&nbsp; ความสนใจ Workshop
-    </div>
+    <!-- ══════════════════════════════════════ SECTION 07 ══ -->
+    <div class="section-hdr pb"><span class="sec-num">07</span> Workshop Interest &nbsp;·&nbsp; ความสนใจ Workshop</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q24</div>
-        <div class="q-text">ถ้า UFicon จัด Workshop สอนใช้ iPhone ฟรีที่สาขา คุณสนใจมาไหม <span class="q-tag">WKSP</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q24</div>
+        <div class="q-text">ถ้า UFicon จัด Workshop สอนใช้ iPhone ฟรีที่สาขา คุณสนใจมาไหม <span class="q-tag">WKSP</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q24"><span>สนใจมาก — อยากมาเลย</span></label>
-        <label class="opt-item"><input type="radio" name="q24"><span>สนใจ — ถ้าหัวข้อตรงกับที่อยากรู้</span></label>
-        <label class="opt-item"><input type="radio" name="q24"><span>ไม่แน่ใจ — ขึ้นอยู่กับช่วงเวลา</span></label>
-        <label class="opt-item"><input type="radio" name="q24"><span>ไม่สนใจ</span></label>
+        <label class="opt"><input type="radio" name="q24"><span>สนใจมาก — อยากมาเลย</span></label>
+        <label class="opt"><input type="radio" name="q24"><span>สนใจ — ถ้าหัวข้อตรงกับที่อยากรู้</span></label>
+        <label class="opt"><input type="radio" name="q24"><span>ไม่แน่ใจ — ขึ้นอยู่กับช่วงเวลา</span></label>
+        <label class="opt"><input type="radio" name="q24"><span>ไม่สนใจ</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q25</div>
+      <div class="q-header"><div class="q-num">Q25</div>
         <div class="q-text">หัวข้อที่คุณอยากเรียนรู้มากที่สุด <span class="q-tag">TOPIC</span>
-          <div class="q-hint">เลือกได้มากกว่า 1 ข้อ</div>
-        </div>
-      </div>
+          <span class="q-hint">เลือกได้มากกว่า 1 ข้อ</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="checkbox"><span>วิธีย้ายเครื่องด้วยตัวเอง</span></label>
-        <label class="opt-item"><input type="checkbox"><span>วิธีตั้งค่า iCloud</span></label>
-        <label class="opt-item"><input type="checkbox"><span>ถ่ายรูป / วิดีโอให้สวย</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Shortcut / Automation</span></label>
-        <label class="opt-item"><input type="checkbox"><span>iPhone + Apple Watch / AirPods</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Privacy & Security</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Apple Pay / Digital Wallet</span></label>
-        <label class="opt-item"><input type="checkbox"><span>What's New in iPhone 18</span></label>
-        <label class="opt-item"><input type="checkbox"><span>Productivity Tips</span></label>
-        <label class="opt-item"><input type="checkbox"><span>อื่นๆ</span></label>
+        <label class="opt"><input type="checkbox"><span>วิธีย้ายเครื่องด้วยตัวเอง</span></label>
+        <label class="opt"><input type="checkbox"><span>วิธีตั้งค่าและจัดการ iCloud</span></label>
+        <label class="opt"><input type="checkbox"><span>ใช้ iPhone ถ่ายรูป / วิดีโอให้สวย</span></label>
+        <label class="opt"><input type="checkbox"><span>Shortcut / Automation</span></label>
+        <label class="opt"><input type="checkbox"><span>iPhone + Apple Watch / AirPods</span></label>
+        <label class="opt"><input type="checkbox"><span>Privacy &amp; Security</span></label>
+        <label class="opt"><input type="checkbox"><span>Apple Pay / Digital Wallet</span></label>
+        <label class="opt"><input type="checkbox"><span>What's New in iPhone 18</span></label>
+        <label class="opt"><input type="checkbox"><span>Productivity Tips</span></label>
+        <label class="opt"><input type="checkbox"><span>อื่นๆ</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q26</div>
-        <div class="q-text">รูปแบบ Workshop ที่ชอบ <span class="q-tag">FORMAT</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q26</div>
+        <div class="q-text">รูปแบบ Workshop ที่ชอบ <span class="q-tag">FORMAT</span></div></div>
       <div class="options cols-1">
-        <label class="opt-item"><input type="radio" name="q26"><span>ออฟไลน์ที่ร้าน กลุ่มเล็ก (5–10 คน)</span></label>
-        <label class="opt-item"><input type="radio" name="q26"><span>ออฟไลน์ที่ร้าน กลุ่มใหญ่</span></label>
-        <label class="opt-item"><input type="radio" name="q26"><span>ออนไลน์ Facebook Live / YouTube</span></label>
-        <label class="opt-item"><input type="radio" name="q26"><span>คลิปสั้น TikTok ดูเองได้เลย</span></label>
+        <label class="opt"><input type="radio" name="q26"><span>ออฟไลน์ที่ร้านแบบลงมือทำ (กลุ่มเล็ก 5–10 คน)</span></label>
+        <label class="opt"><input type="radio" name="q26"><span>ออฟไลน์ที่ร้านแบบลงมือทำ (กลุ่มใหญ่)</span></label>
+        <label class="opt"><input type="radio" name="q26"><span>ออนไลน์ Facebook Live / YouTube</span></label>
+        <label class="opt"><input type="radio" name="q26"><span>คลิปสั้น TikTok ดูเองได้เลย</span></label>
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q27</div>
-        <div class="q-text">ช่วงเวลาที่สะดวกมา Workshop <span class="q-tag">TIME</span></div>
-      </div>
+      <div class="q-header"><div class="q-num">Q27</div>
+        <div class="q-text">ช่วงเวลาที่สะดวกมา Workshop <span class="q-tag">TIME</span></div></div>
       <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q27"><span>วันธรรมดา เช้า (10:00–12:00)</span></label>
-        <label class="opt-item"><input type="radio" name="q27"><span>วันธรรมดา บ่าย (13:00–17:00)</span></label>
-        <label class="opt-item"><input type="radio" name="q27"><span>เสาร์–อาทิตย์ เช้า</span></label>
-        <label class="opt-item"><input type="radio" name="q27"><span>เสาร์–อาทิตย์ บ่าย</span></label>
+        <label class="opt"><input type="radio" name="q27"><span>วันธรรมดา เช้า (10:00–12:00)</span></label>
+        <label class="opt"><input type="radio" name="q27"><span>วันธรรมดา บ่าย (13:00–17:00)</span></label>
+        <label class="opt"><input type="radio" name="q27"><span>วันเสาร์–อาทิตย์ เช้า (10:00–12:00)</span></label>
+        <label class="opt"><input type="radio" name="q27"><span>วันเสาร์–อาทิตย์ บ่าย (13:00–17:00)</span></label>
       </div>
     </div>
+
+    <!-- ══════════════════════════════════════ SECTION 08 ══ -->
+    <div class="section-hdr"><span class="sec-num">08</span> Open Questions &nbsp;·&nbsp; คำถามปลายเปิด</div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q28</div>
-        <div class="q-text">ถ้าลงทะเบียน Workshop ไว้ แต่มีธุระ คุณจะ... <span class="q-tag">NO-SHOW</span>
-          <div class="q-hint">สำคัญมาก — ช่วย UFicon แก้ปัญหา no-show</div>
-        </div>
-      </div>
-      <div class="options cols-2">
-        <label class="opt-item"><input type="radio" name="q28"><span>แจ้งล่วงหน้าเสมอ</span></label>
-        <label class="opt-item"><input type="radio" name="q28"><span>พยายามหาคนมาแทน</span></label>
-        <label class="opt-item"><input type="radio" name="q28"><span>ไม่ไปโดยไม่แจ้ง (ขอโทษ)</span></label>
-        <label class="opt-item"><input type="radio" name="q28"><span>ลงทะเบียนแต่รู้ว่าอาจไม่มา</span></label>
-      </div>
-    </div>
-
-    <!-- ═══════ SECTION 08 ═══════ -->
-    <div class="section-header">
-      <span class="sec-num">08</span>
-      Open Questions &nbsp;·&nbsp; คำถามปลายเปิด
-    </div>
-
-    <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q29</div>
+      <div class="q-header"><div class="q-num">Q29</div>
         <div class="q-text">ถ้าจะซื้อ iPhone ใหม่ สิ่งแรกที่คุณจะทำคืออะไร <span class="q-tag">OPEN</span>
-          <div class="q-hint">ให้ตอบตามธรรมชาติ — ไม่ต้องบอก option</div>
-        </div>
-      </div>
-      <div class="answer-label">ตอบ:</div>
-      <div class="answer-lines">
-        <input class="answer-line" type="text" placeholder="">
-        <input class="answer-line" type="text" placeholder="">
-        <input class="answer-line" type="text" placeholder="">
+          <span class="q-hint">ให้ตอบตามธรรมชาติ — ไม่ต้องบอก option</span></div></div>
+      <div class="ans-label">ตอบ:</div>
+      <div class="ans-lines">
+        <input class="ans-line" type="text">
+        <input class="ans-line" type="text">
+        <input class="ans-line" type="text">
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q30</div>
-        <div class="q-text">อยากให้ UFicon มีบริการหรือกิจกรรมอะไรเพิ่มเติม <span class="q-tag">IMPROVE</span></div>
-      </div>
-      <div class="answer-label">ตอบ:</div>
-      <div class="answer-lines">
-        <input class="answer-line" type="text" placeholder="">
-        <input class="answer-line" type="text" placeholder="">
-        <input class="answer-line" type="text" placeholder="">
+      <div class="q-header"><div class="q-num">Q30</div>
+        <div class="q-text">อยากให้ UFicon มีบริการหรือกิจกรรมอะไรเพิ่มเติม <span class="q-tag">IMPROVE</span></div></div>
+      <div class="ans-label">ตอบ:</div>
+      <div class="ans-lines">
+        <input class="ans-line" type="text">
+        <input class="ans-line" type="text">
+        <input class="ans-line" type="text">
       </div>
     </div>
 
     <div class="q-block">
-      <div class="q-header">
-        <div class="q-num">Q31</div>
+      <div class="q-header"><div class="q-num">Q31</div>
         <div class="q-text">คุณเคยซื้อ iPhone ที่ร้านอื่นหรือแบรนด์อื่นบ้างไหม เพราะอะไร <span class="q-tag">COMPETITOR</span>
-          <div class="q-hint">ต้องการ insight เปรียบเทียบกับ iStudio / ออนไลน์</div>
-        </div>
-      </div>
-      <div class="answer-label">ตอบ:</div>
-      <div class="answer-lines">
-        <input class="answer-line" type="text" placeholder="">
-        <input class="answer-line" type="text" placeholder="">
+          <span class="q-hint">ต้องการ insight เปรียบเทียบกับ iStudio / ออนไลน์</span></div></div>
+      <div class="ans-label">ตอบ:</div>
+      <div class="ans-lines">
+        <input class="ans-line" type="text">
+        <input class="ans-line" type="text">
       </div>
     </div>
 
-    <!-- ═══════ NOTES ═══════ -->
+    <!-- ══ NOTES ══ -->
     <div class="notes-block">
-      <div class="notes-header">
+      <div class="notes-hdr">
         Interviewer Notes
-        <span>สังเกตพฤติกรรมหรือ comment พิเศษที่น่าสนใจระหว่างสัมภาษณ์</span>
+        <small>สังเกตพฤติกรรมหรือ comment พิเศษที่น่าสนใจระหว่างสัมภาษณ์</small>
       </div>
       <div class="notes-body">
         <textarea placeholder="บันทึกข้อสังเกต..."></textarea>
         <div class="sentiment-row">
           <label>Overall Sentiment:</label>
-          <div class="sentiment-opts" id="sentOpts">
+          <div class="sent-opts" id="sentOpts">
             <button class="sent-btn" onclick="setSent(this)">Very Positive</button>
             <button class="sent-btn" onclick="setSent(this)">Positive</button>
             <button class="sent-btn" onclick="setSent(this)">Neutral</button>
@@ -926,19 +744,19 @@
 
   </div><!-- /survey-body -->
 
-  <!-- PRINT BAR -->
-  <div class="print-bar">
-    <span class="print-note">กรอกออนไลน์ได้ หรือกด Print เพื่อพิมพ์ใช้หน้าร้าน</span>
-    <button class="btn-reset" onclick="resetForm()">Reset</button>
-    <button class="btn-print" onclick="window.print()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <span class="action-note">กรอกออนไลน์ได้ หรือกด Print เพื่อพิมพ์ใช้หน้าร้าน</span>
+    <button class="btn btn-reset" onclick="resetForm()">Reset</button>
+    <button class="btn btn-print" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       Print / บันทึก PDF
     </button>
   </div>
 
   <!-- FOOTER -->
   <div class="survey-footer">
-    <span>UFicon</span> &nbsp;|&nbsp; Confidential — For Internal Use Only &nbsp;|&nbsp; iPhone 18 NPI Focus Group Survey 2026
+    <b>UFicon</b> &nbsp;|&nbsp; Confidential — For Internal Use Only &nbsp;|&nbsp; iPhone 18 NPI Focus Group Survey 2026
   </div>
 
 </div><!-- /page-wrapper -->
@@ -955,6 +773,5 @@
     document.querySelectorAll('.sent-btn').forEach(b => b.classList.remove('active'));
   }
 </script>
-
 </body>
 </html>
