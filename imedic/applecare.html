@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AppleCare+ — iMedic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css">
+<script>(function(){try{var t=localStorage.getItem('imedic-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-elev: #ffffff;
+    --bg-soft: #f4f5f7;
+    --ink: #0a0a0f;
+    --ink-2: #1d1d24;
+    --muted: #6e6e76;
+    --muted-2: #8a8a93;
+    --line: rgba(10,10,15,0.08);
+    --line-soft: rgba(10,10,15,0.05);
+    --accent: oklch(0.62 0.10 240);
+    --accent-soft: oklch(0.95 0.025 240);
+    --accent-ink: oklch(0.45 0.12 240);
+    --shadow-sm: 0 1px 2px rgba(15,17,23,0.04);
+    --shadow-md: 0 1px 2px rgba(15,17,23,0.04), 0 8px 24px -8px rgba(15,17,23,0.08);
+    --shadow-lg: 0 1px 2px rgba(15,17,23,0.04), 0 24px 60px -20px rgba(15,17,23,0.14);
+    --r-md: 18px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --font-display: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-thai: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-thai);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.75);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a35 100%);
+    display: grid; place-items: center; color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.04em;
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--bg-soft); color: var(--ink-2);
+    font-size: 14px; font-weight: 500;
+    transition: background .2s;
+  }
+  .nav-back:hover { background: oklch(0.93 0.005 240); }
+
+  /* HERO */
+  .hero {
+    padding: 64px 0 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 400px at 50% -10%, oklch(0.97 0.03 240) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    margin: 0 0 20px;
+    font-size: clamp(34px, 4.6vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead {
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 540px;
+  }
+  .hero-side {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .applecare-art {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 440px;
+    border-radius: var(--r-xl);
+    background:
+      radial-gradient(circle at 30% 25%, oklch(0.96 0.05 240) 0%, transparent 50%),
+      radial-gradient(circle at 75% 80%, oklch(0.93 0.06 220) 0%, transparent 55%),
+      linear-gradient(140deg, var(--bg-elev) 0%, oklch(0.97 0.01 240) 100%);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+  }
+  .applecare-shield {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  .applecare-shield::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed var(--line);
+  }
+  .applecare-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted-2);
+    text-align: center;
+  }
+  .applecare-label strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 6px 0 2px;
+    text-transform: none;
+  }
+  .applecare-corner {
+    position: absolute;
+    bottom: 18px; left: 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-2);
+  }
+  .applecare-corner.r { left: auto; right: 18px; text-align: right; }
+
+  /* BENTO */
+  .section { padding: 56px 0; }
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .bento-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all .25s ease;
+  }
+  .bento-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .bento-card.dark {
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a38 100%);
+    color: white;
+    border-color: var(--ink);
+  }
+  .bento-card.dark::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, oklch(0.65 0.13 240 / 0.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .bento-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+  .bento-card.dark .bento-tag {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+  .bento-headline {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .bento-headline small {
+    font-size: 0.4em;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+  .bento-card.dark .bento-headline small { color: rgba(255,255,255,0.55); }
+  .bento-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+  }
+  .bento-card.dark .bento-sub { color: rgba(255,255,255,0.6); }
+  .bento-devices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .device-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .bento-card.dark .device-pill {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.1);
+    color: white;
+  }
+  .device-pill svg { width: 14px; height: 14px; stroke-width: 1.8; opacity: 0.7; }
+
+  /* notice */
+  .notice {
+    margin-top: 22px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .notice-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .notice-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
+  .notice-text {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .notice-text strong { font-weight: 600; color: var(--ink); }
+  .notice-text small { color: var(--muted); }
+
+  /* CTA */
+  .cta-wrap {
+    padding: 40px 0 24px;
+    text-align: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all .2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--ink); color: white; box-shadow: 0 4px 14px -4px rgba(10,10,15,0.3); }
+  .btn-primary:hover { background: #2a2a35; transform: translateY(-2px); box-shadow: 0 8px 20px -6px rgba(10,10,15,0.35); }
+  .cta-wrap .sub {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* PRICE CHECKER */
+  .checker-wrap {
+    max-width: 720px;
+    margin: 16px auto 0;
+    display: none;
+  }
+  .checker-wrap.open {
+    display: block;
+    animation: slideDown .4s cubic-bezier(.2,.7,.2,1);
+  }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+  .checker {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+  }
+  .checker h3 {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    text-align: left;
+  }
+  .checker-step { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; text-align: left; }
+  .checker-step label {
+    font-size: 13px; font-weight: 500; color: var(--ink-2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .checker-step label .num {
+    width: 20px; height: 20px;
+    background: var(--ink); color: white;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  }
+  .checker select {
+    font: inherit;
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 14.5px;
+    color: var(--ink);
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e6e76' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
+    padding-right: 42px;
+    transition: all .15s;
+  }
+  .checker select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .checker select:disabled { opacity: 0.5; cursor: not-allowed; background-color: var(--bg-soft); }
+
+  .price-result {
+    margin-top: 8px;
+    padding: 24px;
+    background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg-elev) 100%);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-align: left;
+    display: none;
+  }
+  .price-result.show { display: block; animation: slideDown .35s cubic-bezier(.2,.7,.2,1); }
+  .price-result-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .price-result-head .name {
+    font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.005em;
+  }
+  .price-result-head .term {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .price-amount {
+    display: flex; align-items: baseline; gap: 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-amount .currency { font-size: 22px; font-weight: 600; color: var(--muted); margin-right: 4px; }
+  .price-amount .num { font-size: 40px; line-height: 1; }
+  .price-amount .per { font-size: 14px; font-weight: 500; color: var(--muted); margin-left: 8px; }
+  .price-monthly { margin-top: 8px; font-size: 13px; color: var(--muted); }
+  .price-monthly strong { color: var(--ink-2); font-weight: 600; }
+  .price-result .actions {
+    margin-top: 18px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .btn-soft { background: var(--bg-soft); color: var(--ink); padding: 12px 18px; border-radius: 999px; font-size: 14px; }
+  .btn-soft:hover { background: oklch(0.93 0.005 240); }
+  .btn-primary.sm { padding: 12px 18px; font-size: 14px; }
+
+  /* DEVICE DETAIL SECTIONS */
+  .devices-section {
+    padding: 24px 0 56px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .devices-head {
+    text-align: center;
+    margin: 0 auto 56px;
+    max-width: 640px;
+  }
+  .devices-head .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .devices-head h2 {
+    font-size: clamp(28px, 3.6vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .devices-head p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+
+  .dev-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .dev-block:first-of-type { border-top: 0; }
+  .dev-block.reverse .dev-visual { order: -1; }
+
+  .dev-content { padding: 0; }
+  .dev-content .meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .dev-content .meta-chip {
+    padding: 5px 12px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .dev-content .meta-chip.years {
+    background: var(--ink); color: white; border-color: var(--ink);
+  }
+  .dev-content h3 {
+    margin: 0 0 14px;
+    font-size: clamp(26px, 3.2vw, 34px);
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.2;
+  }
+  .dev-content > p {
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: 15.5px;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+  .dev-features {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .dev-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    box-shadow: var(--shadow-sm);
+  }
+  .dev-features li .ico {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .dev-features li .ico svg { width: 14px; height: 14px; stroke-width: 2.2; }
+  .dev-features li strong { color: var(--ink); font-weight: 600; }
+  .dev-features li small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+  /* device visual */
+  .dev-visual {
+    aspect-ratio: 4/5;
+    background:
+      radial-gradient(circle at 30% 25%, oklch(0.97 0.025 240) 0%, transparent 55%),
+      linear-gradient(160deg, var(--bg-elev) 0%, oklch(0.96 0.01 240) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+  }
+  .dev-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(135deg,
+      transparent 0px, transparent 24px,
+      oklch(0.95 0.005 240 / 0.4) 24px, oklch(0.95 0.005 240 / 0.4) 25px);
+    pointer-events: none;
+  }
+  .dev-visual.dark {
+    background: linear-gradient(160deg, var(--ink) 0%, #2a2a38 100%);
+    border-color: var(--ink);
+  }
+  .dev-visual.dark::before {
+    background: repeating-linear-gradient(135deg,
+      transparent 0px, transparent 24px,
+      rgba(255,255,255,0.04) 24px, rgba(255,255,255,0.04) 25px);
+  }
+  .dev-silhouette {
+    width: 100%; max-width: 240px; aspect-ratio: 1;
+    position: relative;
+    z-index: 1;
+    display: grid; place-items: center;
+  }
+  .dev-silhouette svg {
+    width: 100%; height: 100%;
+    color: var(--ink);
+    opacity: 0.5;
+  }
+  .dev-visual.dark .dev-silhouette svg { color: white; opacity: 0.6; }
+  .dev-corner {
+    position: absolute;
+    bottom: 18px; left: 18px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-2);
+    z-index: 2;
+  }
+  .dev-corner.r { left: auto; right: 18px; }
+  .dev-visual.dark .dev-corner { color: rgba(255,255,255,0.5); }
+
+  @media (max-width: 900px) {
+    .dev-block { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+    .dev-block.reverse .dev-visual { order: 0; }
+    .dev-visual { aspect-ratio: 4/3; max-width: 420px; margin: 0 auto; }
+  }
+
+  /* AppleCare device tabs */
+  .dev-tabbar{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
+  .dev-tab{ padding:10px 18px; border-radius:999px; border:1px solid var(--line); background:var(--bg-elev); font-weight:600; font-size:14.5px; color:var(--muted); display:inline-flex; align-items:center; gap:8px; transition:all .2s ease; font-family:var(--font-thai); }
+  .dev-tab:hover{ color:var(--ink); }
+  .dev-tab.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .dev-tab svg{ width:16px; height:16px; stroke-width:1.7; }
+  html[data-theme="dark"] .dev-tab.active{ color:#0b0b0e; }
+  .dev-panel{ display:none; }
+  .dev-panel.active{ display:block; animation:rise .5s cubic-bezier(.2,.7,.2,1); }
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:none; } }
+  .dev-intro{ background:linear-gradient(180deg, var(--accent-soft), var(--bg-elev)); border:1px solid var(--line); border-radius:var(--r-lg); padding:30px 32px; margin-bottom:18px; display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+  .dev-intro .yb{ flex-shrink:0; text-align:center; min-width:96px; }
+  .dev-intro .yb .big{ font-family:var(--font-display); font-size:48px; font-weight:700; letter-spacing:-0.03em; line-height:1; color:var(--accent-ink); }
+  .dev-intro .yb .lbl{ font-size:12px; color:var(--muted); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; margin-top:6px; }
+  .dev-intro .txt{ flex:1; min-width:280px; font-size:14.5px; color:var(--ink-2); line-height:1.7; }
+  .dev-intro .txt strong{ color:var(--ink); font-weight:600; }
+  .pillar-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .pillar{ background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--r-lg); padding:28px 26px; box-shadow:var(--shadow-sm); }
+  .pillar-icon{ width:44px; height:44px; border-radius:12px; background:var(--accent-soft); color:var(--accent-ink); display:grid; place-items:center; margin-bottom:16px; }
+  .pillar-icon svg{ width:22px; height:22px; stroke-width:1.6; }
+  .pillar h4{ margin:0 0 14px; font-size:16.5px; font-weight:600; letter-spacing:-0.01em; line-height:1.3; }
+  .pillar ul{ list-style:none; margin:0; padding:0; }
+  .pillar li{ display:flex; gap:10px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--line-soft); font-size:13.5px; color:var(--muted); line-height:1.55; }
+  .pillar li:first-of-type{ border-top:0; padding-top:0; }
+  .pillar li svg{ width:15px; height:15px; stroke-width:2; color:var(--accent-ink); flex-shrink:0; margin-top:2px; }
+  .pillar li strong{ color:var(--ink-2); font-weight:600; }
+  .dev-feenote{ margin-top:20px; font-size:12px; color:var(--muted-2); line-height:1.65; }
+  @media(max-width:860px){ .pillar-grid{ grid-template-columns:1fr; } .dev-intro{ flex-direction:column; align-items:flex-start; gap:18px; } }
+
+  /* Legal terms */
+  .legal-section{ padding:40px 0 0; }
+  .legal{ background:var(--bg-soft); border:1px solid var(--line-soft); border-radius:var(--r-lg); padding:40px 40px 38px; }
+  .legal .eyebrow{ font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent-ink); font-weight:500; margin-bottom:10px; }
+  .legal h3{ font-size:16px; font-weight:600; color:var(--ink); margin:0 0 24px; letter-spacing:-0.01em; }
+  .legal p{ font-size:12.5px; color:var(--muted); line-height:1.9; margin:0 0 20px; max-width:none; }
+  .legal p:last-child{ margin-bottom:0; }
+  .legal a{ color:var(--accent-ink); word-break:break-word; }
+  .legal .trans{ color:var(--muted-2); padding-top:20px; border-top:1px solid var(--line-soft); margin-top:8px; }
+
+  /* FAQ */
+  .faq-section { padding: 56px 0 80px; border-top: 1px solid var(--line-soft); background: var(--bg-soft); }
+  .faq-head { margin-bottom: 28px; }
+  .faq-head .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .faq-head h2 {
+    font-size: clamp(26px, 3.4vw, 36px);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .faq-list {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .faq-item { border-bottom: 1px solid var(--line-soft); }
+  .faq-item:last-child { border-bottom: 0; }
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 22px 26px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: background .15s;
+  }
+  .faq-q:hover { background: var(--bg-soft); }
+  .faq-q .icon {
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    color: var(--ink-2);
+    transition: all .2s ease;
+  }
+  .faq-q .icon svg { width: 14px; height: 14px; stroke-width: 2.2; transition: transform .25s ease; }
+  .faq-item.open .faq-q .icon { background: var(--ink); color: white; }
+  .faq-item.open .faq-q .icon svg { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .faq-a-inner {
+    padding: 0 26px 22px;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .faq-a-inner strong { color: var(--ink-2); }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px; color: var(--muted);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-side { order: -1; }
+    .applecare-art { max-width: 320px; aspect-ratio: 5/4; }
+    .bento { grid-template-columns: 1fr; }
+    .hero { padding: 36px 0 12px; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 18px; }
+    .bento-card { padding: 26px 24px; }
+    .checker { padding: 22px; }
+    .nav-back span { display: none; }
+  }
+
+  /* ============ DARK MODE ============ */
+  html[data-theme="dark"]{
+    --bg:#0b0b0e; --bg-elev:#161619; --bg-soft:#1e1e22;
+    --ink:#f4f4f7; --ink-2:#d6d6db; --muted:#9b9ba3; --muted-2:#74747c;
+    --line:rgba(255,255,255,0.11); --line-soft:rgba(255,255,255,0.06);
+    --accent-soft:oklch(0.32 0.07 240); --accent-ink:oklch(0.80 0.10 240);
+  }
+  html[data-theme="dark"] .nav{ background:rgba(11,11,14,0.72); }
+  html[data-theme="dark"] .brand-mark{ background:linear-gradient(135deg,#f4f4f7,#c6c6ce); color:#0b0b0e; }
+  /* solid controls: bg auto-lightens via --ink, flip text dark + fix hardcoded dark hovers */
+  html[data-theme="dark"] .btn-primary{ color:#0b0b0e; }
+  html[data-theme="dark"] .btn-primary:hover, html[data-theme="dark"] .btn-primary:hover:not(:disabled){ background:#ffffff; }
+  html[data-theme="dark"] .chip.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .seg-item.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .form-section-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .meta-chip.years{ color:#0b0b0e; }
+  html[data-theme="dark"] .checker-step label .num{ color:#0b0b0e; }
+  html[data-theme="dark"] .faq-item.open .faq-q .icon{ color:#0b0b0e; }
+  html[data-theme="dark"] .step-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .tl-marker.done{ color:#0b0b0e; }
+  html[data-theme="dark"] .confirm-check{ color:#0b0b0e; }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked{ background:var(--ink); border-color:var(--ink); }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked::after{ border-color:#0b0b0e; }
+  /* hover backgrounds that hardcode light oklch */
+  html[data-theme="dark"] .nav-back:hover,
+  html[data-theme="dark"] .btn-soft:hover,
+  html[data-theme="dark"] .chip:hover,
+  html[data-theme="dark"] .consent-item:hover,
+  html[data-theme="dark"] .help-chip:hover,
+  html[data-theme="dark"] .theme-toggle:hover{ background:rgba(255,255,255,0.08); }
+  /* feature panels: pin dark so white text reads */
+  html[data-theme="dark"] .summary-head,
+  html[data-theme="dark"] .order-head,
+  html[data-theme="dark"] .sla-card,
+  html[data-theme="dark"] .bento-card.dark{ background:linear-gradient(135deg,#17171c 0%,#26262e 100%); }
+  html[data-theme="dark"] .bento-card.dark{ border-color:rgba(255,255,255,0.1); }
+  /* light gradient surfaces */
+  html[data-theme="dark"] .hero::before{ background:radial-gradient(ellipse 900px 400px at 50% -10%,oklch(0.30 0.06 240) 0%,transparent 60%); }
+  html[data-theme="dark"] .applecare-art{ background:radial-gradient(circle at 30% 25%,oklch(0.32 0.06 240) 0%,transparent 50%),radial-gradient(circle at 75% 80%,oklch(0.30 0.06 220) 0%,transparent 55%),linear-gradient(140deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual{ background:radial-gradient(circle at 30% 25%,oklch(0.30 0.05 240) 0%,transparent 55%),linear-gradient(160deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual::before{ background:repeating-linear-gradient(135deg,transparent 0px,transparent 24px,rgba(255,255,255,0.05) 24px,rgba(255,255,255,0.05) 25px); }
+  html[data-theme="dark"] .dev-silhouette svg{ color:var(--ink); }
+  /* theme toggle button */
+  .theme-toggle{ width:40px; height:40px; border-radius:999px; background:var(--bg-soft); display:grid; place-items:center; color:var(--ink-2); transition:all .2s ease; flex-shrink:0; }
+  .theme-toggle:hover{ background:oklch(0.93 0.005 240); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .sun{ display:none; }
+  html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+  html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+
+</style>
+</head>
+<body data-screen-label="08 AppleCare Plus">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">iM</span>
+      <span>iMedic</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="สลับโหมดสว่าง/มืด">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>กลับหน้าหลัก</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">AppleCare+ Coverage · 08</div>
+        <h1>คุ้มครองอุปกรณ์ Apple ของคุณ<br/>ด้วย <span class="accent">AppleCare+</span></h1>
+        <p class="lead">
+          AppleCare+ คือบริการขยายการรับประกันจาก Apple ที่ให้ความคุ้มครองทั้งตัวเครื่อง
+          และบริการซ่อมเพิ่มเติม รวมถึง<strong style="color:var(--ink-2);font-weight:600">ความเสียหายจากอุบัติเหตุ (Accidental Damage) สูงสุด 2 ครั้งต่อปี</strong>
+          พร้อมสิทธิพิเศษในการเข้าถึงบริการช่วยเหลือจากผู้เชี่ยวชาญ Apple โดยตรง
+        </p>
+      </div>
+      <div class="hero-side">
+        <div class="applecare-art">
+          <div class="applecare-shield">
+            <div class="applecare-label">
+              Coverage
+              <strong>AppleCare+</strong>
+              Protection Plan
+            </div>
+          </div>
+          <span class="applecare-corner">◌ Drop image here</span>
+          <span class="applecare-corner r">SKU · APC-IMG</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO COVERAGE -->
+<section class="section">
+  <div class="container">
+    <div class="bento">
+      <!-- +2 YEARS -->
+      <div class="bento-card">
+        <div class="bento-tag">+2 Years Coverage</div>
+        <div class="bento-headline">+ 2 <small>ปี</small></div>
+        <div class="bento-sub">Extended Warranty</div>
+        <div class="bento-devices">
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M10 19h4"/></svg>
+            iPhone
+          </span>
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            iPad
+          </span>
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 8c0-3 2.5-5 6-5s6 2 6 5v3h-3v8H9v-8H6z"/></svg>
+            AirPods
+          </span>
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M9 7l1-3h4l1 3M9 21l1 3h4l1-3"/></svg>
+            Apple Watch
+          </span>
+        </div>
+      </div>
+
+      <!-- +3 YEARS -->
+      <div class="bento-card dark">
+        <div class="bento-tag">+3 Years Coverage</div>
+        <div class="bento-headline">+ 3 <small>ปี</small></div>
+        <div class="bento-sub">Extended Warranty</div>
+        <div class="bento-devices">
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4z"/></svg>
+            Mac ทุกรุ่น
+          </span>
+          <span class="device-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M10 20h4M12 18v2"/></svg>
+            Apple TV
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTICE -->
+    <div class="notice">
+      <div class="notice-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div class="notice-text">
+        <strong>สามารถซื้อ AppleCare+ ได้ภายใน 365 วัน</strong> นับตั้งแต่วันที่ซื้อเครื่อง
+        <small>· ที่ iMedic by UFicon ทุกสาขา</small>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <button class="btn btn-primary" id="open-checker">
+        ตรวจสอบราคา AppleCare+
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <p class="sub">เลือกอุปกรณ์และรุ่นเพื่อดูราคา AppleCare+ ทันที</p>
+    </div>
+
+    <!-- PRICE CHECKER -->
+    <div class="checker-wrap" id="checker-wrap">
+      <div class="checker">
+        <h3>เลือกอุปกรณ์เพื่อตรวจสอบราคา</h3>
+        <div class="checker-step">
+          <label><span class="num">1</span> ประเภทอุปกรณ์</label>
+          <select id="chk-device">
+            <option value="">— เลือกอุปกรณ์ —</option>
+            <option value="iphone">iPhone</option>
+            <option value="ipad">iPad</option>
+            <option value="airpods">AirPods</option>
+            <option value="watch">Apple Watch</option>
+            <option value="mac">Mac</option>
+            <option value="appletv">Apple TV</option>
+          </select>
+        </div>
+        <div class="checker-step">
+          <label><span class="num">2</span> รุ่น</label>
+          <select id="chk-model" disabled><option value="">— กรุณาเลือกอุปกรณ์ก่อน —</option></select>
+        </div>
+
+        <div class="price-result" id="price-result">
+          <div class="price-result-head">
+            <span class="name" id="pr-name">—</span>
+            <span class="term" id="pr-term">2-Year Coverage</span>
+          </div>
+          <div class="price-amount">
+            <span class="currency">฿</span>
+            <span class="num" id="pr-price">0</span>
+            <span class="per">/ แพ็กเกจ</span>
+          </div>
+          <div class="price-monthly" id="pr-monthly">หรือผ่อน <strong>0% นาน 10 เดือน</strong> เริ่มต้น <strong>฿ 0 / เดือน</strong></div>
+          <div class="actions">
+            <a class="btn btn-primary sm" href="online-booking.html">
+              ติดต่อซื้อที่สาขา
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn-soft" href="tel:0903052760">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.93 19 19 0 0 1-6-6A19 19 0 0 1 3.69 4.81 1 1 0 0 1 4.7 4h4.09a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27 1L9 11.27a16 16 0 0 0 6 6l1.5-1.5a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .76 1z"/></svg>
+              โทรสอบถาม
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICE DETAIL SECTIONS -->
+<section class="devices-section">
+  <div class="container">
+    <div class="devices-head">
+      <div class="eyebrow">Coverage Details</div>
+      <h2>บริการช่วยเหลือด้านเทคนิค บริการด้านฮาร์ดแวร์ของ Apple และบริการช่วยเหลือด้านซอฟต์แวร์ ครบวงจรในที่เดียว</h2>
+      <p>เพราะ Apple ออกแบบทั้งตัวเครื่อง ระบบปฏิบัติการ และแอปพลิเคชัน ผลิตภัณฑ์จึงผสานกันอย่างลงตัว มีเพียง AppleCare+ เท่านั้นที่พร้อมให้บริการและความช่วยเหลือแบบครบวงจรในที่เดียวโดยผู้เชี่ยวชาญของ Apple ปัญหาส่วนใหญ่จึงแก้ไขได้ด้วยการติดต่อเราเพียงครั้งเดียว</p>
+    </div>
+
+    <div class="dev-tabbar">
+      <button class="dev-tab" data-dev="mac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4z"/></svg>สำหรับ Mac</button>
+      <button class="dev-tab" data-dev="ipad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M11 18h2"/></svg>สำหรับ iPad</button>
+      <button class="dev-tab" data-dev="iphone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 19h4"/></svg>สำหรับ iPhone</button>
+      <button class="dev-tab" data-dev="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M9 7l1-3h4l1 3M9 21l1 3h4l1-3"/></svg>สำหรับ Apple Watch</button>
+      <button class="dev-tab" data-dev="airpods"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8c0-3 2.5-5 6-5s6 2 6 5v3h-3v8H9v-8H6z"/></svg>สำหรับ หูฟัง</button>
+    </div>
+
+    <div class="dev-panel active" data-dev="mac"><div class="dev-intro"><div class="yb"><div class="big">+3</div><div class="lbl">ปี / Years</div></div><div class="txt">Mac ทุกเครื่องมาพร้อมการรับประกันแบบจำกัด 1 ปี และบริการช่วยเหลือด้านเทคนิคโดยไม่คิดค่าใช้จ่ายสูงสุด 90 วัน <strong>AppleCare+ สำหรับ Mac ขยายความคุ้มครองเป็น 3 ปี</strong> พร้อมความคุ้มครองความเสียหายจากอุบัติเหตุแบบไม่จำกัดจำนวนครั้ง</div></div><div class="pillar-grid"><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>บริการและความช่วยเหลือในที่เดียว</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ติดต่อผู้เชี่ยวชาญของ Apple ผ่าน<strong>แชทหรือโทรศัพท์</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>คุ้มครองการซ่อม<strong>ทั่วโลก</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>บริการนอกสถานที่ / รับส่งพัสดุถึงที่</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ซ่อมแบบนำเครื่องมาเองที่ศูนย์บริการที่ได้รับอนุญาต</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg></div><h4>ความคุ้มครองด้านฮาร์ดแวร์</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>คอมพิวเตอร์ Mac และ<strong>แบตเตอรี่</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุปกรณ์เสริมในกล่อง เช่น อะแดปเตอร์แปลงไฟ</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>หน่วยความจำ Apple (RAM) และ Apple USB SuperDrive</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุบัติเหตุ <strong>฿3,300</strong> (หน้าจอ/ตัวเครื่อง) · <strong>฿10,000</strong> (อื่นๆ)</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4>ช่วยเหลือด้านซอฟต์แวร์ของ Apple</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การใช้งาน <strong>macOS</strong> และ iCloud</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>แอป Apple: รูปภาพ, iMovie, GarageBand, Pages, Numbers, Keynote</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>แอประดับโปร: Final Cut Pro, Logic Pro</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การเชื่อมต่อพริ้นเตอร์และเครือข่ายไร้สาย</span></li></ul></div></div><p class="dev-feenote">*ค่าธรรมเนียมการให้บริการความเสียหายจากอุบัติเหตุ ฿3,300 สำหรับหน้าจอหรือตัวเครื่องภายนอก หรือ ฿10,000 สำหรับความเสียหายอื่นๆ ราคารวม VAT แล้ว</p></div>
+    <div class="dev-panel" data-dev="ipad"><div class="dev-intro"><div class="yb"><div class="big">+2</div><div class="lbl">ปี / Years</div></div><div class="txt">iPad ทุกเครื่องมาพร้อมการรับประกันแบบจำกัด 1 ปี และบริการช่วยเหลือด้านเทคนิค 90 วัน <strong>AppleCare+ สำหรับ iPad, Apple Pencil และคีย์บอร์ดของ Apple ขยายความคุ้มครองเป็น 2 ปี</strong> พร้อมความคุ้มครองอุบัติเหตุแบบไม่จำกัดจำนวนครั้ง</div></div><div class="pillar-grid"><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>บริการและความช่วยเหลือในที่เดียว</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ติดต่อผู้เชี่ยวชาญของ Apple ผ่าน<strong>แชทหรือโทรศัพท์</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ซ่อมแบบนำเครื่องมาเองที่ศูนย์บริการที่ได้รับอนุญาต</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg></div><h4>ความคุ้มครองด้านฮาร์ดแวร์</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>iPad และ<strong>แบตเตอรี่</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span><strong>Apple Pencil</strong> และคีย์บอร์ด iPad ของ Apple</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>สาย USB และอะแดปเตอร์แปลงไฟที่มาพร้อมเครื่อง</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุบัติเหตุ <strong>฿1,600</strong> (iPad) · <strong>฿1,000</strong> (Pencil/คีย์บอร์ด)</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4>ช่วยเหลือด้านซอฟต์แวร์ของ Apple</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การใช้งาน <strong>iPadOS</strong> และ iCloud</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การเชื่อมต่อเครือข่ายไร้สาย</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>แอปสำหรับ iPad: FaceTime, Keynote, Numbers, Pages</span></li></ul></div></div><p class="dev-feenote">*ค่าธรรมเนียมการให้บริการความเสียหายจากอุบัติเหตุ ฿1,600 สำหรับ iPad และ ฿1,000 สำหรับ Apple Pencil หรือคีย์บอร์ดของ Apple ราคารวม VAT แล้ว</p></div>
+    <div class="dev-panel" data-dev="iphone"><div class="dev-intro"><div class="yb"><div class="big">+2</div><div class="lbl">ปี / Years</div></div><div class="txt">iPhone ทุกเครื่องมาพร้อมการรับประกันแบบจำกัด 1 ปี และบริการช่วยเหลือด้านเทคนิคสูงสุด 90 วัน <strong>AppleCare+ สำหรับ iPhone ขยายความคุ้มครองเป็น 2 ปี</strong> พร้อมความคุ้มครองอุบัติเหตุแบบไม่จำกัดจำนวนครั้ง</div></div><div class="pillar-grid"><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>บริการและความช่วยเหลือในที่เดียว</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ติดต่อผู้เชี่ยวชาญของ Apple ผ่าน<strong>แชทหรือโทรศัพท์</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>มีบริการ<strong>เสร็จในวันเดียว</strong>ในเมืองหลักส่วนใหญ่</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ซ่อมแบบนำเครื่องมาเองที่ศูนย์บริการที่ได้รับอนุญาต</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg></div><h4>ความคุ้มครองด้านฮาร์ดแวร์</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>iPhone และ<strong>แบตเตอรี่</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>สาย USB-C เป็น Lightning ที่มาพร้อมเครื่อง</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุบัติเหตุ <strong>฿1,000</strong> (หน้าจอ/กระจกหลัง) · <strong>฿3,300</strong> (อื่นๆ)</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4>ช่วยเหลือด้านซอฟต์แวร์ของ Apple</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การใช้งาน <strong>iOS</strong> และ iCloud</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การเชื่อมต่อเครือข่ายไร้สาย</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>แอปสำหรับ iPhone: FaceTime, เมล, ปฏิทิน</span></li></ul></div></div><p class="dev-feenote">*ค่าธรรมเนียมการให้บริการความเสียหายจากอุบัติเหตุ ฿1,000 สำหรับหน้าจอหรือกระจกด้านหลัง หรือ ฿3,300 สำหรับความเสียหายอื่นๆ (กระจกหลังครอบคลุม iPhone 12/13/14) ราคารวม VAT แล้ว</p></div>
+    <div class="dev-panel" data-dev="watch"><div class="dev-intro"><div class="yb"><div class="big">+2</div><div class="lbl">ปี / Years</div></div><div class="txt">Apple Watch ทุกเรือนมาพร้อมการรับประกันแบบจำกัด 1 ปี และบริการช่วยเหลือด้านเทคนิค 90 วัน <strong>AppleCare+ สำหรับ Apple Watch ขยายความคุ้มครองเป็น 2 ปี</strong> พร้อมความคุ้มครองอุบัติเหตุแบบไม่จำกัดจำนวนครั้ง</div></div><div class="pillar-grid"><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>บริการและความช่วยเหลือในที่เดียว</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ติดต่อผู้เชี่ยวชาญของ Apple ผ่าน<strong>แชทหรือโทรศัพท์</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>คุ้มครองการซ่อม<strong>ทั่วโลก</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ซ่อมแบบนำเครื่องมาเองที่ศูนย์บริการที่ได้รับอนุญาต</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg></div><h4>ความคุ้มครองด้านฮาร์ดแวร์</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>Apple Watch และ<strong>แบตเตอรี่</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ค่าอะไหล่และค่าแรงโดยช่างที่ได้รับอนุญาตจาก Apple</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุบัติเหตุ <strong>฿2,300</strong> (Watch/Nike) · <strong>฿2,600</strong> (Ultra)</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4>ช่วยเหลือด้านซอฟต์แวร์ของ Apple</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การใช้งาน <strong>watchOS</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การเชื่อมต่อกับ iPhone, iOS และแอป Apple Watch</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>คำถามเกี่ยวกับแอปต่างๆ ของ Apple สำหรับ Apple Watch</span></li></ul></div></div><p class="dev-feenote">*ค่าธรรมเนียมการให้บริการความเสียหายจากอุบัติเหตุ ฿2,300 สำหรับ Apple Watch และ Apple Watch Nike หรือ ฿2,600 สำหรับ Apple Watch Ultra ราคารวม VAT แล้ว</p></div>
+    <div class="dev-panel" data-dev="airpods"><div class="dev-intro"><div class="yb"><div class="big">+2</div><div class="lbl">ปี / Years</div></div><div class="txt">AirPods, หูฟัง Beats หรือเฮดโฟน Beats ทุกคู่มาพร้อมการรับประกันแบบจำกัด 1 ปี และบริการช่วยเหลือด้านเทคนิคสูงสุด 90 วัน <strong>AppleCare+ ขยายความคุ้มครองเป็น 2 ปี</strong> พร้อมความคุ้มครองอุบัติเหตุแบบไม่จำกัดจำนวนครั้ง</div></div><div class="pillar-grid"><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>บริการและความช่วยเหลือในที่เดียว</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ติดต่อผู้เชี่ยวชาญของ Apple ผ่าน<strong>แชทหรือโทรศัพท์</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>ซ่อมแบบนำเครื่องมาเองที่ศูนย์บริการที่ได้รับอนุญาต</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg></div><h4>ความคุ้มครองด้านฮาร์ดแวร์</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>AirPods, หูฟัง Beats หรือเฮดโฟน Beats</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span><strong>แบตเตอรี่</strong> และสายชาร์จ USB ที่มาพร้อมเครื่อง</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>อุบัติเหตุแบบไม่จำกัดจำนวนครั้ง ค่าบริการ <strong>฿1,000</strong> ต่อครั้ง</span></li></ul></div><div class="pillar"><div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4>ช่วยเหลือด้านซอฟต์แวร์ของ Apple</h4><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การใช้งาน <strong>Siri</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>การเชื่อมต่อ <strong>Bluetooth</strong></span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg><span>รองรับ AirPods, AirPods Pro, AirPods Max และ Beats รุ่นต่างๆ</span></li></ul></div></div><p class="dev-feenote">*ค่าธรรมเนียมการให้บริการความเสียหายจากอุบัติเหตุ ฿1,000 ต่อครั้ง ราคารวม VAT แล้ว</p></div>
+  </div>
+</section>
+
+<!-- LEGAL TERMS -->
+<section class="legal-section">
+  <div class="container">
+    <div class="legal">
+      <div class="eyebrow">Terms &amp; Conditions</div>
+      <h3>ข้อกำหนดและเงื่อนไข</h3>
+      <p>*การให้บริการครอบคลุมเฉพาะ iPhone และอุปกรณ์เสริมเดิมที่มาพร้อมกับเครื่องเท่านั้น หรือสำหรับแบตเตอรี่ที่เก็บประจุได้ไม่ถึง 80% ของความจุเดิมที่ระบุไว้ หากต้องการทราบรายละเอียดทั้งหมด โปรดอ่านข้อกำหนดที่ <a href="https://www.apple.com/th/legal/sales-support/applecare/applecareplus" target="_blank" rel="noopener">www.apple.com/th/legal/sales-support/applecare/applecareplus</a></p>
+      <p>ความคุ้มครองจะเริ่มมีผลในวันที่คุณซื้อ AppleCare+, AppleCare+ สำหรับ iPhone มอบความคุ้มครองด้านความเสียหายจากอุบัติเหตุในการหยิบจับแบบไม่จำกัดจำนวนครั้ง โดยแต่ละครั้งมีค่าธรรมเนียมการให้บริการ ฿1,000 สำหรับการเปลี่ยนหน้าจอหรือความเสียหายกับกระจกด้านหลังตัวเครื่อง หรือ ฿3,300 สำหรับความเสียหายอื่นๆ จากอุบัติเหตุ ค่าธรรมเนียมการให้บริการสำหรับความเสียหายกับกระจกด้านหลังตัวเครื่องครอบคลุมเฉพาะ iPhone 12, iPhone 13 และ iPhone 14 เท่านั้น</p>
+      <p>อาจมีค่าบริการโทรศัพท์ในท้องถิ่น หมายเลขโทรศัพท์และเวลาทำการอาจแตกต่างกันไป และอาจเปลี่ยนแปลงได้</p>
+      <p>ความพร้อมและตัวเลือกของบริการแบบเสร็จในวันเดียวกันอาจแตกต่างกันตามภูมิภาคและรุ่นของ iPhone สำหรับการให้บริการในต่างประเทศนั้น Apple อาจซ่อมหรือเปลี่ยน iPhone และชิ้นส่วน iPhone ของคุณด้วยรุ่นหรือชิ้นส่วน iPhone ที่เทียบเท่ากันซึ่งเป็นไปตามมาตรฐานท้องถิ่น ความครอบคลุมในการให้บริการเป็นไปตามข้อกำหนดและเงื่อนไขของ AppleCare+ โปรดอ่านข้อกำหนดและเงื่อนไขของ AppleCare+ หากต้องการทราบรายละเอียดทั้งหมดเกี่ยวกับผลิตภัณฑ์</p>
+      <p>สิทธิประโยชน์ของ AppleCare+ นั้นแยกต่างหากและเพิ่มเติมจากการรับประกันแบบจำกัดของ Apple และสิทธิ์ทางกฎหมายที่ให้ไว้ตามกฎหมายคุ้มครองผู้บริโภคในเขตอำนาจศาลของคุณ AppleCare+ อยู่ภายใต้การยอมรับข้อกำหนดและเงื่อนไข การซื้อ iPhone ไม่จำเป็นต้องซื้อแผนดังกล่าว</p>
+      <p>สำหรับประเทศไทย ความคุ้มครองด้านความเสียหายจากอุบัติเหตุในการหยิบจับที่คุณได้รับจะเป็นไปตามกรมธรรม์การประกันภัยกลุ่มที่บริษัท แอปเปิ้ล เซาท์ เอเชีย (ประเทศไทย) จำกัด ซื้อจากบริษัท นิวแฮมพ์เชอร์ อินชัวรันส์ สาขาประเทศไทย</p>
+      <p class="trans">[“Apple South Asia (Thailand) Limited” แปลเป็น “บริษัท แอปเปิ้ล เซาท์ เอเชีย (ประเทศไทย) จำกัด”] · [“New Hampshire Insurance Company” แปลเป็น “บริษัท นิวแฮมพ์เชอร์ อินชัวรันส์”] · ความครอบคลุมในการให้บริการอาจมีข้อจำกัดบางประการ</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-head">
+      <div class="eyebrow">FAQ · 09</div>
+      <h2>คำถามที่พบบ่อย</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>AppleCare+ ครอบคลุมความเสียหายแบบไหนบ้าง?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          AppleCare+ ครอบคลุมการรับประกันตัวเครื่องและแบตเตอรี่ (ตามเงื่อนไข Apple) รวมถึงความเสียหายจาก<strong>อุบัติเหตุ (Accidental Damage)</strong> เช่น ตกกระแทกหรือโดนของเหลว สูงสุด 2 ครั้งต่อปี โดยอาจมีค่าใช้จ่ายส่วนต่างต่อครั้ง (Service Fee) ตามที่ Apple กำหนด
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>สามารถซื้อ AppleCare+ ได้เมื่อไหร่บ้าง?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          ซื้อได้ภายใน <strong>365 วันนับจากวันที่ซื้อเครื่อง</strong> โดยเครื่องของคุณต้องผ่านการตรวจสอบสภาพจากทีมงาน iMedic ก่อน เพื่อยืนยันว่าเครื่องอยู่ในสภาพที่ดีและสามารถลงทะเบียน AppleCare+ ได้
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>ระยะเวลาคุ้มครองของ AppleCare+ มีกี่ปี?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          สำหรับ <strong>iPhone, iPad, AirPods และ Apple Watch</strong> คุ้มครองเพิ่ม <strong>2 ปี</strong> สำหรับ <strong>Mac ทุกรุ่น และ Apple TV</strong> คุ้มครองเพิ่ม <strong>3 ปี</strong> (นับรวมกับการรับประกัน 1 ปีของ Apple)
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>การเคลม AppleCare+ ต้องทำอย่างไร?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          นำเครื่องและหลักฐานการซื้อ AppleCare+ มาที่สาขา iMedic by UFicon ทีมงานจะตรวจสอบและประสานงานกับ Apple โดยตรง ใช้เวลาอนุมัติเฉลี่ย 1–3 วันทำการ
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>ความเสียหายจากอุบัติเหตุมีค่าบริการเพิ่มไหม?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          มีค่า Service Fee ต่อครั้ง ขึ้นอยู่กับประเภทอุปกรณ์และอาการ เช่น เปลี่ยนหน้าจอ iPhone ~฿1,090 หรือเปลี่ยนตัวเครื่องอื่นๆ ~฿3,290 ตามอัตราที่ Apple กำหนด ทีมงาน iMedic แจ้งราคาก่อนดำเนินการทุกครั้ง
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>หากขายเครื่องต่อ AppleCare+ โอนสิทธิ์ได้ไหม?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          ได้ AppleCare+ สามารถ <strong>โอนสิทธิ์ไปยังเจ้าของใหม่</strong> ได้ตลอดอายุการคุ้มครอง โดยติดต่อ Apple Support เพื่ออัปเดตข้อมูลเจ้าของเครื่อง
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <span>ซื้อ AppleCare+ ผ่อนชำระได้ไหม?</span>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          ได้ iMedic by UFicon รองรับการผ่อน <strong>0% นาน 10 เดือน</strong> ผ่านบัตรเครดิตของธนาคารชั้นนำ สอบถามรายละเอียดที่สาขา หรือโทร <a href="tel:0903052760" style="color:var(--accent-ink);font-weight:600">090-305-2760</a>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <span>© 2025 iMedic Co., Ltd. · ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple</span>
+    <span>โทร 090-305-2760 · Line @imedicthai</span>
+  </div>
+</footer>
+
+<script>
+  // ---- AppleCare+ pricing data (illustrative) ----
+  const APC_PRICES = {
+    iphone: {
+      term: "2 ปี",
+      models: [
+        ["iPhone 15 Pro Max", 11900],
+        ["iPhone 15 Pro", 10900],
+        ["iPhone 15 Plus", 8900],
+        ["iPhone 15", 7900],
+        ["iPhone 14 Pro Max", 11900],
+        ["iPhone 14 Pro", 10900],
+        ["iPhone 14 Plus", 8900],
+        ["iPhone 14", 7900],
+        ["iPhone 13 series", 6900],
+        ["iPhone SE (3rd gen)", 3900]
+      ]
+    },
+    ipad: {
+      term: "2 ปี",
+      models: [
+        ["iPad Pro 13\" (M4)", 8900],
+        ["iPad Pro 11\" (M4)", 7500],
+        ["iPad Air 13\" / 11\" (M2)", 5500],
+        ["iPad (10th gen)", 3500],
+        ["iPad mini (6th gen)", 4500]
+      ]
+    },
+    airpods: {
+      term: "2 ปี",
+      models: [
+        ["AirPods Pro (2nd gen)", 1990],
+        ["AirPods Max", 2990],
+        ["AirPods (3rd gen)", 1490]
+      ]
+    },
+    watch: {
+      term: "2 ปี",
+      models: [
+        ["Apple Watch Ultra 2", 4290],
+        ["Apple Watch Series 9", 2990],
+        ["Apple Watch SE (2nd gen)", 1990]
+      ]
+    },
+    mac: {
+      term: "3 ปี",
+      models: [
+        ["MacBook Pro 16\"", 17900],
+        ["MacBook Pro 14\"", 13900],
+        ["MacBook Air 15\"", 9900],
+        ["MacBook Air 13\"", 8900],
+        ["iMac 24\"", 7900],
+        ["Mac mini", 3990],
+        ["Mac Studio", 7500]
+      ]
+    },
+    appletv: {
+      term: "3 ปี",
+      models: [
+        ["Apple TV 4K (3rd gen)", 990]
+      ]
+    }
+  };
+
+  const DEVICE_LABEL = {
+    iphone: "iPhone", ipad: "iPad", airpods: "AirPods",
+    watch: "Apple Watch", mac: "Mac", appletv: "Apple TV"
+  };
+
+  // ---- CTA: open checker ----
+  const checkerWrap = document.getElementById("checker-wrap");
+  const openCheckerBtn = document.getElementById("open-checker");
+  openCheckerBtn.addEventListener("click", () => {
+    checkerWrap.classList.add("open");
+    setTimeout(() => {
+      const target = checkerWrap.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: target, behavior: "smooth" });
+      document.getElementById("chk-device").focus();
+    }, 100);
+  });
+
+  // ---- Checker logic ----
+  const devSel = document.getElementById("chk-device");
+  const modSel = document.getElementById("chk-model");
+  const result = document.getElementById("price-result");
+
+  devSel.addEventListener("change", () => {
+    const k = devSel.value;
+    result.classList.remove("show");
+    if (!k) {
+      modSel.disabled = true;
+      modSel.innerHTML = '<option value="">— กรุณาเลือกอุปกรณ์ก่อน —</option>';
+      return;
+    }
+    modSel.disabled = false;
+    const data = APC_PRICES[k];
+    modSel.innerHTML = '<option value="">— เลือกรุ่น —</option>' +
+      data.models.map((m, i) => `<option value="${i}">${m[0]}</option>`).join("");
+  });
+
+  modSel.addEventListener("change", () => {
+    const k = devSel.value;
+    const i = modSel.value;
+    if (i === "") { result.classList.remove("show"); return; }
+    const data = APC_PRICES[k];
+    const [name, price] = data.models[parseInt(i, 10)];
+    document.getElementById("pr-name").textContent = name;
+    document.getElementById("pr-term").textContent = data.term + " Coverage";
+    document.getElementById("pr-price").textContent = price.toLocaleString("en-US");
+    const monthly = Math.round(price / 10);
+    document.getElementById("pr-monthly").innerHTML =
+      'หรือผ่อน <strong>0% นาน 10 เดือน</strong> เพียง <strong>฿ ' + monthly.toLocaleString("en-US") + ' / เดือน</strong>';
+    result.classList.add("show");
+  });
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll(".faq-q").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.parentElement;
+      const a = item.querySelector(".faq-a");
+      const isOpen = item.classList.contains("open");
+      // close all
+      document.querySelectorAll(".faq-item.open").forEach(o => {
+        o.classList.remove("open");
+        o.querySelector(".faq-a").style.maxHeight = "0";
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        a.style.maxHeight = a.scrollHeight + "px";
+      }
+    });
+  });
+</script>
+<script>
+  (function(){
+    var tg=document.getElementById('theme-toggle');
+    function setTheme(t){ if(t==='dark')document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('imedic-theme',t);}catch(e){} }
+    if(tg) tg.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'; setTheme(cur==='dark'?'light':'dark'); });
+  })();
+</script>
+<script>
+  (function(){
+    var tabs=document.querySelectorAll('.dev-tab');
+    var panels=document.querySelectorAll('.dev-panel');
+    tabs.forEach(function(t){ t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.classList.remove('active');});
+      panels.forEach(function(x){x.classList.remove('active');});
+      t.classList.add('active');
+      var p=document.querySelector('.dev-panel[data-dev="'+t.dataset.dev+'"]');
+      if(p)p.classList.add('active');
+    });});
+    var first=document.querySelector('.dev-tab[data-dev="mac"]'); if(first)first.classList.add('active');
+  })();
+</script>
+</body>
+</html>

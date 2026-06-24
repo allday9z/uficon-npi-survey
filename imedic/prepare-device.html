@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ขั้นตอนการเตรียมเครื่อง — iMedic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css">
+<script>(function(){try{var t=localStorage.getItem('imedic-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-elev: #ffffff;
+    --bg-soft: #f4f5f7;
+    --ink: #0a0a0f;
+    --ink-2: #1d1d24;
+    --muted: #6e6e76;
+    --muted-2: #8a8a93;
+    --line: rgba(10,10,15,0.08);
+    --line-soft: rgba(10,10,15,0.05);
+    --accent: oklch(0.62 0.10 240);
+    --accent-soft: oklch(0.95 0.025 240);
+    --accent-ink: oklch(0.45 0.12 240);
+    --shadow-sm: 0 1px 2px rgba(15,17,23,0.04);
+    --shadow-md: 0 1px 2px rgba(15,17,23,0.04), 0 8px 24px -8px rgba(15,17,23,0.08);
+    --shadow-lg: 0 1px 2px rgba(15,17,23,0.04), 0 24px 60px -20px rgba(15,17,23,0.14);
+    --r-md: 18px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --font-display: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-thai: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-thai);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.75);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a35 100%);
+    display: grid; place-items: center; color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.04em;
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--bg-soft); color: var(--ink-2);
+    font-size: 14px; font-weight: 500;
+    transition: background .2s;
+  }
+  .nav-back:hover { background: oklch(0.93 0.005 240); }
+
+  /* HERO */
+  .hero {
+    padding: 72px 0 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 900px 400px at 50% -10%, oklch(0.97 0.03 240) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+  .hero .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    margin: 0 0 18px;
+    font-size: clamp(30px, 4.2vw, 48px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p {
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 640px;
+    text-wrap: pretty;
+  }
+  .hero p strong { color: var(--ink-2); font-weight: 600; }
+
+  /* STEPS */
+  .steps-section { padding: 32px 0 24px; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .step-card {
+    position: relative;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 36px 32px 32px;
+    transition: all .25s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 240px;
+    box-shadow: var(--shadow-sm);
+  }
+  .step-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(10,10,15,0.12);
+  }
+  .step-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 100% 0%, oklch(0.96 0.025 240) 0%, transparent 35%);
+    pointer-events: none;
+  }
+  .step-num-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .step-num strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--ink);
+    margin-top: 6px;
+    text-transform: none;
+  }
+  .step-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: var(--ink);
+    color: white;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px -6px rgba(10,10,15,0.3);
+  }
+  .step-icon svg { width: 26px; height: 26px; stroke-width: 1.5; }
+  .step-body { position: relative; z-index: 1; margin-top: auto; }
+  .step-title {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    margin: 0 0 6px;
+  }
+  .step-sub {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-tag {
+    padding: 5px 11px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .cta-wrap {
+    padding: 48px 0 20px;
+    text-align: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all .2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--ink); color: white; box-shadow: 0 4px 14px -4px rgba(10,10,15,0.3); }
+  .btn-primary:hover { background: #2a2a35; transform: translateY(-2px); box-shadow: 0 8px 20px -6px rgba(10,10,15,0.35); }
+  .btn-soft { background: var(--bg-soft); color: var(--ink); padding: 12px 18px; font-size: 14.5px; }
+  .btn-soft:hover { background: oklch(0.93 0.005 240); }
+
+  /* WARNING NOTE */
+  .warning {
+    max-width: 720px;
+    margin: 24px auto 0;
+    padding: 18px 22px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    border-left: 3px solid var(--accent);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    text-align: left;
+  }
+  .warning .row + .row { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line-soft); }
+  .warning strong { color: var(--ink-2); font-weight: 600; }
+  .warning .en {
+    color: var(--muted-2);
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  /* SLA */
+  .sla-section {
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--line-soft);
+    margin-top: 48px;
+  }
+  .sla-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .sla-head .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .sla-head h2 {
+    margin: 0;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+
+  .sla-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+  }
+  .sla-card {
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a38 100%);
+    color: white;
+    border-radius: var(--r-lg);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .sla-card::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, oklch(0.65 0.13 240 / 0.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .sla-card .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .sla-card .big {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin: 0 0 10px;
+  }
+  .sla-card .big small {
+    font-size: 0.35em;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-left: 8px;
+    letter-spacing: 0;
+  }
+  .sla-card .sub {
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 380px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sla-hotline {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .sla-hotline-head {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sla-hotline-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid; place-items: center;
+  }
+  .sla-hotline-icon svg { width: 20px; height: 20px; stroke-width: 1.8; }
+  .sla-hotline h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .sla-hotline h4 small {
+    display: block; font-weight: 400; font-size: 12px;
+    color: var(--muted); margin-top: 2px;
+    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .sla-hotline-num {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .sla-hotline-num small {
+    display: block; font-weight: 500; font-size: 13px; color: var(--accent-ink); margin-top: 4px;
+    letter-spacing: 0;
+  }
+  .sla-hotline-meta {
+    font-size: 13px;
+    color: var(--muted);
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px; color: var(--muted);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .sla-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 18px; }
+    .hero { padding: 40px 0 24px; }
+    .step-card { padding: 28px 22px 24px; min-height: 0; }
+    .step-num strong { font-size: 44px; }
+    .nav-back span { display: none; }
+  }
+
+  /* ============ DARK MODE ============ */
+  html[data-theme="dark"]{
+    --bg:#0b0b0e; --bg-elev:#161619; --bg-soft:#1e1e22;
+    --ink:#f4f4f7; --ink-2:#d6d6db; --muted:#9b9ba3; --muted-2:#74747c;
+    --line:rgba(255,255,255,0.11); --line-soft:rgba(255,255,255,0.06);
+    --accent-soft:oklch(0.32 0.07 240); --accent-ink:oklch(0.80 0.10 240);
+  }
+  html[data-theme="dark"] .nav{ background:rgba(11,11,14,0.72); }
+  html[data-theme="dark"] .brand-mark{ background:linear-gradient(135deg,#f4f4f7,#c6c6ce); color:#0b0b0e; }
+  /* solid controls: bg auto-lightens via --ink, flip text dark + fix hardcoded dark hovers */
+  html[data-theme="dark"] .btn-primary{ color:#0b0b0e; }
+  html[data-theme="dark"] .btn-primary:hover, html[data-theme="dark"] .btn-primary:hover:not(:disabled){ background:#ffffff; }
+  html[data-theme="dark"] .chip.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .seg-item.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .form-section-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .meta-chip.years{ color:#0b0b0e; }
+  html[data-theme="dark"] .checker-step label .num{ color:#0b0b0e; }
+  html[data-theme="dark"] .faq-item.open .faq-q .icon{ color:#0b0b0e; }
+  html[data-theme="dark"] .step-icon{ color:#0b0b0e; }
+  html[data-theme="dark"] .tl-marker.done{ color:#0b0b0e; }
+  html[data-theme="dark"] .confirm-check{ color:#0b0b0e; }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked{ background:var(--ink); border-color:var(--ink); }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked::after{ border-color:#0b0b0e; }
+  /* hover backgrounds that hardcode light oklch */
+  html[data-theme="dark"] .nav-back:hover,
+  html[data-theme="dark"] .btn-soft:hover,
+  html[data-theme="dark"] .chip:hover,
+  html[data-theme="dark"] .consent-item:hover,
+  html[data-theme="dark"] .help-chip:hover,
+  html[data-theme="dark"] .theme-toggle:hover{ background:rgba(255,255,255,0.08); }
+  /* feature panels: pin dark so white text reads */
+  html[data-theme="dark"] .summary-head,
+  html[data-theme="dark"] .order-head,
+  html[data-theme="dark"] .sla-card,
+  html[data-theme="dark"] .bento-card.dark{ background:linear-gradient(135deg,#17171c 0%,#26262e 100%); }
+  html[data-theme="dark"] .bento-card.dark{ border-color:rgba(255,255,255,0.1); }
+  /* light gradient surfaces */
+  html[data-theme="dark"] .hero::before{ background:radial-gradient(ellipse 900px 400px at 50% -10%,oklch(0.30 0.06 240) 0%,transparent 60%); }
+  html[data-theme="dark"] .applecare-art{ background:radial-gradient(circle at 30% 25%,oklch(0.32 0.06 240) 0%,transparent 50%),radial-gradient(circle at 75% 80%,oklch(0.30 0.06 220) 0%,transparent 55%),linear-gradient(140deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual{ background:radial-gradient(circle at 30% 25%,oklch(0.30 0.05 240) 0%,transparent 55%),linear-gradient(160deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual::before{ background:repeating-linear-gradient(135deg,transparent 0px,transparent 24px,rgba(255,255,255,0.05) 24px,rgba(255,255,255,0.05) 25px); }
+  html[data-theme="dark"] .dev-silhouette svg{ color:var(--ink); }
+  /* theme toggle button */
+  .theme-toggle{ width:40px; height:40px; border-radius:999px; background:var(--bg-soft); display:grid; place-items:center; color:var(--ink-2); transition:all .2s ease; flex-shrink:0; }
+  .theme-toggle:hover{ background:oklch(0.93 0.005 240); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .sun{ display:none; }
+  html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+  html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+
+</style>
+</head>
+<body data-screen-label="09 Prepare Device">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">iM</span>
+      <span>iMedic</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="สลับโหมดสว่าง/มืด">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>กลับหน้าหลัก</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="eyebrow">Device Preparation · 10</div>
+    <h1>การเตรียมอุปกรณ์ให้พร้อมสำหรับ<br/><span class="accent">การรับบริการที่ iMedic</span></h1>
+    <p>
+      ก่อนที่คุณจะส่งอุปกรณ์เข้าศูนย์บริการ ทำตามขั้นตอนต่อไปนี้
+      ก่อนส่งอุปกรณ์ของคุณมารับการซ่อมหรือเปลี่ยน
+      <strong>หากเครื่องเปิดไม่ได้หรือไม่ตอบสนอง ให้ทำตามขั้นตอนต่อไปนี้ให้มากที่สุดเท่าที่จะทำได้</strong>
+    </p>
+  </div>
+</section>
+
+<!-- 4 STEPS -->
+<section class="steps-section">
+  <div class="container">
+    <div class="steps-grid">
+
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-num-wrap">
+          <div class="step-num">Step<strong>01</strong></div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3 class="step-title">สำรองข้อมูลอุปกรณ์ iOS ของคุณ</h3>
+          <p class="step-sub">สำรองข้อมูลผ่าน iCloud หรือเชื่อมต่อกับ Mac / PC เพื่อ Backup ข้อมูลทั้งหมด ก่อนนำเครื่องเข้ารับบริการ</p>
+        </div>
+        <div class="step-tags">
+          <span class="step-tag">iCloud Backup</span>
+          <span class="step-tag">Finder / iTunes</span>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-num-wrap">
+          <div class="step-num">Step<strong>02</strong></div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3 class="step-title">เตรียมรหัสผ่าน Apple ID ของคุณให้พร้อม</h3>
+          <p class="step-sub">โปรดเตรียม Email และรหัสผ่าน Apple ID ที่ใช้กับเครื่องล่าสุด เพื่อใช้ในการ Sign out และยืนยันความเป็นเจ้าของอุปกรณ์</p>
+        </div>
+        <div class="step-tags">
+          <span class="step-tag">Apple ID</span>
+          <span class="step-tag">Find My — off</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-num-wrap">
+          <div class="step-num">Step<strong>03</strong></div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.5"/><path d="M14 10h4M14 14h3"/></svg>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3 class="step-title">นำบัตรประชาชน, ใบขับขี่ หรือหนังสือเดินทาง เพื่อยืนยันตัวตน</h3>
+          <p class="step-sub">เอกสารยืนยันตัวตนต้องเป็นของบุคคลที่นำเครื่องมา และเป็นเอกสารตัวจริงที่ยังไม่หมดอายุ</p>
+        </div>
+        <div class="step-tags">
+          <span class="step-tag">บัตรประชาชน</span>
+          <span class="step-tag">ใบขับขี่</span>
+          <span class="step-tag">Passport</span>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card">
+        <div class="step-num-wrap">
+          <div class="step-num">Step<strong>04</strong></div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11h6M9 15h4"/><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/></svg>
+          </div>
+        </div>
+        <div class="step-body">
+          <h3 class="step-title">โปรดนำใบเสร็จซื้อสินค้ามาด้วย (ถ้ามี) เพื่อยืนยันความเป็นเจ้าของ</h3>
+          <p class="step-sub">ใบเสร็จช่วยให้ทีมงานยืนยันสิทธิประกันและข้อมูลการซื้อได้รวดเร็วยิ่งขึ้น — ทั้งใบเสร็จกระดาษและ Email Receipt</p>
+        </div>
+        <div class="step-tags">
+          <span class="step-tag">ใบเสร็จ / Receipt</span>
+          <span class="step-tag">E-receipt</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <a class="btn btn-primary" href="index.html#pricing">
+        ตรวจสอบราคาซ่อม
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+
+      <!-- WARNING -->
+      <div class="warning">
+        <div class="row">
+          <strong>กรุณาสำรองข้อมูลก่อนเข้ารับบริการทุกครั้ง</strong> ทางศูนย์บริการ iMedic ไม่สามารถปลดล็อก Apple ID ให้ลูกค้าได้ ตามนโยบายของ Apple
+        </div>
+        <div class="row en">
+          Please backup your own data before the service. Due to Apple’s service policy, please contact Apple Hotline if your Apple ID was locked.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLA SECTION -->
+<section class="sla-section">
+  <div class="container">
+    <div class="sla-head">
+      <div class="eyebrow">Service Turnaround Time</div>
+      <h2>ระยะเวลาในการส่งซ่อมสินค้า</h2>
+    </div>
+    <div class="sla-grid">
+      <div class="sla-card">
+        <div class="lbl">Repair / Claim Turnaround</div>
+        <div class="big">7–10 <small>วันทำการ</small></div>
+        <p class="sub">ศูนย์บริการ iMedic จะใช้ระยะเวลาประมาณ <strong style="color:white">7 ถึง 10 วันทำการ</strong> ในการดำเนินการซ่อมหรือเคลมสินค้า ทีมงานจะแจ้งสถานะให้ทราบทุกขั้นตอนผ่านเบอร์โทรและ Line ที่ลูกค้าให้ไว้</p>
+      </div>
+
+      <div class="sla-hotline">
+        <div class="sla-hotline-head">
+          <div class="sla-hotline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.93 19 19 0 0 1-6-6A19 19 0 0 1 3.69 4.81 1 1 0 0 1 4.7 4h4.09a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27 1L9 11.27a16 16 0 0 0 6 6l1.5-1.5a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .76 1z"/></svg>
+          </div>
+          <h4>Apple Hotline<small>กรณีลืมรหัสผ่าน Apple ID</small></h4>
+        </div>
+        <a class="sla-hotline-num" href="tel:0018004412904">
+          001-800-441-2904
+          <small>โทรฟรี · Toll-free</small>
+        </a>
+        <div class="sla-hotline-meta">
+          กรณีที่ลูกค้าลืมรหัสผ่าน Apple ID กรุณาติดต่อ Apple Hotline เพื่อดำเนินการรีเซ็ตรหัสผ่านโดยตรงกับ Apple
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <span>© 2025 iMedic Co., Ltd. · ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple</span>
+    <span>โทร 090-305-2760 · Line @imedicthai</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tg=document.getElementById('theme-toggle');
+    function setTheme(t){ if(t==='dark')document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('imedic-theme',t);}catch(e){} }
+    if(tg) tg.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'; setTheme(cur==='dark'?'light':'dark'); });
+  })();
+</script>
+</body>
+</html>

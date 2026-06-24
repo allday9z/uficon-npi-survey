@@ -1,0 +1,2402 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>iMedic — ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple</title>
+<script>(function(){try{var t=localStorage.getItem('imedic-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css">
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-elev: #ffffff;
+    --bg-soft: #f4f5f7;
+    --ink: #0a0a0f;
+    --ink-2: #1d1d24;
+    --muted: #6e6e76;
+    --muted-2: #8a8a93;
+    --line: rgba(10,10,15,0.08);
+    --line-soft: rgba(10,10,15,0.05);
+    --accent: oklch(0.62 0.10 240);
+    --accent-soft: oklch(0.95 0.025 240);
+    --accent-ink: oklch(0.45 0.12 240);
+    --shadow-sm: 0 1px 2px rgba(15,17,23,0.04), 0 1px 1px rgba(15,17,23,0.03);
+    --shadow-md: 0 1px 2px rgba(15,17,23,0.04), 0 8px 24px -8px rgba(15,17,23,0.08);
+    --shadow-lg: 0 1px 2px rgba(15,17,23,0.04), 0 24px 60px -20px rgba(15,17,23,0.14);
+    --r-sm: 12px;
+    --r-md: 18px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --font-display: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-thai: "LINE Seed Sans TH", system-ui, sans-serif;
+  }
+
+  /* ============ DARK MODE ============ */
+  html[data-theme="dark"] {
+    --bg: #0b0b0e;
+    --bg-elev: #161619;
+    --bg-soft: #1e1e22;
+    --ink: #f4f4f7;
+    --ink-2: #d6d6db;
+    --muted: #9b9ba3;
+    --muted-2: #74747c;
+    --line: rgba(255,255,255,0.11);
+    --line-soft: rgba(255,255,255,0.06);
+    --accent-soft: oklch(0.32 0.07 240);
+    --accent-ink: oklch(0.80 0.10 240);
+  }
+  html[data-theme="dark"] .nav { background: rgba(11,11,14,0.72); }
+  html[data-theme="dark"] .cta-card { background: rgba(255,255,255,0.04); }
+  html[data-theme="dark"] .cta-card:hover { background: rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .device-tile {
+    background: repeating-linear-gradient(135deg, oklch(0.23 0.006 240) 0px, oklch(0.23 0.006 240) 10px, oklch(0.26 0.007 240) 10px, oklch(0.26 0.007 240) 20px);
+  }
+  html[data-theme="dark"] .hero-devices {
+    background: linear-gradient(180deg, var(--bg-elev) 0%, oklch(0.20 0.012 240) 100%);
+  }
+  html[data-theme="dark"] .hero::before {
+    background: radial-gradient(ellipse 1100px 500px at 50% -10%, oklch(0.30 0.06 240) 0%, transparent 60%), linear-gradient(180deg, transparent 0%, var(--bg) 80%);
+  }
+  html[data-theme="dark"] .price-card.featured {
+    background: linear-gradient(180deg, oklch(0.22 0.02 240), var(--bg-elev));
+    border-color: oklch(0.40 0.05 240);
+  }
+  html[data-theme="dark"] .silhouette svg { stroke: var(--ink); }
+  html[data-theme="dark"] .branch-photo {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.4) 100%),
+      repeating-linear-gradient(45deg, oklch(0.24 0.01 240) 0px, oklch(0.24 0.01 240) 12px, oklch(0.27 0.012 240) 12px, oklch(0.27 0.012 240) 24px) !important;
+  }
+
+  /* dark: solid controls (—ink becomes light, flip text dark) */
+  html[data-theme="dark"] .brand-mark { background: linear-gradient(135deg, #f4f4f7, #c6c6ce); color: #0b0b0e; }
+  html[data-theme="dark"] .btn-primary { color: #0b0b0e; }
+  html[data-theme="dark"] .btn-primary:hover { background: #ffffff; }
+  html[data-theme="dark"] .btn-ghost:hover { background: rgba(255,255,255,0.06); }
+  html[data-theme="dark"] .cta-card:hover .arrow { color: #0b0b0e; }
+  html[data-theme="dark"] .pd-close:hover { color: #0b0b0e; }
+  html[data-theme="dark"] .pd-book-btn { color: #0b0b0e; }
+  html[data-theme="dark"] .pd-book-btn:hover { background: #ffffff; }
+  html[data-theme="dark"] .social-btn:hover { color: #0b0b0e; }
+  html[data-theme="dark"] .pd-tab.active { border-bottom-color: var(--ink); }
+  /* dark: keep feature banner dark so white text reads */
+  html[data-theme="dark"] .cta-banner { background: linear-gradient(135deg, #17171c 0%, #26262e 100%); }
+
+  /* theme toggle button */
+  .theme-toggle {
+    width: 40px; height: 40px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    color: var(--ink-2);
+    transition: all .2s ease;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { background: oklch(0.93 0.005 240); }
+  html[data-theme="dark"] .theme-toggle:hover { background: rgba(255,255,255,0.1); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .sun { display: none; }
+  html[data-theme="dark"] .theme-toggle .moon { display: none; }
+  html[data-theme="dark"] .theme-toggle .sun { display: block; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-thai);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.75);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner {
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+  }
+  .brand-mark {
+    width: 30px; height: 30px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a35 100%);
+    display: grid; place-items: center;
+    color: white;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.04em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+    opacity: 0.78;
+    transition: opacity .2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14.5px;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .btn-ghost { color: var(--ink-2); }
+  .btn-ghost:hover { background: var(--bg-soft); }
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+  }
+  .btn-primary:hover { background: #2a2a35; transform: translateY(-1px); }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 88px 0 40px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 1100px 500px at 50% -10%, oklch(0.97 0.03 240) 0%, transparent 60%),
+      linear-gradient(180deg, transparent 0%, var(--bg) 80%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 8px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    box-shadow: var(--shadow-sm);
+  }
+  .eyebrow-chip {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 {
+    margin: 22px 0 22px;
+    font-family: var(--font-thai);
+    font-weight: 600;
+    font-size: clamp(38px, 5.6vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 920px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.lead {
+    max-width: 740px;
+    color: var(--muted);
+    font-size: 17.5px;
+    line-height: 1.65;
+    margin: 0 0 44px;
+    text-wrap: pretty;
+  }
+  .hero p.lead strong {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  /* CTA Grid */
+  .cta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .cta-card {
+    position: relative;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 180px;
+    transition: all .25s ease;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: var(--shadow-sm);
+  }
+  .cta-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(10,10,15,0.12);
+    background: rgba(255,255,255,0.95);
+  }
+  .cta-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid;
+    place-items: center;
+  }
+  .cta-icon svg { width: 22px; height: 22px; stroke-width: 1.6; }
+  .cta-title {
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    margin-top: auto;
+  }
+  .cta-sub {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .cta-card .arrow {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    transition: all .25s ease;
+    color: var(--muted);
+  }
+  .cta-card:hover .arrow {
+    background: var(--ink);
+    color: white;
+    transform: translate(2px, -2px);
+  }
+
+  /* Hero device strip */
+  .hero-devices {
+    margin: 64px 0 0;
+    background: linear-gradient(180deg, var(--bg-elev) 0%, oklch(0.98 0.01 240) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    padding: 36px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-devices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 28px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-devices-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .hero-devices-title small {
+    display: block;
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .trust-row {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .trust-item svg { color: var(--accent-ink); }
+  .device-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .device-tile {
+    aspect-ratio: 4/5;
+    border-radius: var(--r-md);
+    background:
+      repeating-linear-gradient(135deg,
+        oklch(0.97 0.003 240) 0px,
+        oklch(0.97 0.003 240) 10px,
+        oklch(0.95 0.005 240) 10px,
+        oklch(0.95 0.005 240) 20px);
+    border: 1px solid var(--line-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .device-tile-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-2);
+  }
+  .device-tile-name {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .device-tile-name small {
+    display: block;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  /* device silhouettes */
+  .silhouette {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+  }
+  .silhouette svg { width: 60%; height: 60%; opacity: 0.5; }
+
+  /* ============ SECTION GENERIC ============ */
+  section.section { padding: 100px 0; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .section-eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(30px, 3.4vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.018em;
+    margin: 0;
+    max-width: 720px;
+    text-wrap: balance;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 460px;
+    margin: 14px 0 0;
+    line-height: 1.6;
+  }
+  .section-head-right {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ============ PRICING ============ */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .price-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: all .25s ease;
+    position: relative;
+  }
+  .price-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .price-card.featured {
+    background: linear-gradient(180deg, oklch(0.99 0.005 240), var(--bg-elev));
+    border-color: oklch(0.85 0.04 240);
+  }
+  .price-card.featured::after {
+    content: "Most repaired";
+    position: absolute;
+    top: -10px; right: 20px;
+    background: var(--accent-ink);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .price-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    color: var(--ink);
+  }
+  .price-icon svg { width: 28px; height: 28px; stroke-width: 1.4; }
+  .price-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .price-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 16px;
+  }
+  .price-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13.5px;
+    gap: 12px;
+  }
+  .price-list .label { color: var(--muted); }
+  .price-list .value {
+    font-weight: 600;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .price-from {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: -4px;
+  }
+  .price-amount {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-amount small {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  .price-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent-ink);
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  .price-link:hover { gap: 10px; transition: gap .2s; }
+  .price-link { cursor: pointer; background: none; border: 0; font: inherit; padding: 0; text-align: left; }
+
+  /* General services block */
+  .general-services {
+    margin-top: 28px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .gs-head {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .gs-head h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .gs-head small {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-2);
+  }
+  .gs-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gs-row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 28px;
+    border-top: 1px solid var(--line-soft);
+    transition: background .2s;
+  }
+  .gs-row:hover { background: var(--bg-soft); }
+  .gs-row:nth-child(odd) { border-right: 1px solid var(--line-soft); }
+  .gs-num {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--muted-2);
+    letter-spacing: 0.05em;
+  }
+  .gs-label-th { font-size: 14.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .gs-label-en { font-size: 12.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+  .gs-price {
+    font-family: var(--font-display);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .gs-price small { font-size: 11.5px; font-weight: 500; color: var(--muted); }
+
+  /* fine print */
+  .fine-print {
+    margin-top: 32px;
+    padding: 22px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-md);
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .fine-print h5 {
+    margin: 0 0 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-2);
+    font-family: var(--font-thai);
+  }
+  .fine-print ul {
+    margin: 0; padding-left: 18px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .fine-print li::marker { color: var(--muted-2); }
+
+  /* ============ PRICING DETAIL MODAL ============ */
+  .pd-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,17,23,0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5vh 24px;
+    overflow-y: auto;
+    animation: fadeIn .25s ease;
+  }
+  .pd-backdrop.open { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .pd-modal {
+    background: var(--bg-elev);
+    width: 100%;
+    max-width: 920px;
+    border-radius: var(--r-xl);
+    box-shadow: 0 30px 80px -10px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: rise .35s cubic-bezier(.2,.7,.2,1);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+  }
+  .pd-header {
+    padding: 26px 32px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .pd-header-left { display: flex; align-items: center; gap: 16px; }
+  .pd-header-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+  }
+  .pd-header-icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+  .pd-header h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+  .pd-header small {
+    display: block;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .pd-close {
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--ink);
+    display: grid; place-items: center;
+    transition: all .2s;
+  }
+  .pd-close:hover { background: var(--ink); color: white; }
+
+  .pd-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 14px 18px 0;
+    border-bottom: 1px solid var(--line-soft);
+    overflow-x: auto;
+    background: var(--bg-elev);
+    scrollbar-width: thin;
+  }
+  .pd-tab {
+    padding: 10px 14px;
+    border-radius: 10px 10px 0 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all .2s;
+  }
+  .pd-tab:hover { color: var(--ink); }
+  .pd-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+    font-weight: 600;
+  }
+
+  .pd-body {
+    overflow-y: auto;
+    padding: 24px 32px 32px;
+  }
+  .pd-panel { display: none; }
+  .pd-panel.active { display: block; }
+  .pd-panel-intro {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 0 0 18px;
+    line-height: 1.6;
+  }
+  .pd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  .pd-table thead th {
+    text-align: left;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-2);
+    font-weight: 500;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    font-family: "JetBrains Mono", monospace;
+  }
+  .pd-table thead th:last-child { text-align: right; }
+  .pd-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .pd-table tbody td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .pd-table tbody tr:hover td { background: var(--bg-soft); }
+
+  .pd-panel-cta {
+    margin-top: 24px;
+    background: linear-gradient(180deg, var(--accent-soft), oklch(0.97 0.015 240));
+    border: 1px solid oklch(0.88 0.04 240);
+    border-radius: var(--r-md);
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pd-panel-cta-text { display: flex; flex-direction: column; gap: 2px; }
+  .pd-panel-cta-text strong {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .pd-panel-cta-text span {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .pd-book-btn {
+    background: var(--ink);
+    color: white;
+    padding: 11px 20px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .pd-book-btn:hover {
+    background: #2a2a35;
+    transform: translateY(-1px);
+  }
+  .pd-model {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .pd-model small {
+    display: block;
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 12.5px;
+    margin-top: 2px;
+  }
+  .pd-foot {
+    padding: 18px 32px;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .pd-foot a { color: var(--accent-ink); font-weight: 600; }
+
+  @media (max-width: 720px) {
+    .gs-list { grid-template-columns: 1fr; }
+    .gs-row:nth-child(odd) { border-right: 0; }
+    .pd-header { padding: 20px 22px; }
+    .pd-body { padding: 18px 22px 24px; }
+    .pd-foot { padding: 16px 22px; }
+  }
+
+  /* ============ WHY ============ */
+  .why-section {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .why-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    padding: 30px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: var(--shadow-sm);
+    transition: all .25s ease;
+  }
+  .why-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .why-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid; place-items: center;
+  }
+  .why-icon svg { width: 22px; height: 22px; stroke-width: 1.6; }
+  .why-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .why-desc {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .why-meta {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted-2);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .why-meta strong {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  /* ============ BRANCH ============ */
+  .branch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .branch-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: all .25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .branch-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .branch-photo {
+    aspect-ratio: 5/3;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.15) 100%),
+      repeating-linear-gradient(45deg,
+        oklch(0.93 0.01 240) 0px,
+        oklch(0.93 0.01 240) 12px,
+        oklch(0.90 0.015 240) 12px,
+        oklch(0.90 0.015 240) 24px);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+  .branch-photo-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: white;
+    background: rgba(10,10,15,0.55);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .branch-body {
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+  .branch-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .branch-addr {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+    min-height: 65px;
+    text-wrap: pretty;
+  }
+  .branch-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    margin-top: auto;
+    border-top: 1px solid var(--line-soft);
+  }
+  .branch-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .branch-meta-item svg {
+    width: 14px; height: 14px;
+    color: var(--muted);
+    stroke-width: 1.8;
+  }
+  .branch-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .branch-actions .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+  .btn-soft {
+    background: var(--bg-soft);
+    color: var(--ink);
+  }
+  .btn-soft:hover { background: oklch(0.93 0.005 240); }
+
+  /* ============ CTA BANNER ============ */
+  .cta-banner {
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a38 100%);
+    color: white;
+    border-radius: var(--r-xl);
+    padding: 64px 56px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::after {
+    content: "";
+    position: absolute;
+    width: 600px; height: 600px;
+    right: -150px; top: -200px;
+    background: radial-gradient(circle, oklch(0.65 0.13 240 / 0.35) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-banner h2 {
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .cta-banner p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0 0 28px;
+    max-width: 480px;
+  }
+  .cta-banner .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cta-banner .btn-primary {
+    background: white;
+    color: var(--ink);
+  }
+  .cta-banner .btn-primary:hover { background: #f0f0f5; }
+  .cta-banner .btn-outline {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .cta-banner .btn-outline:hover { background: rgba(255,255,255,0.08); }
+  .cta-banner-side {
+    position: relative;
+    z-index: 1;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--r-md);
+    padding: 22px 20px;
+  }
+  .stat-val {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 72px 0 32px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+  }
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-2);
+    margin: 0 0 16px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .footer-col ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .footer-col a {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    opacity: 0.78;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-tag {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 12px 0 24px;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  .socials {
+    display: flex;
+    gap: 8px;
+  }
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    background: var(--bg-soft);
+    display: grid; place-items: center;
+    color: var(--ink-2);
+    transition: all .2s;
+  }
+  .social-btn:hover { background: var(--ink); color: white; }
+  .social-btn svg { width: 16px; height: 16px; }
+  .footer-bottom {
+    border-top: 1px solid var(--line-soft);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-bottom-links {
+    display: flex; gap: 24px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .cta-grid { grid-template-columns: repeat(2, 1fr); }
+    .device-strip { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .branch-grid { grid-template-columns: 1fr; }
+    .cta-banner { grid-template-columns: 1fr; padding: 44px 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    section.section { padding: 72px 0; }
+    .hero { padding: 56px 0 24px; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 20px; }
+    .cta-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .device-strip { grid-template-columns: 1fr 1fr; }
+    .hero-devices { padding: 24px; }
+    .cta-banner { padding: 36px 24px; }
+  }
+
+  /* tiny entrance */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: none; }
+  }
+  .delay-1 { animation-delay: .08s; }
+  .delay-2 { animation-delay: .16s; }
+  .delay-3 { animation-delay: .24s; }
+  .delay-4 { animation-delay: .32s; }
+
+  /* Tweaks panel */
+  #tweaks {
+    position: fixed;
+    right: 20px; bottom: 20px;
+    z-index: 100;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: var(--shadow-lg);
+    width: 240px;
+    display: none;
+    font-family: var(--font-thai);
+  }
+  #tweaks.open { display: block; }
+  #tweaks h5 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  #tweaks h5 button { font-size: 16px; color: var(--muted); padding: 2px 6px; line-height: 1; }
+  .tweak-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .tweak-row label { font-size: 12.5px; color: var(--muted); }
+  .swatches { display: flex; gap: 6px; }
+  .swatch {
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .swatch.active { border-color: var(--ink); transform: scale(1.05); }
+</style>
+</head>
+<body data-screen-label="01 Landing">
+
+<!-- NAV -->
+<nav class="nav" data-comment-anchor="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#">
+      <span class="brand-mark">iM</span>
+      <span>iMedic</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">บริการ</a>
+      <a href="#pricing">ค่าบริการ</a>
+      <a href="#why">ทำไมต้อง iMedic</a>
+      <a href="#branches">สาขา</a>
+      <a href="#contact">ติดต่อ</a>
+    </div>
+    <div class="nav-cta">
+      <button class="theme-toggle" id="theme-toggle" aria-label="สลับโหมดสว่าง/มืด">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="btn btn-ghost" href="check-status.html">ตรวจสถานะ</a>
+      <a class="btn btn-primary" href="online-booking.html">
+        จองคิวซ่อม
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="reveal">
+      <span class="eyebrow">
+        <span class="eyebrow-chip">ACMT Certified</span>
+        ช่างผ่านการรับรองมาตรฐานสากลจาก Apple
+      </span>
+    </div>
+    <h1 class="reveal delay-1">
+      ศูนย์ซ่อมและบริการ <span class="accent">ผลิตภัณฑ์ Apple</span><br/>
+      อย่างครบวงจร โดยทีมช่างมืออาชีพ
+    </h1>
+    <p class="lead reveal delay-2">
+      iMedic คือศูนย์บริการที่ให้ความเชี่ยวชาญเฉพาะทางด้านการซ่อมและดูแลผลิตภัณฑ์ Apple ครบทุกรุ่น
+      ไม่ว่าจะเป็น <strong>iPhone, iPad, Mac หรือ Apple Watch</strong> ทีมช่างของเราผ่านการรับรองตามมาตรฐาน
+      <strong>ACMT (Apple Certified Macintosh Technician)</strong> ซึ่งเป็นมาตรฐานระดับสากลจาก Apple
+    </p>
+
+    <!-- CTA GRID -->
+    <div class="cta-grid">
+      <a class="cta-card reveal delay-1" data-comment-anchor="cta-applecare" href="applecare.html">
+        <span class="cta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <span class="arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+        <span class="cta-title">เช็คราคา AppleCare+</span>
+        <span class="cta-sub">เปรียบเทียบแพ็กเกจคุ้มครอง</span>
+      </a>
+
+      <a class="cta-card reveal delay-2" data-comment-anchor="cta-status" href="check-status.html">
+        <span class="cta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M11 8v3l2 1"/></svg>
+        </span>
+        <span class="arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+        <span class="cta-title">ตรวจสถานะการซ่อม</span>
+        <span class="cta-sub">ติดตามแบบเรียลไทม์</span>
+      </a>
+
+      <a class="cta-card reveal delay-3" data-comment-anchor="cta-book" href="online-booking.html">
+        <span class="cta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.5" fill="currentColor"/></svg>
+        </span>
+        <span class="arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+        <span class="cta-title">จองคิวออนไลน์</span>
+        <span class="cta-sub">เลือกวัน-เวลาที่สะดวก</span>
+      </a>
+
+      <a class="cta-card reveal delay-4" data-comment-anchor="cta-prep" href="prepare-device.html">
+        <span class="cta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11h6M9 15h4"/><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/></svg>
+        </span>
+        <span class="arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </span>
+        <span class="cta-title">ขั้นตอนเตรียมเครื่อง</span>
+        <span class="cta-sub">เช็คลิสต์ก่อนนำเครื่องเข้าซ่อม</span>
+      </a>
+    </div>
+
+    <!-- DEVICE STRIP -->
+    <div class="hero-devices reveal delay-3">
+      <div class="hero-devices-header">
+        <div class="hero-devices-title">
+          เราดูแลครอบคลุมทุกผลิตภัณฑ์
+          <small>iPhone · iPad · Mac · Apple Watch — รับซ่อมทุกรุ่น ทุกอาการ</small>
+        </div>
+        <div class="trust-row">
+          <span class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+            อะไหล่มาตรฐาน
+          </span>
+          <span class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            รับประกันงานซ่อม 90 วัน
+          </span>
+          <span class="trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M5 7v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            เก็บข้อมูลปลอดภัย
+          </span>
+        </div>
+      </div>
+
+      <div class="device-strip">
+        <div class="device-tile">
+          <div class="silhouette">
+            <svg viewBox="0 0 60 100" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linejoin="round">
+              <rect x="6" y="4" width="48" height="92" rx="10"/>
+              <rect x="10" y="9" width="40" height="80" rx="3" stroke-width="1" opacity="0.4"/>
+              <rect x="22" y="6" width="16" height="3" rx="1.5" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="device-tile-label">01 · Phone</div>
+          <div class="device-tile-name">iPhone<small>ทุกรุ่น ตั้งแต่ iPhone 6 ขึ้นไป</small></div>
+        </div>
+        <div class="device-tile">
+          <div class="silhouette">
+            <svg viewBox="0 0 80 100" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linejoin="round">
+              <rect x="6" y="6" width="68" height="88" rx="6"/>
+              <rect x="10" y="10" width="60" height="80" rx="2" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="device-tile-label">02 · Tablet</div>
+          <div class="device-tile-name">iPad<small>iPad mini, Air, Pro และมาตรฐาน</small></div>
+        </div>
+        <div class="device-tile">
+          <div class="silhouette">
+            <svg viewBox="0 0 120 80" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linejoin="round">
+              <path d="M14 12h92v48H14z"/>
+              <path d="M6 60h108l-6 8H12z" fill="none"/>
+              <rect x="18" y="16" width="84" height="40" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="device-tile-label">03 · Computer</div>
+          <div class="device-tile-name">Mac<small>MacBook, iMac, Mac mini, Studio</small></div>
+        </div>
+        <div class="device-tile">
+          <div class="silhouette">
+            <svg viewBox="0 0 80 100" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linejoin="round">
+              <rect x="20" y="28" width="40" height="44" rx="10"/>
+              <path d="M28 28l3-8h18l3 8M28 72l3 8h18l3-8"/>
+              <rect x="24" y="34" width="32" height="32" rx="6" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="device-tile-label">04 · Wearable</div>
+          <div class="device-tile-name">Apple Watch<small>Series 3 ขึ้นไป รวม Ultra</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE CHARGE -->
+<section class="section" id="pricing" data-screen-label="02 Service Charge">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">02 — Pricing</div>
+        <h2 class="section-title">อัตราค่าบริการ <br/>Service Charge</h2>
+        <p class="section-desc">กรุณาสำรองข้อมูลก่อนเข้ารับบริการทุกครั้ง<br/>ทางศูนย์บริการ iMedic ไม่สามารถปลดล็อก Apple ID ให้ลูกค้าได้ ตามนโยบายของ Apple</p>
+      </div>
+      <div class="section-head-right">
+        <a class="btn btn-soft" href="#all-prices">
+          ดูรายการทั้งหมด
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- iPhone -->
+      <div class="price-card featured">
+        <div class="price-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 19h4"/></svg>
+        </div>
+        <div>
+          <h3 class="price-name">iPhone</h3>
+          <div class="price-from">เริ่มต้น</div>
+          <div class="price-amount">฿ 1,290<small> /งาน</small></div>
+        </div>
+        <ul class="price-list">
+          <li><span class="label">เปลี่ยนหน้าจอ</span><span class="value">฿ 3,900 –</span></li>
+          <li><span class="label">เปลี่ยนแบตเตอรี่</span><span class="value">฿ 1,290 –</span></li>
+          <li><span class="label">เปลี่ยนกล้องหลัง</span><span class="value">฿ 2,500 –</span></li>
+          <li><span class="label">งานเมนบอร์ด</span><span class="value">ประเมิน</span></li>
+        </ul>
+        <button class="price-link" data-pd-open="iphone">
+          ดูรายละเอียดเพิ่มเติม
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- iPad -->
+      <div class="price-card">
+        <div class="price-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M11 18h2"/></svg>
+        </div>
+        <div>
+          <h3 class="price-name">iPad</h3>
+          <div class="price-from">เริ่มต้น</div>
+          <div class="price-amount">฿ 1,500<small> /งาน</small></div>
+        </div>
+        <ul class="price-list">
+          <li><span class="label">เปลี่ยนหน้าจอ</span><span class="value">฿ 4,500 –</span></li>
+          <li><span class="label">เปลี่ยนแบตเตอรี่</span><span class="value">฿ 1,890 –</span></li>
+          <li><span class="label">ซ่อมพอร์ตชาร์จ</span><span class="value">฿ 1,500 –</span></li>
+          <li><span class="label">งานเมนบอร์ด</span><span class="value">ประเมิน</span></li>
+        </ul>
+        <button class="price-link" data-pd-open="ipad">
+          ดูรายละเอียดเพิ่มเติม
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- Mac -->
+      <div class="price-card">
+        <div class="price-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4z"/></svg>
+        </div>
+        <div>
+          <h3 class="price-name">Mac</h3>
+          <div class="price-from">เริ่มต้น</div>
+          <div class="price-amount">฿ 2,500<small> /งาน</small></div>
+        </div>
+        <ul class="price-list">
+          <li><span class="label">เปลี่ยนคีย์บอร์ด</span><span class="value">฿ 4,900 –</span></li>
+          <li><span class="label">เปลี่ยนแบตเตอรี่</span><span class="value">฿ 2,900 –</span></li>
+          <li><span class="label">ลงระบบ / กู้ข้อมูล</span><span class="value">฿ 1,500 –</span></li>
+          <li><span class="label">งาน Logic Board</span><span class="value">ประเมิน</span></li>
+        </ul>
+        <button class="price-link" data-pd-open="mac">
+          ดูรายละเอียดเพิ่มเติม
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- Apple Watch -->
+      <div class="price-card">
+        <div class="price-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M9 7l1-3h4l1 3M9 21l1 3h4l1-3"/></svg>
+        </div>
+        <div>
+          <h3 class="price-name">Apple Watch</h3>
+          <div class="price-from">เริ่มต้น</div>
+          <div class="price-amount">฿ 1,890<small> /งาน</small></div>
+        </div>
+        <ul class="price-list">
+          <li><span class="label">เปลี่ยนหน้าจอ</span><span class="value">฿ 3,500 –</span></li>
+          <li><span class="label">เปลี่ยนแบตเตอรี่</span><span class="value">฿ 1,890 –</span></li>
+          <li><span class="label">เปลี่ยนกระจกหลัง</span><span class="value">฿ 2,200 –</span></li>
+          <li><span class="label">งาน Logic Board</span><span class="value">ประเมิน</span></li>
+        </ul>
+        <button class="price-link" data-pd-open="watch">
+          ดูรายละเอียดเพิ่มเติม
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- General service charges -->
+    <div class="general-services">
+      <div class="gs-head">
+        <h3>ค่าบริการทั่วไป &nbsp;·&nbsp; General Service Charges</h3>
+        <small>ราคารวม VAT 7%</small>
+      </div>
+      <div class="gs-list">
+        <div class="gs-row">
+          <span class="gs-num">01</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการตรวจเช็ค เปลี่ยนอะไหล่ Mac</div>
+            <div class="gs-label-en">Service Charge for Mac</div>
+          </div>
+          <div class="gs-price">฿ 1,605</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">02</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการตรวจเช็ค เปลี่ยนอะไหล่ iOS Device</div>
+            <div class="gs-label-en">Service Charge for iOS Device</div>
+          </div>
+          <div class="gs-price">฿ 535</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">03</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการตรวจเช็ค ทำความสะอาด AirPods</div>
+            <div class="gs-label-en">Service Charge for AirPods</div>
+          </div>
+          <div class="gs-price">฿ 300</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">04</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการทำความสะอาดภายนอก/ภายในตัวเครื่อง</div>
+            <div class="gs-label-en">Cleaning · External / Internal Hardware</div>
+          </div>
+          <div class="gs-price">฿ 535 – 1,605</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">05</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการติดตั้ง Windows on Boot Camp</div>
+            <div class="gs-label-en">Installing Windows on Boot Camp</div>
+          </div>
+          <div class="gs-price">฿ 2,140</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">06</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการ Restore สำหรับ iDevice</div>
+            <div class="gs-label-en">Hi-Level Firmware Reset &amp; Restoring</div>
+          </div>
+          <div class="gs-price">฿ 535</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">07</span>
+          <div>
+            <div class="gs-label-th">ค่าบริการ Mac OS — Upgrading / Installing</div>
+            <div class="gs-label-en">Upgrading Mac OS / Installing Mac OS</div>
+          </div>
+          <div class="gs-price">฿ 1,605</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">08</span>
+          <div>
+            <div class="gs-label-th">ปรึกษาปัญหาการใช้งาน iOS (30 นาที)</div>
+            <div class="gs-label-en">Consultation — Do More Using iOS · 30 min.</div>
+          </div>
+          <div class="gs-price">฿ 535</div>
+        </div>
+        <div class="gs-row">
+          <span class="gs-num">09</span>
+          <div>
+            <div class="gs-label-th">ปรึกษาปัญหาการใช้งาน macOS (30 นาที)</div>
+            <div class="gs-label-en">Consultation — Do More Using macOS · 30 min.</div>
+          </div>
+          <div class="gs-price">฿ 1,070</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fine print -->
+    <div class="fine-print">
+      <h5>*เงื่อนไขการแลกเปลี่ยน (Exchange)</h5>
+      <ul>
+        <li>ราคาดังกล่าวรวมภาษีมูลค่าเพิ่ม 7% แล้ว และอาจมีการเปลี่ยนแปลงราคาและเงื่อนไขโดยไม่ต้องแจ้งให้ทราบล่วงหน้า</li>
+        <li>เครื่องที่ได้รับ มีคุณสมบัติ (สเปค) เหมือนเครื่องเดิมที่นำมาทำการซ่อมทุกประการ เช่น รุ่น, สี, ความจุ เป็นต้น</li>
+        <li>เครื่องที่ได้รับ มีการรับประกัน 90 วัน หรือนับต่อจากเครื่องเดิม ขึ้นอยู่กับว่าระยะเวลาใดคุ้มครองนานกว่า</li>
+        <li>เป็นราคาแลกเปลี่ยน (Exchange) เฉพาะตัวเครื่องเท่านั้น (ไม่มีกล่อง หรือสายนาฬิกา หรืออุปกรณ์เสริมใดๆ)</li>
+        <li>การพิจารณาอนุมัติในการแลกเปลี่ยน ขึ้นอยู่กับดุลยพินิจของศูนย์บริการ ซึ่งเป็นไปตามเงื่อนไขของทาง Apple</li>
+        <li>มีการเรียกเก็บค่าบริการแยกต่างหาก สำหรับการเปลี่ยนแบตเตอรี่, จอแสดงผลและชิ้นส่วนอื่นๆ (535 บาท)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY iMEDIC -->
+<section class="section why-section" id="why" data-screen-label="03 Why iMedic">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">03 — Why iMedic</div>
+        <h2 class="section-title">ทำไม? ต้องใช้บริการ<br/>ที่ iMedic</h2>
+        <p class="section-desc">มาตรฐานเดียวกับศูนย์บริการชั้นนำ บริการที่คุณตรวจสอบและไว้วางใจได้ทุกขั้นตอน</p>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3 class="why-title">ทีมช่างผ่านมาตรฐาน ACMT</h3>
+        <p class="why-desc">ทีมช่างทุกคนได้รับการรับรอง Apple Certified Macintosh Technician มาตรฐานสากลโดยตรงจาก Apple</p>
+        <div class="why-meta"><span>Certification</span><strong>ACMT</strong></div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 7.3 12 2 3.5 7.3V16l8.5 5.3L20.5 16z"/><path d="M3.5 7.3 12 12.6l8.5-5.3M12 12.6V22"/></svg>
+        </div>
+        <h3 class="why-title">ใช้อะไหล่ตรงตามมาตรฐาน</h3>
+        <p class="why-desc">อะไหล่คุณภาพสูง คัดสรรจากซัพพลายเออร์ที่ได้มาตรฐาน พร้อมรับประกันงานซ่อมทุกชิ้น</p>
+        <div class="why-meta"><span>Warranty</span><strong>90 Days</strong></div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h2M8 17h6"/></svg>
+        </div>
+        <h3 class="why-title">ตรวจสอบสถานะออนไลน์</h3>
+        <p class="why-desc">ติดตามความคืบหน้างานซ่อมแบบเรียลไทม์ผ่านเว็บไซต์และ Line ทุกขั้นตอนตรวจสอบได้</p>
+        <div class="why-meta"><span>Status</span><strong>Real-time</strong></div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m10 15 1.5 1.5L15 13"/></svg>
+        </div>
+        <h3 class="why-title">บริการนัดหมายล่วงหน้า</h3>
+        <p class="why-desc">เลือกวันและเวลาที่สะดวก ไม่ต้องรอคิว มาถึงพร้อมเริ่มงานทันที ประหยัดเวลาของคุณ</p>
+        <div class="why-meta"><span>Booking</span><strong>Online</strong></div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 1 1-3-6.5L21 8M21 3v5h-5"/></svg>
+        </div>
+        <h3 class="why-title">ปรึกษาโดยผู้เชี่ยวชาญ</h3>
+        <p class="why-desc">ทีมที่ปรึกษาพร้อมให้คำแนะนำตั้งแต่การประเมินอาการ การเตรียมเครื่อง จนเสร็จสมบูรณ์</p>
+        <div class="why-meta"><span>Expert</span><strong>1-on-1</strong></div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3 class="why-title">ซ่อมรวดเร็ว ตรวจสอบได้</h3>
+        <p class="why-desc">งานซ่อมหลายรายการเสร็จภายในวันเดียว ขั้นตอนโปร่งใส ตรวจสอบราคาและสถานะได้ทุกเวลา</p>
+        <div class="why-meta"><span>Turnaround</span><strong>Same-day*</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCH LOCATIONS -->
+<section class="section" id="branches" data-screen-label="04 Branches">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">04 — Locations</div>
+        <h2 class="section-title">สาขาของเรา</h2>
+        <p class="section-desc">เปิดให้บริการ 3 สาขา ครอบคลุมพื้นที่กรุงเทพและปริมณฑล เดินทางสะดวก จอดรถง่าย</p>
+      </div>
+      <div class="section-head-right">
+        <a class="btn btn-soft" href="#all-branches">
+          ดูสาขาทั้งหมด
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="branch-grid">
+      <!-- Branch 1 -->
+      <div class="branch-card">
+        <div class="branch-photo">
+          <span class="branch-photo-label">storefront photo · 5:3</span>
+        </div>
+        <div class="branch-body">
+          <div>
+            <h3 class="branch-name">iMedic — สยามสแควร์</h3>
+            <p class="branch-addr">ชั้น 3 อาคารเซ็นเตอร์พอยท์ ถ.พระราม 1 แขวงปทุมวัน เขตปทุมวัน กรุงเทพฯ 10330</p>
+          </div>
+          <div class="branch-meta">
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              10:00 – 21:00
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.93 19 19 0 0 1-6-6A19 19 0 0 1 3.69 4.81 1 1 0 0 1 4.7 4h4.09a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27 1L9 11.27a16 16 0 0 0 6 6l1.5-1.5a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .76 1z"/></svg>
+              02-123-4567
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+              BTS สยาม
+            </span>
+          </div>
+          <div class="branch-actions">
+            <a class="btn btn-soft" href="#map-siam">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              ดูแผนที่
+            </a>
+            <a class="btn btn-primary" href="online-booking.html">จองคิว</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 2 -->
+      <div class="branch-card">
+        <div class="branch-photo" style="background:
+          linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.15) 100%),
+          repeating-linear-gradient(45deg, oklch(0.91 0.012 250) 0px, oklch(0.91 0.012 250) 12px, oklch(0.88 0.018 250) 12px, oklch(0.88 0.018 250) 24px);">
+          <span class="branch-photo-label">storefront photo · 5:3</span>
+        </div>
+        <div class="branch-body">
+          <div>
+            <h3 class="branch-name">iMedic — เซ็นทรัล ลาดพร้าว</h3>
+            <p class="branch-addr">ชั้น 4 ศูนย์การค้าเซ็นทรัล ลาดพร้าว ถ.พหลโยธิน แขวงจตุจักร เขตจตุจักร กรุงเทพฯ 10900</p>
+          </div>
+          <div class="branch-meta">
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              10:00 – 22:00
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.93 19 19 0 0 1-6-6A19 19 0 0 1 3.69 4.81 1 1 0 0 1 4.7 4h4.09a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27 1L9 11.27a16 16 0 0 0 6 6l1.5-1.5a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .76 1z"/></svg>
+              02-234-5678
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+              MRT พหลโยธิน
+            </span>
+          </div>
+          <div class="branch-actions">
+            <a class="btn btn-soft" href="#map-ladprao">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              ดูแผนที่
+            </a>
+            <a class="btn btn-primary" href="online-booking.html">จองคิว</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch 3 -->
+      <div class="branch-card">
+        <div class="branch-photo" style="background:
+          linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.15) 100%),
+          repeating-linear-gradient(45deg, oklch(0.93 0.008 230) 0px, oklch(0.93 0.008 230) 12px, oklch(0.90 0.014 230) 12px, oklch(0.90 0.014 230) 24px);">
+          <span class="branch-photo-label">storefront photo · 5:3</span>
+        </div>
+        <div class="branch-body">
+          <div>
+            <h3 class="branch-name">iMedic — เมกาบางนา</h3>
+            <p class="branch-addr">ชั้น 1 ศูนย์การค้าเมกาบางนา ถ.บางนา-ตราด กม.8 ต.บางแก้ว อ.บางพลี จ.สมุทรปราการ 10540</p>
+          </div>
+          <div class="branch-meta">
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              10:00 – 22:00
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M22 16.92V21a1 1 0 0 1-1.1 1 19 19 0 0 1-8.27-2.93 19 19 0 0 1-6-6A19 19 0 0 1 3.69 4.81 1 1 0 0 1 4.7 4h4.09a1 1 0 0 1 1 .76l1 4a1 1 0 0 1-.27 1L9 11.27a16 16 0 0 0 6 6l1.5-1.5a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .76 1z"/></svg>
+              02-345-6789
+            </span>
+            <span class="branch-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+              ทางด่วน บางนา
+            </span>
+          </div>
+          <div class="branch-actions">
+            <a class="btn btn-soft" href="#map-megabangna">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              ดูแผนที่
+            </a>
+            <a class="btn btn-primary" href="online-booking.html">จองคิว</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="cta-banner">
+      <div>
+        <h2>เครื่องมีปัญหา? เริ่มจองคิวซ่อมได้ภายใน 60 วินาที</h2>
+        <p>กรอกข้อมูลเครื่องและอาการ ระบบจะประเมินราคาเบื้องต้นและจัดสรรช่างให้คุณอัตโนมัติ</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="online-booking.html">
+            จองคิวซ่อมเลย
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="btn btn-outline" href="#chat">คุยกับเรา</a>
+        </div>
+      </div>
+      <div class="cta-banner-side">
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-val">12,400+</div>
+            <div class="stat-label">เครื่องที่ดูแลแล้ว</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">4.9 ★</div>
+            <div class="stat-label">คะแนนจากลูกค้า</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">90 วัน</div>
+            <div class="stat-label">รับประกันงานซ่อม</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">3 สาขา</div>
+            <div class="stat-label">ทั่วกรุงเทพฯ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" data-screen-label="05 Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="brand" href="#">
+          <span class="brand-mark">iM</span>
+          <span>iMedic</span>
+        </a>
+        <p class="footer-tag">ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple แบบครบวงจร โดยทีมช่างมาตรฐาน ACMT</p>
+        <div class="socials">
+          <a class="social-btn" href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Line">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.631.631 0 .345-.282.63-.631.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.282.629-.63.629h-2.386c-.345 0-.627-.285-.63-.629V8.108c0-.345.285-.63.63-.63h2.386c.345 0 .627.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM12 2C6.477 2 2 5.69 2 10.235c0 4.092 3.553 7.526 8.353 8.21.325.07.768.214.881.493.103.252.067.65.033.911 0 0-.117.706-.143.857-.043.252-.2.987.865.538 1.066-.45 5.748-3.385 7.84-5.793C20.857 13.846 22 12.165 22 10.235 22 5.69 17.523 2 12 2zM7.755 13.514H5.369c-.345 0-.63-.285-.63-.63V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.146h1.756c.349 0 .63.283.63.63 0 .344-.282.63-.63.63zm2.13-.63a.629.629 0 0 1-.626.63.628.628 0 0 1-.626-.63V8.108c0-.345.282-.63.626-.63.345 0 .626.285.626.63v4.776zm5.741 0c0 .272-.173.513-.43.6a.689.689 0 0 1-.197.027.626.626 0 0 1-.505-.252l-2.443-3.317v2.942c0 .345-.282.63-.63.63-.345 0-.63-.285-.63-.63V8.108c0-.27.173-.513.43-.598a.673.673 0 0 1 .195-.033.638.638 0 0 1 .506.252l2.443 3.32V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63z"/></svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>บริการ</h4>
+        <ul>
+          <li><a href="#">ซ่อม iPhone</a></li>
+          <li><a href="#">ซ่อม iPad</a></li>
+          <li><a href="#">ซ่อม Mac</a></li>
+          <li><a href="#">ซ่อม Apple Watch</a></li>
+          <li><a href="applecare.html">AppleCare+</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>ลูกค้า</h4>
+        <ul>
+          <li><a href="online-booking.html">จองคิวออนไลน์</a></li>
+          <li><a href="check-status.html">ตรวจสถานะการซ่อม</a></li>
+          <li><a href="prepare-device.html">ขั้นตอนเตรียมเครื่อง</a></li>
+          <li><a href="#">เงื่อนไขรับประกัน</a></li>
+          <li><a href="#">คำถามที่พบบ่อย</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>ติดต่อ</h4>
+        <ul>
+          <li><a href="tel:021234567">02-123-4567</a></li>
+          <li><a href="mailto:hello@imedic.co.th">hello@imedic.co.th</a></li>
+          <li><a href="#">@imedic (Line OA)</a></li>
+          <li><a href="#">จันทร์ – อาทิตย์</a></li>
+          <li><a href="#">10:00 – 22:00 น.</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 iMedic Co., Ltd. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">นโยบายความเป็นส่วนตัว</a>
+        <a href="#">เงื่อนไขการให้บริการ</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- PRICING DETAIL MODAL -->
+<div class="pd-backdrop" id="pd-backdrop" role="dialog" aria-modal="true" aria-labelledby="pd-title">
+  <div class="pd-modal">
+    <div class="pd-header">
+      <div class="pd-header-left">
+        <div class="pd-header-icon" id="pd-icon"></div>
+        <div>
+          <h3 id="pd-title">iPhone</h3>
+          <small id="pd-subtitle">Service price reference · ราคาอ้างอิงแต่ละรุ่น</small>
+        </div>
+      </div>
+      <button class="pd-close" id="pd-close" aria-label="ปิด">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="pd-tabs" id="pd-tabs"></div>
+    <div class="pd-body" id="pd-body"></div>
+    <div class="pd-foot">
+      <span>ราคาดังกล่าวรวมภาษีมูลค่าเพิ่ม 7% · ราคาอ้างอิง อาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า</span>
+    </div>
+  </div>
+</div>
+
+<!-- TWEAKS -->
+<div id="tweaks">
+  <h5>Tweaks <button id="tw-close" aria-label="close">×</button></h5>
+  <div class="tweak-row">
+    <label>Accent color</label>
+    <div class="swatches" id="tw-accent">
+      <button class="swatch active" data-h="240" style="background: oklch(0.62 0.10 240)"></button>
+      <button class="swatch" data-h="200" style="background: oklch(0.62 0.10 200)"></button>
+      <button class="swatch" data-h="160" style="background: oklch(0.62 0.10 160)"></button>
+      <button class="swatch" data-h="30" style="background: oklch(0.62 0.10 30)"></button>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <label>Surface contrast</label>
+    <div class="swatches" id="tw-contrast">
+      <button class="swatch active" data-bg="#fbfbfd" style="background:#fbfbfd; border:1px solid var(--line)"></button>
+      <button class="swatch" data-bg="#f4f5f7" style="background:#f4f5f7; border:1px solid var(--line)"></button>
+      <button class="swatch" data-bg="#ffffff" style="background:#ffffff; border:1px solid var(--line)"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- Tweak Mode protocol ----
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accentHue": 200,
+    "bg": "#fbfbfd"
+  }/*EDITMODE-END*/;
+
+  const tweaks = { ...TWEAK_DEFAULTS };
+
+  function applyTweaks() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const h = tweaks.accentHue;
+    document.documentElement.style.setProperty('--accent', `oklch(0.62 0.10 ${h})`);
+    if (dark) {
+      document.documentElement.style.setProperty('--accent-soft', `oklch(0.32 0.07 ${h})`);
+      document.documentElement.style.setProperty('--accent-ink', `oklch(0.80 0.10 ${h})`);
+      document.documentElement.style.removeProperty('--bg');
+    } else {
+      document.documentElement.style.setProperty('--accent-soft', `oklch(0.95 0.025 ${h})`);
+      document.documentElement.style.setProperty('--accent-ink', `oklch(0.45 0.12 ${h})`);
+      document.documentElement.style.setProperty('--bg', tweaks.bg);
+    }
+  }
+
+  // ---- Light / Dark theme ----
+  const themeToggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('imedic-theme', t); } catch (e) {}
+    applyTweaks();
+  }
+  if (themeToggle) themeToggle.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    setTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+
+  applyTweaks();
+
+  const panel = document.getElementById('tweaks');
+  window.addEventListener('message', (e) => {
+    if (!e.data) return;
+    if (e.data.type === '__activate_edit_mode') panel.classList.add('open');
+    if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('open');
+  });
+  // announce after listener is live
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+
+  document.getElementById('tw-close').addEventListener('click', () => {
+    panel.classList.remove('open');
+    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch (e) {}
+  });
+
+  document.querySelectorAll('#tw-accent .swatch').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#tw-accent .swatch').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      tweaks.accentHue = +b.dataset.h;
+      applyTweaks();
+      try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accentHue: tweaks.accentHue } }, '*'); } catch (e) {}
+    });
+  });
+  document.querySelectorAll('#tw-contrast .swatch').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#tw-contrast .swatch').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      tweaks.bg = b.dataset.bg;
+      applyTweaks();
+      try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { bg: tweaks.bg } }, '*'); } catch (e) {}
+    });
+  });
+
+  // ---- Pricing Detail Modal ----
+  const PD_DATA = {
+    iphone: {
+      title: "iPhone",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 19h4"/></svg>',
+      sub: "Service price reference · ราคาอ้างอิงแต่ละรุ่น",
+      categories: [
+        { id: "exchange", label: "ราคาซ่อมแบบแลกเปลี่ยนเครื่อง", intro: "ราคาบริการแลกเปลี่ยนเครื่องใหม่ (Exchange) ในสภาพและสเปคเทียบเท่าเครื่องเดิม",
+          headers: ["รุ่น", "ราคา (รวม VAT)"],
+          rows: [
+            ["iPhone 15 Pro Max", "฿ 41,900"],
+            ["iPhone 15 Pro", "฿ 36,900"],
+            ["iPhone 15 Plus", "฿ 28,900"],
+            ["iPhone 15", "฿ 25,900"],
+            ["iPhone 14 Pro Max", "฿ 38,900"],
+            ["iPhone 14 Pro", "฿ 33,900"],
+            ["iPhone 14 / 14 Plus", "฿ 22,500"],
+            ["iPhone 13 / 13 mini", "฿ 19,900"],
+            ["iPhone 12 series", "฿ 16,900"],
+            ["iPhone 11 series", "฿ 13,900"]
+          ]},
+        { id: "battery", label: "ราคาอะไหล่แบตเตอรี่",
+          intro: "เปลี่ยนแบตเตอรี่มาตรฐาน iMedic พร้อมรับประกัน 90 วัน",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPhone 15 / 15 Plus / 15 Pro / Pro Max", "฿ 3,290"],
+            ["iPhone 14 series", "฿ 2,990"],
+            ["iPhone 13 / 13 mini / 13 Pro / Pro Max", "฿ 2,690"],
+            ["iPhone 12 / 12 mini / 12 Pro / Pro Max", "฿ 2,490"],
+            ["iPhone 11 / 11 Pro / 11 Pro Max", "฿ 2,190"],
+            ["iPhone XS / XS Max / XR", "฿ 1,890"],
+            ["iPhone X / 8 / 8 Plus", "฿ 1,590"]
+          ]},
+        { id: "screen", label: "ราคาอะไหล่หน้าจอ",
+          intro: "หน้าจอแสดงผลพร้อม Touch มาตรฐาน iMedic",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPhone 15 Pro Max", "฿ 18,900"],
+            ["iPhone 15 Pro", "฿ 16,900"],
+            ["iPhone 15 Plus", "฿ 13,900"],
+            ["iPhone 15", "฿ 11,900"],
+            ["iPhone 14 Pro Max / Pro", "฿ 15,900"],
+            ["iPhone 14 / 14 Plus", "฿ 10,900"],
+            ["iPhone 13 series", "฿ 8,900"],
+            ["iPhone 12 series", "฿ 7,500"],
+            ["iPhone 11 series", "฿ 5,900"]
+          ]},
+        { id: "front-cam", label: "ราคาอะไหล่กล้องหน้า",
+          intro: "เปลี่ยนชุดกล้องหน้าและเซ็นเซอร์ Face ID",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPhone 15 Pro / Pro Max", "฿ 4,500"],
+            ["iPhone 15 / 15 Plus", "฿ 3,900"],
+            ["iPhone 14 series", "฿ 3,500"],
+            ["iPhone 13 series", "฿ 2,900"],
+            ["iPhone 12 series", "฿ 2,500"],
+            ["iPhone 11 series", "฿ 1,900"]
+          ]},
+        { id: "rear-cam", label: "ราคาอะไหล่กล้องหลัง",
+          intro: "เปลี่ยนชุดกล้องหลังทั้งโมดูล",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPhone 15 Pro Max", "฿ 9,900"],
+            ["iPhone 15 Pro", "฿ 8,900"],
+            ["iPhone 15 / 15 Plus", "฿ 6,900"],
+            ["iPhone 14 Pro / Pro Max", "฿ 8,500"],
+            ["iPhone 14 / 14 Plus", "฿ 5,900"],
+            ["iPhone 13 series", "฿ 4,500"],
+            ["iPhone 12 series", "฿ 3,500"]
+          ]},
+        { id: "rear-housing", label: "ราคาเปลี่ยนชุดระบบด้านหลัง",
+          intro: "เปลี่ยนชุด Rear Housing (กระจกหลัง + โครง + พอร์ตชาร์จ)",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPhone 15 Pro Max", "฿ 12,900"],
+            ["iPhone 15 Pro", "฿ 11,900"],
+            ["iPhone 15 / 15 Plus", "฿ 9,500"],
+            ["iPhone 14 series", "฿ 8,900"],
+            ["iPhone 13 series", "฿ 7,500"],
+            ["iPhone 12 series", "฿ 6,500"]
+          ]}
+      ]
+    },
+    ipad: {
+      title: "iPad",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M11 18h2"/></svg>',
+      sub: "Service price reference · ราคาอ้างอิงแต่ละรุ่น",
+      categories: [
+        { id: "exchange", label: "ราคาซ่อมแบบแลกเปลี่ยนเครื่อง", intro: "บริการแลกเปลี่ยนเครื่อง (Exchange) สำหรับ iPad ทุกรุ่น",
+          headers: ["รุ่น", "ราคา"],
+          rows: [
+            ["iPad Pro 13\" M4", "฿ 49,900"],
+            ["iPad Pro 11\" M4", "฿ 39,900"],
+            ["iPad Air 13\" M2", "฿ 28,900"],
+            ["iPad Air 11\" M2", "฿ 22,900"],
+            ["iPad 10th Gen", "฿ 16,500"],
+            ["iPad mini 6", "฿ 18,900"]
+          ]},
+        { id: "battery", label: "ราคาอะไหล่แบตเตอรี่", intro: "เปลี่ยนแบตเตอรี่ iPad พร้อมรับประกัน 90 วัน",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPad Pro 12.9\" / 13\"", "฿ 5,900"],
+            ["iPad Pro 11\"", "฿ 4,900"],
+            ["iPad Air 11\" / 13\"", "฿ 3,900"],
+            ["iPad 10/9/8", "฿ 2,900"],
+            ["iPad mini 6/5", "฿ 2,500"]
+          ]},
+        { id: "screen", label: "ราคาอะไหล่หน้าจอ", intro: "เปลี่ยนหน้าจอแสดงผลพร้อม Touch",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPad Pro 13\" M4", "฿ 22,900"],
+            ["iPad Pro 11\" M4", "฿ 18,900"],
+            ["iPad Air 13\"", "฿ 12,900"],
+            ["iPad Air 11\"", "฿ 9,900"],
+            ["iPad 10/9", "฿ 6,900"],
+            ["iPad mini 6", "฿ 7,900"]
+          ]},
+        { id: "front-cam", label: "ราคาอะไหล่กล้องหน้า", intro: "เปลี่ยนชุดกล้องหน้า iPad",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPad Pro M4", "฿ 3,500"],
+            ["iPad Air M2", "฿ 2,500"],
+            ["iPad 10/9", "฿ 1,500"],
+            ["iPad mini 6", "฿ 1,500"]
+          ]},
+        { id: "rear-cam", label: "ราคาอะไหล่กล้องหลัง", intro: "เปลี่ยนชุดกล้องหลัง iPad",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPad Pro M4", "฿ 4,900"],
+            ["iPad Air M2", "฿ 2,900"],
+            ["iPad 10/9", "฿ 1,900"],
+            ["iPad mini 6", "฿ 1,900"]
+          ]},
+        { id: "rear-housing", label: "ราคาเปลี่ยนชุดระบบด้านหลัง", intro: "เปลี่ยน Rear Housing สำหรับ iPad",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["iPad Pro M4 / M2", "฿ 9,900"],
+            ["iPad Air M2", "฿ 6,900"],
+            ["iPad 10/9", "฿ 4,500"],
+            ["iPad mini 6", "฿ 4,900"]
+          ]}
+      ]
+    },
+    mac: {
+      title: "Mac",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4z"/></svg>',
+      sub: "Service price reference · ราคาอ้างอิงแต่ละรุ่น",
+      categories: [
+        { id: "exchange", label: "ราคาซ่อมแบบแลกเปลี่ยนเครื่อง", intro: "แลกเปลี่ยนเครื่อง Mac (Exchange Service)",
+          headers: ["รุ่น", "ราคา"],
+          rows: [
+            ["MacBook Pro 16\" M3 Max", "฿ 119,000"],
+            ["MacBook Pro 14\" M3 Pro", "฿ 89,000"],
+            ["MacBook Pro 14\" M3", "฿ 65,000"],
+            ["MacBook Air 15\" M3", "฿ 49,900"],
+            ["MacBook Air 13\" M3", "฿ 39,900"],
+            ["iMac 24\" M3", "฿ 59,900"],
+            ["Mac mini M2", "฿ 21,900"]
+          ]},
+        { id: "battery", label: "ราคาอะไหล่แบตเตอรี่", intro: "เปลี่ยนแบตเตอรี่ MacBook พร้อมรับประกัน",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["MacBook Pro 16\" M-series", "฿ 8,900"],
+            ["MacBook Pro 14\" M-series", "฿ 7,500"],
+            ["MacBook Pro 13\" Intel/M1/M2", "฿ 5,900"],
+            ["MacBook Air 15\" M-series", "฿ 5,500"],
+            ["MacBook Air 13\" M-series", "฿ 4,900"],
+            ["MacBook Air Intel", "฿ 3,900"]
+          ]},
+        { id: "screen", label: "ราคาอะไหล่หน้าจอ", intro: "เปลี่ยนหน้าจอ MacBook / iMac",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["MacBook Pro 16\" Liquid Retina XDR", "฿ 39,900"],
+            ["MacBook Pro 14\" Liquid Retina XDR", "฿ 32,900"],
+            ["MacBook Air 15\" Liquid Retina", "฿ 19,900"],
+            ["MacBook Air 13\" Liquid Retina", "฿ 15,900"],
+            ["iMac 24\" 4.5K", "฿ 29,900"]
+          ]},
+        { id: "front-cam", label: "ราคาอะไหล่กล้องหน้า", intro: "เปลี่ยนชุด FaceTime HD Camera",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["MacBook Pro M-series", "฿ 3,500"],
+            ["MacBook Air M-series", "฿ 2,900"],
+            ["iMac 24\"", "฿ 4,500"]
+          ]},
+        { id: "rear-cam", label: "ราคาอะไหล่กล้องหลัง", intro: "ไม่มีในผลิตภัณฑ์ Mac — ข้ามไปยังรายการอื่น",
+          headers: ["รายการ", "หมายเหตุ"],
+          rows: [
+            ["Mac ทุกรุ่น", "ไม่มีกล้องหลัง"]
+          ]},
+        { id: "rear-housing", label: "ราคาเปลี่ยนชุดระบบด้านหลัง", intro: "เปลี่ยนชุด Bottom Case / Top Case",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["MacBook Pro 16\" Top Case + Battery", "฿ 18,900"],
+            ["MacBook Pro 14\" Top Case + Battery", "฿ 15,900"],
+            ["MacBook Air 15\" Top Case + Battery", "฿ 12,900"],
+            ["MacBook Air 13\" Top Case + Battery", "฿ 10,900"]
+          ]}
+      ]
+    },
+    watch: {
+      title: "Apple Watch",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M9 7l1-3h4l1 3M9 21l1 3h4l1-3"/></svg>',
+      sub: "Service price reference · ราคาอ้างอิงแต่ละรุ่น",
+      categories: [
+        { id: "exchange", label: "ราคาซ่อมแบบแลกเปลี่ยนเครื่อง", intro: "แลกเปลี่ยนเรือนนาฬิกา (Exchange) สเปคเทียบเท่า",
+          headers: ["รุ่น", "ราคา"],
+          rows: [
+            ["Apple Watch Ultra 2", "฿ 32,900"],
+            ["Apple Watch Series 9 (45 mm)", "฿ 16,900"],
+            ["Apple Watch Series 9 (41 mm)", "฿ 14,900"],
+            ["Apple Watch SE 2 (44 mm)", "฿ 10,900"],
+            ["Apple Watch SE 2 (40 mm)", "฿ 9,900"],
+            ["Apple Watch Series 8 / 7", "฿ 12,900"]
+          ]},
+        { id: "battery", label: "ราคาอะไหล่แบตเตอรี่", intro: "เปลี่ยนแบตเตอรี่ Apple Watch พร้อมรับประกัน 90 วัน",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["Apple Watch Ultra / Ultra 2", "฿ 3,900"],
+            ["Series 9 / 8 / 7", "฿ 2,500"],
+            ["Series 6 / SE", "฿ 1,890"],
+            ["Series 5 / 4", "฿ 1,690"],
+            ["Series 3", "฿ 1,490"]
+          ]},
+        { id: "screen", label: "ราคาอะไหล่หน้าจอ", intro: "เปลี่ยนหน้าจอแสดงผล Always-On Retina",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["Apple Watch Ultra 2", "฿ 15,900"],
+            ["Series 9 (45 mm)", "฿ 7,900"],
+            ["Series 9 (41 mm)", "฿ 6,900"],
+            ["Series 8 / 7", "฿ 6,500"],
+            ["SE 2", "฿ 4,900"],
+            ["Series 6 / 5 / 4", "฿ 4,500"]
+          ]},
+        { id: "front-cam", label: "ราคาอะไหล่กล้องหน้า", intro: "Apple Watch ไม่มีกล้องหน้า — ข้ามไปยังรายการอื่น",
+          headers: ["รายการ", "หมายเหตุ"],
+          rows: [["Apple Watch ทุกรุ่น", "ไม่มีกล้องหน้า"]]},
+        { id: "rear-cam", label: "ราคาอะไหล่กล้องหลัง", intro: "Apple Watch ไม่มีกล้องหลัง — ข้ามไปยังรายการอื่น",
+          headers: ["รายการ", "หมายเหตุ"],
+          rows: [["Apple Watch ทุกรุ่น", "ไม่มีกล้องหลัง"]]},
+        { id: "rear-housing", label: "ราคาเปลี่ยนชุดระบบด้านหลัง", intro: "เปลี่ยนกระจกหลัง + เซ็นเซอร์ Heart Rate",
+          headers: ["รุ่น", "ราคาเปลี่ยน"],
+          rows: [
+            ["Apple Watch Ultra / Ultra 2", "฿ 4,500"],
+            ["Series 9 / 8 / 7", "฿ 2,900"],
+            ["SE 2 / SE", "฿ 2,200"],
+            ["Series 6 / 5 / 4", "฿ 2,200"],
+            ["Series 3", "฿ 1,500"]
+          ]}
+      ]
+    }
+  };
+
+  const pdBackdrop = document.getElementById('pd-backdrop');
+  const pdTitle = document.getElementById('pd-title');
+  const pdSub = document.getElementById('pd-subtitle');
+  const pdIcon = document.getElementById('pd-icon');
+  const pdTabs = document.getElementById('pd-tabs');
+  const pdBody = document.getElementById('pd-body');
+
+  function openPD(key) {
+    const data = PD_DATA[key];
+    if (!data) return;
+    pdTitle.textContent = data.title;
+    pdSub.textContent = data.sub;
+    pdIcon.innerHTML = data.icon;
+
+    pdTabs.innerHTML = '';
+    pdBody.innerHTML = '';
+    data.categories.forEach((cat, i) => {
+      const t = document.createElement('button');
+      t.className = 'pd-tab' + (i === 0 ? ' active' : '');
+      t.textContent = cat.label;
+      t.dataset.cat = cat.id;
+      t.addEventListener('click', () => {
+        pdTabs.querySelectorAll('.pd-tab').forEach(x => x.classList.remove('active'));
+        pdBody.querySelectorAll('.pd-panel').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        pdBody.querySelector('[data-panel="' + cat.id + '"]').classList.add('active');
+      });
+      pdTabs.appendChild(t);
+
+      const panel = document.createElement('div');
+      panel.className = 'pd-panel' + (i === 0 ? ' active' : '');
+      panel.dataset.panel = cat.id;
+      panel.innerHTML =
+        '<p class="pd-panel-intro">' + cat.intro + '</p>' +
+        '<table class="pd-table"><thead><tr>' +
+          cat.headers.map(h => '<th>' + h + '</th>').join('') +
+        '</tr></thead><tbody>' +
+          cat.rows.map(r => '<tr><td class="pd-model">' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') +
+        '</tbody></table>' +
+        '<div class="pd-panel-cta">' +
+          '<div class="pd-panel-cta-text">' +
+            '<strong>พร้อมเข้ารับบริการ?</strong>' +
+            '<span>จองคิวล่วงหน้าเพื่อรับสิทธิ์ราคาประเมินก่อนซ่อม ไม่ต้องรอคิว</span>' +
+          '</div>' +
+          '<a href="online-booking.html" class="btn btn-primary pd-book-btn">จองคิวซ่อม' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>' +
+          '</a>' +
+        '</div>';
+      pdBody.appendChild(panel);
+    });
+
+    pdBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePD() {
+    pdBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-pd-open]').forEach(b => {
+    b.addEventListener('click', () => openPD(b.dataset.pdOpen));
+  });
+  document.getElementById('pd-close').addEventListener('click', closePD);
+  pdBackdrop.addEventListener('click', (e) => {
+    if (e.target === pdBackdrop) closePD();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && pdBackdrop.classList.contains('open')) closePD();
+  });
+</script>
+</body>
+</html>

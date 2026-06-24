@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>จองคิวออนไลน์ — iMedic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css">
+<script>(function(){try{var t=localStorage.getItem('imedic-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-elev: #ffffff;
+    --bg-soft: #f4f5f7;
+    --ink: #0a0a0f;
+    --ink-2: #1d1d24;
+    --muted: #6e6e76;
+    --muted-2: #8a8a93;
+    --line: rgba(10,10,15,0.08);
+    --line-soft: rgba(10,10,15,0.05);
+    --accent: oklch(0.62 0.10 240);
+    --accent-soft: oklch(0.95 0.025 240);
+    --accent-ink: oklch(0.45 0.12 240);
+    --danger: oklch(0.55 0.16 25);
+    --success: oklch(0.55 0.13 155);
+    --shadow-sm: 0 1px 2px rgba(15,17,23,0.04), 0 1px 1px rgba(15,17,23,0.03);
+    --shadow-md: 0 1px 2px rgba(15,17,23,0.04), 0 8px 24px -8px rgba(15,17,23,0.08);
+    --shadow-lg: 0 1px 2px rgba(15,17,23,0.04), 0 24px 60px -20px rgba(15,17,23,0.14);
+    --r-sm: 12px;
+    --r-md: 18px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --font-display: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-thai: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-thai);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.75);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner {
+    height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a35 100%);
+    display: grid; place-items: center; color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.04em;
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--bg-soft); color: var(--ink-2);
+    font-size: 14px; font-weight: 500;
+    transition: background .2s;
+  }
+  .nav-back:hover { background: oklch(0.93 0.005 240); }
+
+  /* PAGE HEAD */
+  .pagehead {
+    padding: 56px 0 28px;
+    text-align: left;
+    position: relative;
+  }
+  .pagehead-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .pagehead h1 {
+    margin: 0 0 14px;
+    font-size: clamp(34px, 4.4vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .pagehead h1 .accent {
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .pagehead p {
+    margin: 0; color: var(--muted); font-size: 16.5px; max-width: 620px; line-height: 1.6;
+  }
+
+  /* LAYOUT */
+  .booking-wrap {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: start;
+    padding: 32px 0 100px;
+  }
+
+  /* FORM */
+  .form-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .form-section {
+    padding: 32px 36px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .form-section:last-of-type { border-bottom: 0; }
+  .form-section-head {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px;
+  }
+  .form-section-num {
+    width: 32px; height: 32px; border-radius: 999px;
+    background: var(--ink); color: white;
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 600; font-size: 13.5px;
+    flex-shrink: 0;
+  }
+  .form-section h2 {
+    margin: 4px 0 4px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .form-section h2 small {
+    display: block;
+    font-size: 12.5px; font-weight: 400; color: var(--muted); margin-top: 2px;
+    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  /* form grid */
+  .field-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .field-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 13px; font-weight: 500; color: var(--ink-2);
+  }
+  .field label .req { color: var(--danger); margin-left: 2px; }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"],
+  .field input[type="date"],
+  .field input[type="time"],
+  .field select,
+  .field textarea {
+    font: inherit;
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: all .15s ease;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e6e76' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .field textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--muted-2); }
+  .field-hint {
+    font-size: 12px; color: var(--muted-2); margin-top: 2px;
+  }
+
+  /* device segmented */
+  .seg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .seg-item {
+    padding: 18px 12px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    cursor: pointer;
+    transition: all .18s ease;
+    text-align: center;
+  }
+  .seg-item:hover { background: var(--bg-soft); }
+  .seg-item.active {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: white;
+    box-shadow: 0 4px 14px -4px rgba(0,0,0,0.25);
+  }
+  .seg-item svg { width: 22px; height: 22px; stroke-width: 1.5; }
+  .seg-item span { font-size: 13.5px; font-weight: 500; }
+
+  /* symptom chips */
+  .chip-group {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    padding: 10px 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all .15s ease;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip:hover { background: oklch(0.93 0.005 240); }
+  .chip.active {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .chip::before {
+    content: "+";
+    font-weight: 600; font-size: 14px;
+    opacity: 0.5;
+    transition: transform .15s;
+  }
+  .chip.active::before { content: "✓"; opacity: 1; }
+
+  /* consent */
+  .consent-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+  .consent-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .consent-item:hover { background: oklch(0.93 0.005 240); }
+  .consent-item input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--line);
+    background: white;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all .15s;
+  }
+  .consent-item input[type="checkbox"]:checked {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .consent-item input[type="checkbox"]:checked::after {
+    content: "";
+    width: 10px; height: 6px;
+    border-left: 2px solid white; border-bottom: 2px solid white;
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .consent-item .ctext {
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.55;
+  }
+  .consent-item .ctext strong { color: var(--ink); font-weight: 600; }
+  .consent-item .ctext a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
+
+  .submit-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px;
+    transition: all .2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-primary:hover:not(:disabled) { background: #2a2a35; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-ghost { color: var(--muted); }
+  .btn-ghost:hover { color: var(--ink); }
+
+  /* SIDE SUMMARY */
+  .summary {
+    position: sticky;
+    top: 92px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .summary-head {
+    padding: 22px 24px;
+    background: linear-gradient(180deg, var(--ink) 0%, #2a2a38 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-head::after {
+    content: ""; position: absolute;
+    right: -60px; top: -60px; width: 200px; height: 200px;
+    background: radial-gradient(circle, oklch(0.65 0.13 240 / 0.35) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .summary-head .label {
+    font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    opacity: 0.6; margin-bottom: 6px;
+  }
+  .summary-head h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .summary-head p { margin: 4px 0 0; font-size: 13px; opacity: 0.65; line-height: 1.5; }
+
+  .summary-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .summary-row {
+    display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .summary-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .summary-row .lbl { font-size: 12.5px; color: var(--muted); flex-shrink: 0; }
+  .summary-row .val { font-size: 13.5px; font-weight: 500; color: var(--ink); text-align: right; }
+  .summary-row .val.empty { color: var(--muted-2); font-weight: 400; }
+
+  .summary-foot {
+    padding: 18px 24px;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+    font-size: 12px; color: var(--muted); line-height: 1.6;
+  }
+
+  /* CONFIRMATION */
+  .confirm {
+    display: none;
+    padding: 32px 0 100px;
+  }
+  .confirm.show { display: block; }
+  .booking-wrap.hide { display: none; }
+
+  .confirm-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: rise .5s cubic-bezier(.2,.7,.2,1);
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  .confirm-hero {
+    padding: 56px 48px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--accent-soft) 0%, var(--bg-elev) 100%);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .confirm-check {
+    width: 72px; height: 72px;
+    margin: 0 auto 22px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: white;
+    display: grid; place-items: center;
+    box-shadow: 0 12px 30px -8px rgba(10,10,15,0.4);
+    animation: pop .5s .2s cubic-bezier(.5, 1.6, .4, 1) backwards;
+  }
+  @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+  .confirm-check svg { width: 36px; height: 36px; stroke-width: 2.5; }
+  .confirm-hero h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+  .confirm-hero p {
+    margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6;
+  }
+  .confirm-ref {
+    margin-top: 18px;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .confirm-ref strong { font-weight: 600; }
+
+  .confirm-body { padding: 36px 48px; }
+  .confirm-body h3 {
+    margin: 0 0 18px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+  .confirm-list { display: flex; flex-direction: column; gap: 0; }
+  .confirm-row {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 24px; padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: baseline;
+  }
+  .confirm-row:last-child { border-bottom: 0; }
+  .confirm-row .lbl { font-size: 13.5px; color: var(--muted); }
+  .confirm-row .val { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.55; }
+  .confirm-row .val .badge {
+    display: inline-block;
+    margin-right: 6px; margin-bottom: 4px;
+    padding: 3px 10px;
+    background: var(--accent-soft); color: var(--accent-ink);
+    border-radius: 999px; font-size: 12.5px; font-weight: 500;
+  }
+
+  .confirm-note {
+    margin: 0 48px 36px;
+    padding: 18px 22px;
+    background: var(--bg-soft);
+    border-radius: 14px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    border-left: 3px solid var(--accent);
+  }
+  .confirm-note strong { color: var(--ink-2); font-weight: 600; }
+  .confirm-note a { color: var(--accent-ink); font-weight: 600; }
+
+  .confirm-actions {
+    padding: 24px 48px 36px;
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+  }
+  .btn-soft { background: var(--bg-elev); color: var(--ink); border: 1px solid var(--line); }
+  .btn-soft:hover { background: oklch(0.97 0.005 240); }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px; color: var(--muted);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 980px) {
+    .booking-wrap { grid-template-columns: 1fr; gap: 28px; }
+    .summary { position: static; }
+    .seg { grid-template-columns: repeat(2, 1fr); }
+    .field-grid, .field-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .form-section { padding: 26px 24px; }
+    .confirm-hero, .confirm-body { padding-left: 28px; padding-right: 28px; }
+    .confirm-note { margin-left: 28px; margin-right: 28px; }
+    .confirm-actions { padding-left: 28px; padding-right: 28px; }
+    .confirm-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 18px; }
+    .pagehead { padding: 36px 0 20px; }
+    .field-grid, .field-grid.cols-3 { grid-template-columns: 1fr; }
+    .nav-back span { display: none; }
+  }
+
+  /* ============ DARK MODE ============ */
+  html[data-theme="dark"]{
+    --bg:#0b0b0e; --bg-elev:#161619; --bg-soft:#1e1e22;
+    --ink:#f4f4f7; --ink-2:#d6d6db; --muted:#9b9ba3; --muted-2:#74747c;
+    --line:rgba(255,255,255,0.11); --line-soft:rgba(255,255,255,0.06);
+    --accent-soft:oklch(0.32 0.07 240); --accent-ink:oklch(0.80 0.10 240);
+  }
+  html[data-theme="dark"] .nav{ background:rgba(11,11,14,0.72); }
+  html[data-theme="dark"] .brand-mark{ background:linear-gradient(135deg,#f4f4f7,#c6c6ce); color:#0b0b0e; }
+  /* solid controls: bg auto-lightens via --ink, flip text dark + fix hardcoded dark hovers */
+  html[data-theme="dark"] .btn-primary{ color:#0b0b0e; }
+  html[data-theme="dark"] .btn-primary:hover, html[data-theme="dark"] .btn-primary:hover:not(:disabled){ background:#ffffff; }
+  html[data-theme="dark"] .chip.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .seg-item.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .form-section-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .meta-chip.years{ color:#0b0b0e; }
+  html[data-theme="dark"] .checker-step label .num{ color:#0b0b0e; }
+  html[data-theme="dark"] .faq-item.open .faq-q .icon{ color:#0b0b0e; }
+  html[data-theme="dark"] .step-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .tl-marker.done{ color:#0b0b0e; }
+  html[data-theme="dark"] .confirm-check{ color:#0b0b0e; }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked{ background:var(--ink); border-color:var(--ink); }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked::after{ border-color:#0b0b0e; }
+  /* hover backgrounds that hardcode light oklch */
+  html[data-theme="dark"] .nav-back:hover,
+  html[data-theme="dark"] .btn-soft:hover,
+  html[data-theme="dark"] .chip:hover,
+  html[data-theme="dark"] .consent-item:hover,
+  html[data-theme="dark"] .help-chip:hover,
+  html[data-theme="dark"] .theme-toggle:hover{ background:rgba(255,255,255,0.08); }
+  /* feature panels: pin dark so white text reads */
+  html[data-theme="dark"] .summary-head,
+  html[data-theme="dark"] .order-head,
+  html[data-theme="dark"] .sla-card,
+  html[data-theme="dark"] .bento-card.dark{ background:linear-gradient(135deg,#17171c 0%,#26262e 100%); }
+  html[data-theme="dark"] .bento-card.dark{ border-color:rgba(255,255,255,0.1); }
+  /* light gradient surfaces */
+  html[data-theme="dark"] .hero::before{ background:radial-gradient(ellipse 900px 400px at 50% -10%,oklch(0.30 0.06 240) 0%,transparent 60%); }
+  html[data-theme="dark"] .applecare-art{ background:radial-gradient(circle at 30% 25%,oklch(0.32 0.06 240) 0%,transparent 50%),radial-gradient(circle at 75% 80%,oklch(0.30 0.06 220) 0%,transparent 55%),linear-gradient(140deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual{ background:radial-gradient(circle at 30% 25%,oklch(0.30 0.05 240) 0%,transparent 55%),linear-gradient(160deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual::before{ background:repeating-linear-gradient(135deg,transparent 0px,transparent 24px,rgba(255,255,255,0.05) 24px,rgba(255,255,255,0.05) 25px); }
+  html[data-theme="dark"] .dev-silhouette svg{ color:var(--ink); }
+  /* theme toggle button */
+  .theme-toggle{ width:40px; height:40px; border-radius:999px; background:var(--bg-soft); display:grid; place-items:center; color:var(--ink-2); transition:all .2s ease; flex-shrink:0; }
+  .theme-toggle:hover{ background:oklch(0.93 0.005 240); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .sun{ display:none; }
+  html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+  html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+
+</style>
+</head>
+<body data-screen-label="06 Online Booking">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">iM</span>
+      <span>iMedic</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="สลับโหมดสว่าง/มืด">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>กลับหน้าหลัก</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEAD -->
+<div class="container">
+  <div class="pagehead">
+    <div class="pagehead-eyebrow">Online Booking · 06</div>
+    <h1>จองคิว<span class="accent">ออนไลน์</span></h1>
+    <p>กรอกข้อมูลด้านล่างเพื่อจองคิวเข้ารับบริการที่ศูนย์ iMedic ทีมงานจะติดต่อยืนยันการนัดหมายภายใน 1 ชั่วโมงทำการ</p>
+  </div>
+</div>
+
+<!-- BOOKING FORM + SUMMARY -->
+<div class="container">
+  <div class="booking-wrap" id="booking-wrap">
+
+    <!-- FORM -->
+    <form class="form-card" id="booking-form" novalidate>
+
+      <!-- 01 — ข้อมูลผู้จอง -->
+      <section class="form-section">
+        <div class="form-section-head">
+          <div class="form-section-num">1</div>
+          <div>
+            <h2>ข้อมูลผู้จอง <small>Personal Information</small></h2>
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="f-firstname">ชื่อ<span class="req">*</span></label>
+            <input type="text" id="f-firstname" name="firstname" placeholder="กรอกชื่อ" required>
+          </div>
+          <div class="field">
+            <label for="f-lastname">นามสกุล<span class="req">*</span></label>
+            <input type="text" id="f-lastname" name="lastname" placeholder="กรอกนามสกุล" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">เบอร์โทรศัพท์<span class="req">*</span></label>
+            <input type="tel" id="f-phone" name="phone" placeholder="08X-XXX-XXXX" required>
+          </div>
+          <div class="field">
+            <label for="f-email">อีเมล<span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 — สาขา + วันเวลา -->
+      <section class="form-section">
+        <div class="form-section-head">
+          <div class="form-section-num">2</div>
+          <div>
+            <h2>เลือกสาขาและนัดหมาย <small>Branch &amp; Schedule</small></h2>
+          </div>
+        </div>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="f-branch">สาขาที่ต้องการเข้ารับบริการ<span class="req">*</span></label>
+            <select id="f-branch" name="branch" required>
+              <option value="">— เลือกสาขา —</option>
+              <option value="siam">iMedic — สยามสแควร์ (10:00 – 21:00)</option>
+              <option value="ladprao">iMedic — เซ็นทรัล ลาดพร้าว (10:00 – 22:00)</option>
+              <option value="megabangna">iMedic — เมกาบางนา (10:00 – 22:00)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date">วันที่<span class="req">*</span></label>
+            <input type="date" id="f-date" name="date" required>
+          </div>
+          <div class="field">
+            <label for="f-time">เวลา<span class="req">*</span></label>
+            <select id="f-time" name="time" required>
+              <option value="">— เลือกเวลา —</option>
+              <option>10:00</option><option>10:30</option>
+              <option>11:00</option><option>11:30</option>
+              <option>12:00</option><option>12:30</option>
+              <option>13:00</option><option>13:30</option>
+              <option>14:00</option><option>14:30</option>
+              <option>15:00</option><option>15:30</option>
+              <option>16:00</option><option>16:30</option>
+              <option>17:00</option><option>17:30</option>
+              <option>18:00</option><option>18:30</option>
+              <option>19:00</option><option>19:30</option>
+              <option>20:00</option><option>20:30</option>
+              <option>21:00</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 — ข้อมูลอุปกรณ์ -->
+      <section class="form-section">
+        <div class="form-section-head">
+          <div class="form-section-num">3</div>
+          <div>
+            <h2>ข้อมูลอุปกรณ์ <small>Device Information</small></h2>
+          </div>
+        </div>
+
+        <div class="field full" style="margin-bottom:18px">
+          <label>ประเภทอุปกรณ์<span class="req">*</span></label>
+          <div class="seg" id="device-seg" role="radiogroup">
+            <button type="button" class="seg-item" data-device="iPhone" role="radio" aria-checked="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 19h4"/></svg>
+              <span>iPhone</span>
+            </button>
+            <button type="button" class="seg-item" data-device="iPad" role="radio" aria-checked="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M11 18h2"/></svg>
+              <span>iPad</span>
+            </button>
+            <button type="button" class="seg-item" data-device="Mac" role="radio" aria-checked="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4z"/></svg>
+              <span>Mac</span>
+            </button>
+            <button type="button" class="seg-item" data-device="Apple Watch" role="radio" aria-checked="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="12" height="14" rx="3"/><path d="M9 7l1-3h4l1 3M9 21l1 3h4l1-3"/></svg>
+              <span>Apple Watch</span>
+            </button>
+          </div>
+          <input type="hidden" id="f-device" name="device" required>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="f-model">รุ่น<span class="req">*</span></label>
+            <select id="f-model" name="model" required disabled>
+              <option value="">— กรุณาเลือกประเภทอุปกรณ์ก่อน —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-imei">เลข IMEI / Serial Number<span class="req">*</span></label>
+            <input type="text" id="f-imei" name="imei" placeholder="กด *#06# บนเครื่อง iPhone/iPad" required>
+            <div class="field-hint">เลข IMEI 15 หลัก หรือ Serial Number ของอุปกรณ์</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 — อาการ -->
+      <section class="form-section">
+        <div class="form-section-head">
+          <div class="form-section-num">4</div>
+          <div>
+            <h2>อาการที่พบและรายละเอียด <small>Symptoms &amp; Details</small></h2>
+          </div>
+        </div>
+
+        <div class="field full" style="margin-bottom:18px">
+          <label>เลือกอาการที่พบ (เลือกได้มากกว่า 1)<span class="req">*</span></label>
+          <div class="chip-group" id="symptom-chips">
+            <button type="button" class="chip" data-symptom="แบตเสื่อม / แบตหมดเร็ว">แบตเสื่อม / แบตหมดเร็ว</button>
+            <button type="button" class="chip" data-symptom="เครื่องเปิดไม่ติด">เครื่องเปิดไม่ติด</button>
+            <button type="button" class="chip" data-symptom="เครื่องค้าง / รีสตาร์ทเอง">เครื่องค้าง / รีสตาร์ทเอง</button>
+            <button type="button" class="chip" data-symptom="หน้าจอแตก / ร้าว">หน้าจอแตก / ร้าว</button>
+            <button type="button" class="chip" data-symptom="หน้าจอไม่แสดงผล / มืด">หน้าจอไม่แสดงผล / มืด</button>
+            <button type="button" class="chip" data-symptom="หน้าจอสัมผัสไม่ทำงาน">หน้าจอสัมผัสไม่ทำงาน</button>
+            <button type="button" class="chip" data-symptom="ลำโพง / ไมโครโฟนเสีย">ลำโพง / ไมโครโฟนเสีย</button>
+            <button type="button" class="chip" data-symptom="กล้องเบลอ / ไม่ทำงาน">กล้องเบลอ / ไม่ทำงาน</button>
+            <button type="button" class="chip" data-symptom="ชาร์จไม่เข้า / พอร์ตชาร์จเสีย">ชาร์จไม่เข้า / พอร์ตชาร์จเสีย</button>
+            <button type="button" class="chip" data-symptom="เครื่องร้อนผิดปกติ">เครื่องร้อนผิดปกติ</button>
+            <button type="button" class="chip" data-symptom="Wi-Fi / Bluetooth ใช้ไม่ได้">Wi-Fi / Bluetooth ใช้ไม่ได้</button>
+            <button type="button" class="chip" data-symptom="เครื่องตกน้ำ / โดนของเหลว">เครื่องตกน้ำ / โดนของเหลว</button>
+            <button type="button" class="chip" data-symptom="อื่นๆ (ระบุในรายละเอียด)">อื่นๆ (ระบุในรายละเอียด)</button>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="f-detail">รายละเอียดอาการเบื้องต้น<span class="req">*</span></label>
+          <textarea id="f-detail" name="detail" placeholder="เช่น แบตหมดเร็วในช่วง 2 สัปดาห์ที่ผ่านมา ใช้งานปกติแต่หมดเร็วกว่าเดิม 30%..." required></textarea>
+          <div class="field-hint">ยิ่งให้รายละเอียดละเอียดเท่าไหร่ ทีมช่างจะสามารถประเมินและเตรียมการได้ดียิ่งขึ้น</div>
+        </div>
+      </section>
+
+      <!-- 05 — ยืนยันและส่ง -->
+      <section class="form-section">
+        <div class="form-section-head">
+          <div class="form-section-num">5</div>
+          <div>
+            <h2>ยืนยันการจอง <small>Confirm &amp; Submit</small></h2>
+          </div>
+        </div>
+
+        <div class="consent-list">
+          <label class="consent-item">
+            <input type="checkbox" id="c-truth" required>
+            <span class="ctext"><strong>ขอยืนยันว่าข้อมูลทั้งหมดที่กรอกเป็นความจริง</strong> และตรงตามอุปกรณ์ที่จะนำมารับบริการที่ศูนย์ iMedic</span>
+          </label>
+          <label class="consent-item">
+            <input type="checkbox" id="c-privacy" required>
+            <span class="ctext"><strong>ยินยอมให้ iMedic จัดเก็บและใช้ข้อมูลส่วนบุคคล</strong> เพื่อวัตถุประสงค์ในการให้บริการและติดต่อกลับ ตาม<a href="#privacy">นโยบายความเป็นส่วนตัว</a></span>
+          </label>
+        </div>
+
+        <div class="submit-row">
+          <button type="button" class="btn btn-ghost" id="reset-btn">ล้างข้อมูล</button>
+          <button type="submit" class="btn btn-primary" id="submit-btn" disabled>
+            ยืนยันการจอง
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </section>
+    </form>
+
+    <!-- SUMMARY -->
+    <aside>
+      <div class="summary">
+        <div class="summary-head">
+          <div class="label">Booking Summary</div>
+          <h3>สรุปการจอง</h3>
+          <p>ข้อมูลจะอัปเดตเมื่อคุณกรอกฟอร์ม</p>
+        </div>
+        <div class="summary-body">
+          <div class="summary-row"><span class="lbl">ชื่อผู้จอง</span><span class="val empty" id="s-name">—</span></div>
+          <div class="summary-row"><span class="lbl">ติดต่อ</span><span class="val empty" id="s-contact">—</span></div>
+          <div class="summary-row"><span class="lbl">สาขา</span><span class="val empty" id="s-branch">—</span></div>
+          <div class="summary-row"><span class="lbl">วัน-เวลา</span><span class="val empty" id="s-when">—</span></div>
+          <div class="summary-row"><span class="lbl">อุปกรณ์</span><span class="val empty" id="s-device">—</span></div>
+          <div class="summary-row"><span class="lbl">อาการ</span><span class="val empty" id="s-symptom">—</span></div>
+        </div>
+        <div class="summary-foot">
+          การจองยังไม่สมบูรณ์จนกว่าจะกด <strong>ยืนยันการจอง</strong> และทีมงานติดต่อกลับเพื่อยืนยันคิวอีกครั้ง
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- CONFIRMATION -->
+<div class="container">
+  <div class="confirm" id="confirm">
+    <div class="confirm-card">
+      <div class="confirm-hero">
+        <div class="confirm-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>
+        </div>
+        <h2>ขอบคุณที่ทำการจองคิวออนไลน์กับเรา<br/>ระบบได้รับข้อมูลเรียบร้อยแล้ว</h2>
+        <p>ทีมงาน iMedic จะติดต่อกลับเพื่อยืนยันการนัดหมายภายใน 1 ชั่วโมงทำการ</p>
+        <div class="confirm-ref">
+          <span style="color:var(--muted)">เลขที่การจอง</span>
+          <strong id="c-ref">IMD-000000</strong>
+        </div>
+      </div>
+
+      <div class="confirm-body">
+        <h3>สรุปข้อมูลการจอง · Booking Details</h3>
+        <div class="confirm-list">
+          <div class="confirm-row"><span class="lbl">ผู้จอง</span><span class="val" id="c-name">—</span></div>
+          <div class="confirm-row"><span class="lbl">ติดต่อ</span><span class="val" id="c-contact">—</span></div>
+          <div class="confirm-row"><span class="lbl">อุปกรณ์</span><span class="val" id="c-device">—</span></div>
+          <div class="confirm-row"><span class="lbl">อาการ</span><span class="val" id="c-symptom">—</span></div>
+          <div class="confirm-row"><span class="lbl">วัน-เวลา</span><span class="val" id="c-when">—</span></div>
+          <div class="confirm-row"><span class="lbl">สาขา</span><span class="val" id="c-branch">—</span></div>
+        </div>
+      </div>
+
+      <div class="confirm-note">
+        <strong>*</strong> โปรดเดินทางมาตามเวลานัดหมายก่อน <strong>10–15 นาที</strong> หากต้องการเปลี่ยนแปลงหรือติดต่อเพิ่มเติม กรุณาติดต่อ <a href="tel:0903052760">090-305-2760</a> หรือ Line <a href="https://line.me/R/ti/p/@imedicthai">@imedicthai</a>
+      </div>
+
+      <div class="confirm-actions">
+        <a class="btn btn-soft" href="index.html">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          กลับหน้าหลัก
+        </a>
+        <button class="btn btn-primary" id="book-again">
+          จองคิวเพิ่มเติม
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <span>© 2025 iMedic Co., Ltd. · ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple</span>
+    <span>โทร 090-305-2760 · Line @imedicthai</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Model data per device ----
+  const MODELS = {
+    "iPhone": [
+      "iPhone 15 Pro Max", "iPhone 15 Pro", "iPhone 15 Plus", "iPhone 15",
+      "iPhone 14 Pro Max", "iPhone 14 Pro", "iPhone 14 Plus", "iPhone 14",
+      "iPhone 13 Pro Max", "iPhone 13 Pro", "iPhone 13", "iPhone 13 mini",
+      "iPhone 12 Pro Max", "iPhone 12 Pro", "iPhone 12", "iPhone 12 mini",
+      "iPhone SE (3rd gen)", "iPhone SE (2nd gen)",
+      "iPhone 11 Pro Max", "iPhone 11 Pro", "iPhone 11",
+      "iPhone XS Max", "iPhone XS", "iPhone XR", "iPhone X",
+      "iPhone 8 Plus", "iPhone 8"
+    ],
+    "iPad": [
+      "iPad Pro 13\" (M4)", "iPad Pro 11\" (M4)",
+      "iPad Pro 12.9\" (M2)", "iPad Pro 11\" (M2)",
+      "iPad Air 13\" (M2)", "iPad Air 11\" (M2)",
+      "iPad Air (5th gen)", "iPad (10th gen)", "iPad (9th gen)",
+      "iPad mini (6th gen)"
+    ],
+    "Mac": [
+      "MacBook Pro 16\" (M3 Max)", "MacBook Pro 16\" (M3 Pro)",
+      "MacBook Pro 14\" (M3 Max)", "MacBook Pro 14\" (M3 Pro)", "MacBook Pro 14\" (M3)",
+      "MacBook Air 15\" (M3)", "MacBook Air 13\" (M3)",
+      "MacBook Air 15\" (M2)", "MacBook Air 13\" (M2)",
+      "MacBook Pro 13\" (M2)", "MacBook Pro 13\" (M1)",
+      "iMac 24\" (M3)", "iMac 24\" (M1)",
+      "Mac mini (M2 Pro)", "Mac mini (M2)",
+      "Mac Studio (M2 Ultra)", "Mac Studio (M2 Max)"
+    ],
+    "Apple Watch": [
+      "Apple Watch Ultra 2", "Apple Watch Ultra",
+      "Apple Watch Series 9 (45 mm)", "Apple Watch Series 9 (41 mm)",
+      "Apple Watch SE (2nd gen, 44 mm)", "Apple Watch SE (2nd gen, 40 mm)",
+      "Apple Watch Series 8 (45 mm)", "Apple Watch Series 8 (41 mm)",
+      "Apple Watch Series 7", "Apple Watch Series 6", "Apple Watch SE", "Apple Watch Series 5"
+    ]
+  };
+
+  const BRANCHES = {
+    "siam": "iMedic — สยามสแควร์",
+    "ladprao": "iMedic — เซ็นทรัล ลาดพร้าว",
+    "megabangna": "iMedic — เมกาบางนา"
+  };
+
+  // ---- Min date = today ----
+  const todayStr = new Date().toISOString().split("T")[0];
+  document.getElementById("f-date").min = todayStr;
+
+  // ---- Device segmented control ----
+  const deviceSeg = document.getElementById("device-seg");
+  const modelSelect = document.getElementById("f-model");
+  const deviceHidden = document.getElementById("f-device");
+  let selectedDevice = "";
+
+  deviceSeg.querySelectorAll(".seg-item").forEach(b => {
+    b.addEventListener("click", () => {
+      deviceSeg.querySelectorAll(".seg-item").forEach(x => {
+        x.classList.remove("active"); x.setAttribute("aria-checked", "false");
+      });
+      b.classList.add("active"); b.setAttribute("aria-checked", "true");
+      selectedDevice = b.dataset.device;
+      deviceHidden.value = selectedDevice;
+      // populate models
+      modelSelect.disabled = false;
+      modelSelect.innerHTML = '<option value="">— เลือกรุ่น —</option>' +
+        MODELS[selectedDevice].map(m => `<option value="${m}">${m}</option>`).join("");
+      updateSummary();
+    });
+  });
+
+  // ---- Symptom chips (multi-select) ----
+  const symptomChips = document.getElementById("symptom-chips");
+  const selectedSymptoms = new Set();
+  symptomChips.querySelectorAll(".chip").forEach(c => {
+    c.addEventListener("click", () => {
+      const s = c.dataset.symptom;
+      if (selectedSymptoms.has(s)) { selectedSymptoms.delete(s); c.classList.remove("active"); }
+      else { selectedSymptoms.add(s); c.classList.add("active"); }
+      updateSummary();
+    });
+  });
+
+  // ---- Summary live updates ----
+  const sName = document.getElementById("s-name");
+  const sContact = document.getElementById("s-contact");
+  const sBranch = document.getElementById("s-branch");
+  const sWhen = document.getElementById("s-when");
+  const sDevice = document.getElementById("s-device");
+  const sSymptom = document.getElementById("s-symptom");
+
+  function setVal(el, v) {
+    if (v && String(v).trim()) { el.textContent = v; el.classList.remove("empty"); }
+    else { el.textContent = "—"; el.classList.add("empty"); }
+  }
+
+  function formatDateTH(d) {
+    if (!d) return "";
+    try {
+      const date = new Date(d + "T00:00:00");
+      return date.toLocaleDateString("th-TH", { year: "numeric", month: "long", day: "numeric" });
+    } catch (e) { return d; }
+  }
+
+  function updateSummary() {
+    const fn = document.getElementById("f-firstname").value.trim();
+    const ln = document.getElementById("f-lastname").value.trim();
+    const phone = document.getElementById("f-phone").value.trim();
+    const email = document.getElementById("f-email").value.trim();
+    const branchKey = document.getElementById("f-branch").value;
+    const date = document.getElementById("f-date").value;
+    const time = document.getElementById("f-time").value;
+    const model = modelSelect.value;
+    const imei = document.getElementById("f-imei").value.trim();
+
+    setVal(sName, (fn || ln) ? `${fn} ${ln}`.trim() : "");
+    setVal(sContact, [phone, email].filter(Boolean).join(" · "));
+    setVal(sBranch, BRANCHES[branchKey] || "");
+    setVal(sWhen, (date || time) ? `${formatDateTH(date)}${time ? "  เวลา " + time : ""}`.trim() : "");
+    setVal(sDevice, [selectedDevice, model, imei && "IMEI " + imei].filter(Boolean).join(" · "));
+    setVal(sSymptom, Array.from(selectedSymptoms).join(", "));
+  }
+
+  // wire form changes
+  document.querySelectorAll("#booking-form input, #booking-form select, #booking-form textarea").forEach(el => {
+    el.addEventListener("input", () => { updateSummary(); checkSubmit(); });
+    el.addEventListener("change", () => { updateSummary(); checkSubmit(); });
+  });
+
+  // ---- Submit enable when both consents checked ----
+  const submitBtn = document.getElementById("submit-btn");
+  const cTruth = document.getElementById("c-truth");
+  const cPrivacy = document.getElementById("c-privacy");
+  function checkSubmit() {
+    submitBtn.disabled = !(cTruth.checked && cPrivacy.checked);
+  }
+  cTruth.addEventListener("change", checkSubmit);
+  cPrivacy.addEventListener("change", checkSubmit);
+
+  // ---- Submit ----
+  const form = document.getElementById("booking-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // basic validation
+    const required = ["f-firstname","f-lastname","f-phone","f-email","f-branch","f-date","f-time","f-model","f-imei","f-detail"];
+    let firstBad = null;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = "var(--danger)";
+        if (!firstBad) firstBad = el;
+      } else {
+        el.style.borderColor = "";
+      }
+    });
+    if (!selectedDevice) { firstBad = firstBad || deviceSeg; }
+    if (selectedSymptoms.size === 0) { firstBad = firstBad || symptomChips; }
+    if (firstBad) {
+      firstBad.focus && firstBad.focus();
+      window.scrollTo({ top: firstBad.getBoundingClientRect().top + window.scrollY - 120, behavior: "smooth" });
+      return;
+    }
+
+    // build confirmation
+    const fn = document.getElementById("f-firstname").value.trim();
+    const ln = document.getElementById("f-lastname").value.trim();
+    const phone = document.getElementById("f-phone").value.trim();
+    const email = document.getElementById("f-email").value.trim();
+    const branch = BRANCHES[document.getElementById("f-branch").value];
+    const date = document.getElementById("f-date").value;
+    const time = document.getElementById("f-time").value;
+    const model = modelSelect.value;
+    const imei = document.getElementById("f-imei").value.trim();
+
+    document.getElementById("c-name").textContent = `${fn} ${ln}`;
+    document.getElementById("c-contact").textContent = `${phone} · ${email}`;
+    document.getElementById("c-device").innerHTML = `${selectedDevice} — ${model} <small style="color:var(--muted);display:block;font-weight:400;font-size:13px;margin-top:2px">IMEI / Serial: ${imei}</small>`;
+    document.getElementById("c-symptom").innerHTML = Array.from(selectedSymptoms).map(s => `<span class="badge">${s}</span>`).join("");
+    document.getElementById("c-when").textContent = `${formatDateTH(date)}  เวลา ${time} น.`;
+    document.getElementById("c-branch").textContent = branch;
+
+    // generate reference
+    const ref = "IMD-" + Math.floor(100000 + Math.random()*900000);
+    document.getElementById("c-ref").textContent = ref;
+
+    // show confirm, hide form
+    document.getElementById("booking-wrap").classList.add("hide");
+    document.getElementById("confirm").classList.add("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // reset / book again
+  document.getElementById("reset-btn").addEventListener("click", () => {
+    form.reset();
+    selectedSymptoms.clear();
+    symptomChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    deviceSeg.querySelectorAll(".seg-item").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-checked","false"); });
+    selectedDevice = ""; deviceHidden.value = "";
+    modelSelect.disabled = true;
+    modelSelect.innerHTML = '<option value="">— กรุณาเลือกประเภทอุปกรณ์ก่อน —</option>';
+    updateSummary();
+    checkSubmit();
+  });
+
+  document.getElementById("book-again").addEventListener("click", () => {
+    document.getElementById("reset-btn").click();
+    document.getElementById("confirm").classList.remove("show");
+    document.getElementById("booking-wrap").classList.remove("hide");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // initial state
+  updateSummary();
+  checkSubmit();
+</script>
+<script>
+  (function(){
+    var tg=document.getElementById('theme-toggle');
+    function setTheme(t){ if(t==='dark')document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('imedic-theme',t);}catch(e){} }
+    if(tg) tg.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'; setTheme(cur==='dark'?'light':'dark'); });
+  })();
+</script>
+</body>
+</html>

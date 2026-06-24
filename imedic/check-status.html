@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ตรวจสถานะการซ่อม — iMedic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/LINESeedSansTH/LINESeedSansTH.css">
+<script>(function(){try{var t=localStorage.getItem('imedic-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --bg-elev: #ffffff;
+    --bg-soft: #f4f5f7;
+    --ink: #0a0a0f;
+    --ink-2: #1d1d24;
+    --muted: #6e6e76;
+    --muted-2: #8a8a93;
+    --line: rgba(10,10,15,0.08);
+    --line-soft: rgba(10,10,15,0.05);
+    --accent: oklch(0.62 0.10 240);
+    --accent-soft: oklch(0.95 0.025 240);
+    --accent-ink: oklch(0.45 0.12 240);
+    --success: oklch(0.58 0.13 155);
+    --warn: oklch(0.72 0.13 80);
+    --shadow-sm: 0 1px 2px rgba(15,17,23,0.04), 0 1px 1px rgba(15,17,23,0.03);
+    --shadow-md: 0 1px 2px rgba(15,17,23,0.04), 0 8px 24px -8px rgba(15,17,23,0.08);
+    --shadow-lg: 0 1px 2px rgba(15,17,23,0.04), 0 24px 60px -20px rgba(15,17,23,0.14);
+    --r-sm: 12px;
+    --r-md: 18px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --font-display: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-thai: "LINE Seed Sans TH", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-thai);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(251,251,253,0.75);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a35 100%);
+    display: grid; place-items: center; color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.04em;
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--bg-soft); color: var(--ink-2);
+    font-size: 14px; font-weight: 500;
+    transition: background .2s;
+  }
+  .nav-back:hover { background: oklch(0.93 0.005 240); }
+
+  /* PAGE HEAD */
+  .pagehead {
+    padding: 56px 0 28px;
+  }
+  .pagehead-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-ink);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .pagehead h1 {
+    margin: 0 0 14px;
+    font-size: clamp(34px, 4.4vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .pagehead h1 .accent {
+    background: linear-gradient(135deg, var(--accent-ink), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .pagehead p {
+    margin: 0; color: var(--muted); font-size: 16.5px; max-width: 600px; line-height: 1.6;
+  }
+
+  /* SEARCH FORM */
+  .search-card {
+    margin: 24px 0 80px;
+    padding: 36px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+    max-width: 720px;
+  }
+  .search-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label {
+    font-size: 13.5px; font-weight: 600; color: var(--ink-2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .field label svg { color: var(--muted); }
+  .field input {
+    font: inherit;
+    width: 100%;
+    padding: 16px 18px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-size: 15.5px;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    letter-spacing: 0.01em;
+    transition: all .15s ease;
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .field input::placeholder {
+    color: var(--muted-2);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    opacity: 0.65;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 24px; border-radius: 14px;
+    font-weight: 600; font-size: 15px;
+    transition: all .2s ease;
+    white-space: nowrap;
+    font-family: var(--font-thai);
+  }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-primary:hover { background: #2a2a35; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-ghost { color: var(--muted); }
+  .btn-ghost:hover { color: var(--ink); }
+  .btn-soft { background: var(--bg-soft); color: var(--ink); padding: 12px 18px; border-radius: 999px; font-size: 14px; }
+  .btn-soft:hover { background: oklch(0.93 0.005 240); }
+
+  .search-help {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+    color: var(--muted);
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .search-help strong { color: var(--ink-2); font-weight: 600; }
+  .help-chip {
+    padding: 4px 10px;
+    background: var(--bg-soft);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .help-chip:hover { background: oklch(0.93 0.005 240); }
+
+  .error-row {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: oklch(0.96 0.04 25);
+    border: 1px solid oklch(0.85 0.08 25);
+    border-radius: 12px;
+    color: oklch(0.45 0.16 25);
+    font-size: 13.5px;
+    display: none;
+  }
+  .error-row.show { display: block; }
+
+  /* RESULT */
+  .result {
+    display: none;
+    padding-bottom: 80px;
+  }
+  .result.show { display: block; }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Order detail card */
+  .order-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 92px;
+  }
+  .order-head {
+    padding: 24px;
+    background: linear-gradient(180deg, var(--ink) 0%, #2a2a38 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .order-head::after {
+    content: "";
+    position: absolute;
+    right: -60px; top: -80px; width: 220px; height: 220px;
+    background: radial-gradient(circle, oklch(0.65 0.13 240 / 0.35) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .order-head .lbl {
+    font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    opacity: 0.6; margin-bottom: 6px;
+  }
+  .order-head .ref {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+  .order-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .order-status-badge .dot {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: var(--warn);
+    box-shadow: 0 0 0 0 oklch(0.72 0.13 80 / 0.6);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 oklch(0.72 0.13 80 / 0.6); }
+    100% { box-shadow: 0 0 0 8px oklch(0.72 0.13 80 / 0); }
+  }
+
+  .order-body {
+    padding: 22px 24px 8px;
+  }
+  .order-body h3 {
+    margin: 0 0 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+  .order-rows { display: flex; flex-direction: column; }
+  .order-row {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .order-row:last-child { border-bottom: 0; }
+  .order-row .k { font-size: 12px; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+  .order-row .v { font-size: 14.5px; font-weight: 500; color: var(--ink); line-height: 1.5; }
+  .order-row .v.device { font-size: 16px; font-weight: 600; }
+  .order-row .v.device small { display:block; color: var(--muted); font-weight: 400; font-size: 12.5px; margin-top: 2px; font-family: var(--font-mono); }
+  .symptom-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .symptom-badge {
+    padding: 4px 10px;
+    background: var(--accent-soft); color: var(--accent-ink);
+    border-radius: 999px; font-size: 12.5px; font-weight: 500;
+  }
+  .order-foot {
+    padding: 16px 24px;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg-soft);
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .order-foot a { color: var(--accent-ink); font-weight: 600; }
+
+  /* Timeline card */
+  .timeline-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .timeline-head {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .timeline-head h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .timeline-head h2 small {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .progress-meta {
+    text-align: right;
+  }
+  .progress-meta .pct {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .progress-meta .pct small { font-size: 14px; font-weight: 500; color: var(--muted); }
+  .progress-meta .pct-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--bg-soft);
+    position: relative;
+  }
+  .progress-bar-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--ink) 0%, var(--accent-ink) 100%);
+    transition: width 1s cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* Timeline */
+  .timeline {
+    padding: 28px 28px 24px;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 47px;
+    top: 28px;
+    bottom: 28px;
+    width: 2px;
+    background: var(--line);
+  }
+  .tl-item {
+    position: relative;
+    padding-left: 56px;
+    padding-bottom: 22px;
+    min-height: 50px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-marker {
+    position: absolute;
+    left: 28px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: var(--bg-elev);
+    border: 2px solid var(--line);
+    display: grid; place-items: center;
+    color: var(--muted-2);
+    z-index: 1;
+    transition: all .3s ease;
+  }
+  .tl-marker svg { width: 18px; height: 18px; stroke-width: 2; }
+  .tl-marker .step-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .tl-item.done .tl-marker {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+  }
+  .tl-item.current .tl-marker {
+    background: var(--bg-elev);
+    border-color: var(--warn);
+    color: var(--warn);
+    box-shadow: 0 0 0 6px oklch(0.96 0.05 80);
+    animation: ringPulse 1.8s infinite;
+  }
+  @keyframes ringPulse {
+    0%   { box-shadow: 0 0 0 0 oklch(0.72 0.13 80 / 0.5); }
+    100% { box-shadow: 0 0 0 14px oklch(0.72 0.13 80 / 0); }
+  }
+  .tl-item.current .tl-marker::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 999px;
+    border: 2px solid var(--warn);
+    opacity: 0.4;
+  }
+
+  .tl-body { padding-top: 8px; }
+  .tl-title {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+    letter-spacing: -0.005em;
+  }
+  .tl-item:not(.done):not(.current) .tl-title { color: var(--muted); font-weight: 500; }
+
+  .tl-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .tl-meta .tl-time {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+  }
+  .tl-meta .tl-tag {
+    padding: 2px 8px;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .tl-item.current .tl-tag {
+    background: oklch(0.96 0.05 80);
+    color: oklch(0.45 0.13 80);
+  }
+  .tl-item.done .tl-tag {
+    background: oklch(0.94 0.05 155);
+    color: oklch(0.42 0.15 155);
+  }
+  .tl-detail {
+    margin-top: 8px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 540px;
+  }
+  .tl-item.current .tl-detail { color: var(--ink-2); }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--bg-elev);
+    border: 1px dashed var(--line);
+    border-radius: var(--r-lg);
+    color: var(--muted);
+    margin: 24px 0 80px;
+    max-width: 720px;
+  }
+  .empty-state svg { width: 40px; height: 40px; opacity: 0.4; margin-bottom: 14px; }
+  .empty-state h4 { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: var(--ink-2); }
+  .empty-state p { margin: 0; font-size: 14px; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 13px; color: var(--muted);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 980px) {
+    .result-grid { grid-template-columns: 1fr; gap: 18px; }
+    .order-card { position: static; }
+    .search-form { grid-template-columns: 1fr; }
+    .search-card { padding: 28px 24px; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 18px; }
+    .pagehead { padding: 36px 0 16px; }
+    .nav-back span { display: none; }
+    .timeline { padding: 22px 18px; }
+    .timeline::before { left: 37px; }
+    .tl-item { padding-left: 46px; }
+    .tl-marker { left: 18px; width: 36px; height: 36px; }
+  }
+
+  /* ============ DARK MODE ============ */
+  html[data-theme="dark"]{
+    --bg:#0b0b0e; --bg-elev:#161619; --bg-soft:#1e1e22;
+    --ink:#f4f4f7; --ink-2:#d6d6db; --muted:#9b9ba3; --muted-2:#74747c;
+    --line:rgba(255,255,255,0.11); --line-soft:rgba(255,255,255,0.06);
+    --accent-soft:oklch(0.32 0.07 240); --accent-ink:oklch(0.80 0.10 240);
+  }
+  html[data-theme="dark"] .nav{ background:rgba(11,11,14,0.72); }
+  html[data-theme="dark"] .brand-mark{ background:linear-gradient(135deg,#f4f4f7,#c6c6ce); color:#0b0b0e; }
+  /* solid controls: bg auto-lightens via --ink, flip text dark + fix hardcoded dark hovers */
+  html[data-theme="dark"] .btn-primary{ color:#0b0b0e; }
+  html[data-theme="dark"] .btn-primary:hover, html[data-theme="dark"] .btn-primary:hover:not(:disabled){ background:#ffffff; }
+  html[data-theme="dark"] .chip.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .seg-item.active{ color:#0b0b0e; }
+  html[data-theme="dark"] .form-section-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .meta-chip.years{ color:#0b0b0e; }
+  html[data-theme="dark"] .checker-step label .num{ color:#0b0b0e; }
+  html[data-theme="dark"] .faq-item.open .faq-q .icon{ color:#0b0b0e; }
+  html[data-theme="dark"] .step-num{ color:#0b0b0e; }
+  html[data-theme="dark"] .tl-item.done .tl-marker{ color:#0b0b0e; }
+  html[data-theme="dark"] .confirm-check{ color:#0b0b0e; }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked{ background:var(--ink); border-color:var(--ink); }
+  html[data-theme="dark"] .consent-item input[type="checkbox"]:checked::after{ border-color:#0b0b0e; }
+  /* hover backgrounds that hardcode light oklch */
+  html[data-theme="dark"] .nav-back:hover,
+  html[data-theme="dark"] .btn-soft:hover,
+  html[data-theme="dark"] .chip:hover,
+  html[data-theme="dark"] .consent-item:hover,
+  html[data-theme="dark"] .help-chip:hover,
+  html[data-theme="dark"] .theme-toggle:hover{ background:rgba(255,255,255,0.08); }
+  /* feature panels: pin dark so white text reads */
+  html[data-theme="dark"] .summary-head,
+  html[data-theme="dark"] .order-head,
+  html[data-theme="dark"] .sla-card,
+  html[data-theme="dark"] .bento-card.dark{ background:linear-gradient(135deg,#17171c 0%,#26262e 100%); }
+  html[data-theme="dark"] .bento-card.dark{ border-color:rgba(255,255,255,0.1); }
+  /* light gradient surfaces */
+  html[data-theme="dark"] .hero::before{ background:radial-gradient(ellipse 900px 400px at 50% -10%,oklch(0.30 0.06 240) 0%,transparent 60%); }
+  html[data-theme="dark"] .applecare-art{ background:radial-gradient(circle at 30% 25%,oklch(0.32 0.06 240) 0%,transparent 50%),radial-gradient(circle at 75% 80%,oklch(0.30 0.06 220) 0%,transparent 55%),linear-gradient(140deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual{ background:radial-gradient(circle at 30% 25%,oklch(0.30 0.05 240) 0%,transparent 55%),linear-gradient(160deg,var(--bg-elev) 0%,oklch(0.20 0.01 240) 100%); }
+  html[data-theme="dark"] .dev-visual::before{ background:repeating-linear-gradient(135deg,transparent 0px,transparent 24px,rgba(255,255,255,0.05) 24px,rgba(255,255,255,0.05) 25px); }
+  html[data-theme="dark"] .dev-silhouette svg{ color:var(--ink); }
+  /* theme toggle button */
+  .theme-toggle{ width:40px; height:40px; border-radius:999px; background:var(--bg-soft); display:grid; place-items:center; color:var(--ink-2); transition:all .2s ease; flex-shrink:0; }
+  .theme-toggle:hover{ background:oklch(0.93 0.005 240); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .sun{ display:none; }
+  html[data-theme="dark"] .theme-toggle .moon{ display:none; }
+  html[data-theme="dark"] .theme-toggle .sun{ display:block; }
+
+</style>
+</head>
+<body data-screen-label="07 Check Repair Status">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">iM</span>
+      <span>iMedic</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="สลับโหมดสว่าง/มืด">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>กลับหน้าหลัก</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEAD -->
+<div class="container">
+  <div class="pagehead">
+    <div class="pagehead-eyebrow">Repair Tracking · 07</div>
+    <h1>เช็กสถานะ<span class="accent">การซ่อมสินค้า</span></h1>
+    <p>กรุณากรอกหมายเลขใบงาน หรือหมายเลข Serial เพื่อดูความคืบหน้าการซ่อมของคุณแบบเรียลไทม์</p>
+  </div>
+</div>
+
+<!-- SEARCH CARD -->
+<div class="container">
+  <div class="search-card">
+    <form class="search-form" id="status-form" novalidate>
+      <div class="field">
+        <label for="ref-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+          หมายเลขใบงาน หรือ Serial Number
+        </label>
+        <input type="text" id="ref-input" placeholder="ตัวอย่าง  DE0331-11011910  /  SNS309304903-3" autocomplete="off">
+      </div>
+      <button type="submit" class="btn btn-primary">
+        ตรวจสอบสถานะ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+    <div class="error-row" id="error-row">
+      ไม่พบหมายเลขใบงานหรือ Serial นี้ในระบบ กรุณาตรวจสอบและลองอีกครั้ง
+    </div>
+    <div class="search-help">
+      <span><strong>ตัวอย่างหมายเลขที่กรอกได้:</strong></span>
+      <button type="button" class="help-chip" data-fill="DE0331-11011910">DE0331-11011910</button>
+      <button type="button" class="help-chip" data-fill="SNS309304903-3">SNS309304903-3</button>
+      <button type="button" class="help-chip" data-fill="IMD-742918">IMD-742918</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMPTY -->
+<div class="container" id="empty-wrap">
+  <div class="empty-state">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <h4>ยังไม่มีรายการสถานะที่จะแสดง</h4>
+    <p>กรอกหมายเลขใบงานหรือ Serial Number ด้านบน เพื่อเริ่มตรวจสอบ</p>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="container">
+  <div class="result" id="result">
+    <div class="result-grid">
+
+      <!-- ORDER DETAIL -->
+      <div class="order-card">
+        <div class="order-head">
+          <div class="lbl">หมายเลขใบงาน · Reference</div>
+          <div class="ref" id="r-ref">DE0331-11011910</div>
+          <div class="order-status-badge" id="r-status-badge">
+            <span class="dot"></span>
+            <span id="r-status-text">อยู่ระหว่างดำเนินการซ่อม</span>
+          </div>
+        </div>
+        <div class="order-body">
+          <h3>ข้อมูลการจองของคุณ</h3>
+          <div class="order-rows">
+            <div class="order-row">
+              <span class="k">Device</span>
+              <span class="v device" id="r-device">iPhone 14 Pro Max <small>IMEI 356789012345678</small></span>
+            </div>
+            <div class="order-row">
+              <span class="k">Symptom</span>
+              <span class="v">
+                <span class="symptom-badges" id="r-symptoms">
+                  <span class="symptom-badge">แบตเสื่อม / แบตหมดเร็ว</span>
+                  <span class="symptom-badge">เครื่องร้อนผิดปกติ</span>
+                </span>
+              </span>
+            </div>
+            <div class="order-row">
+              <span class="k">Appointment</span>
+              <span class="v" id="r-when">22 พ.ค. 2026  เวลา 14:00 น.</span>
+            </div>
+            <div class="order-row">
+              <span class="k">Branch</span>
+              <span class="v" id="r-branch">iMedic — เซ็นทรัล ลาดพร้าว</span>
+            </div>
+          </div>
+        </div>
+        <div class="order-foot">
+          มีคำถามเกี่ยวกับงานซ่อมนี้? ติดต่อ <a href="tel:0903052760">090-305-2760</a> หรือ Line <a href="#">@imedicthai</a>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="timeline-card">
+        <div class="timeline-head">
+          <h2>สถานะการซ่อม <small>Repair Progress</small></h2>
+          <div class="progress-meta">
+            <div class="pct" id="r-pct">56<small>%</small></div>
+            <div class="pct-label" id="r-step-label">ขั้นตอนที่ 5 / 9</div>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="r-progress" style="width: 56%"></div></div>
+
+        <div class="timeline" id="timeline">
+          <!-- timeline items injected here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <span>© 2025 iMedic Co., Ltd. · ศูนย์ซ่อมและบริการผลิตภัณฑ์ Apple</span>
+    <span>โทร 090-305-2760 · Line @imedicthai</span>
+  </div>
+</footer>
+
+<script>
+  // ---- Mock orders (multiple sample refs) ----
+  const ORDERS = {
+    "DE0331-11011910": {
+      ref: "DE0331-11011910",
+      device: "iPhone 14 Pro Max",
+      imei: "356789012345678",
+      symptoms: ["แบตเสื่อม / แบตหมดเร็ว", "เครื่องร้อนผิดปกติ"],
+      appointment: { date: "22 พ.ค. 2026", time: "14:00" },
+      branch: "iMedic — เซ็นทรัล ลาดพร้าว",
+      currentStep: 4,  // 0-indexed → step 5 of 9
+      stepTimes: [
+        "22 พ.ค. 2026  14:00",
+        "22 พ.ค. 2026  14:08",
+        "22 พ.ค. 2026  15:42",
+        "23 พ.ค. 2026  10:15",
+        "24 พ.ค. 2026  09:30",
+        null, null, null, null
+      ]
+    },
+    "SNS309304903-3": {
+      ref: "SNS309304903-3",
+      device: "MacBook Pro 14\" (M3 Pro)",
+      imei: "C02ZK1N2MD6T",
+      symptoms: ["เครื่องค้าง / รีสตาร์ทเอง", "Wi-Fi / Bluetooth ใช้ไม่ได้"],
+      appointment: { date: "20 พ.ค. 2026", time: "11:30" },
+      branch: "iMedic — สยามสแควร์",
+      currentStep: 7,
+      stepTimes: [
+        "20 พ.ค. 2026  11:30",
+        "20 พ.ค. 2026  11:42",
+        "20 พ.ค. 2026  13:10",
+        "21 พ.ค. 2026  09:00",
+        "23 พ.ค. 2026  14:20",
+        "25 พ.ค. 2026  16:05",
+        "26 พ.ค. 2026  09:30",
+        "26 พ.ค. 2026  11:45",
+        null
+      ]
+    },
+    "IMD-742918": {
+      ref: "IMD-742918",
+      device: "iPad Pro 11\" (M4)",
+      imei: "DMQF7HZ3PD",
+      symptoms: ["หน้าจอแตก / ร้าว"],
+      appointment: { date: "18 พ.ค. 2026", time: "16:00" },
+      branch: "iMedic — เมกาบางนา",
+      currentStep: 8,
+      stepTimes: [
+        "18 พ.ค. 2026  16:00",
+        "18 พ.ค. 2026  16:14",
+        "18 พ.ค. 2026  17:20",
+        "19 พ.ค. 2026  10:00",
+        "20 พ.ค. 2026  11:30",
+        "22 พ.ค. 2026  15:00",
+        "23 พ.ค. 2026  09:00",
+        "24 พ.ค. 2026  14:30",
+        "24 พ.ค. 2026  16:50"
+      ]
+    }
+  };
+
+  const STEPS = [
+    { title: "วันนัดหมาย", en: "Appointment Scheduled",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+      detail: "ระบบได้รับการจองคิวเข้ารับบริการแล้ว รอลูกค้าเข้ามาที่สาขา" },
+    { title: "วันรับสินค้าเข้าระบบ", en: "Device Received",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>',
+      detail: "พนักงานรับเครื่องเข้าระบบและออกหมายเลขใบงานแล้ว" },
+    { title: "ตรวจสอบอาการเบื้องต้น", en: "Initial Diagnosis",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>',
+      detail: "ทีมช่าง ACMT กำลังตรวจสอบเพื่อยืนยันอาการและประเมินการซ่อม" },
+    { title: "รอรับชิ้นส่วน / อะไหล่", en: "Awaiting Parts",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8 8 16M8 8h8v8"/><circle cx="12" cy="12" r="9"/></svg>',
+      detail: "รอชิ้นส่วน / อะไหล่จากคลังเพื่อนำมาเปลี่ยน" },
+    { title: "อยู่ระหว่างดำเนินการซ่อม", en: "Repair in Progress",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6a2 2 0 1 0 2.8 2.8l6-6a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-2.1z"/></svg>',
+      detail: "ช่างกำลังดำเนินการซ่อมตามมาตรฐาน ACMT" },
+    { title: "ซ่อมเสร็จ", en: "Repair Complete",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12s4.5 10 10 10 10-4.5 10-10z"/><path d="m8 12 3 3 5-6"/></svg>',
+      detail: "ซ่อมและทดสอบการทำงานเรียบร้อย พร้อมส่งมอบ" },
+    { title: "กำลังจัดส่งคืน", en: "Preparing for Delivery",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v8h-5zM3 8h13v11H3z"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>',
+      detail: "กำลังจัดเตรียมและบรรจุเครื่องเพื่อส่งคืนลูกค้า" },
+    { title: "จัดส่งคืนลูกค้า", en: "Out for Delivery",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h13v11H3zM16 9h4l3 4v4h-7"/><circle cx="7" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>',
+      detail: "เครื่องอยู่ในระหว่างการจัดส่ง / รอลูกค้ามารับที่สาขา" },
+    { title: "เสร็จสิ้น", en: "Completed",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>',
+      detail: "ลูกค้าได้รับเครื่องเรียบร้อย ขอบคุณที่ใช้บริการ iMedic" }
+  ];
+
+  const STATUS_TEXTS = [
+    "รอเข้ารับบริการ",
+    "รับเครื่องเข้าระบบแล้ว",
+    "กำลังตรวจสอบอาการ",
+    "รอรับชิ้นส่วน / อะไหล่",
+    "อยู่ระหว่างดำเนินการซ่อม",
+    "ซ่อมเสร็จ รอจัดส่ง",
+    "กำลังจัดเตรียมส่งคืน",
+    "อยู่ระหว่างจัดส่ง / รอรับเครื่อง",
+    "เสร็จสิ้น"
+  ];
+
+  function renderTimeline(order) {
+    const tl = document.getElementById("timeline");
+    tl.innerHTML = "";
+    STEPS.forEach((step, i) => {
+      const isDone = i < order.currentStep;
+      const isCurrent = i === order.currentStep;
+      const item = document.createElement("div");
+      item.className = "tl-item" + (isDone ? " done" : "") + (isCurrent ? " current" : "");
+      const time = order.stepTimes[i];
+      let tag = "";
+      if (isDone) tag = '<span class="tl-tag">เสร็จสิ้น</span>';
+      else if (isCurrent) tag = '<span class="tl-tag">กำลังดำเนินการ</span>';
+
+      item.innerHTML =
+        '<div class="tl-marker">' + (isDone
+          ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>'
+          : step.icon) + '</div>' +
+        '<div class="tl-body">' +
+          '<h4 class="tl-title">' + step.title + '</h4>' +
+          '<div class="tl-meta">' +
+            (time ? '<span class="tl-time">' + time + '</span>' : '<span class="tl-time" style="opacity:0.5">— รอดำเนินการ —</span>') +
+            tag +
+            '<span class="tl-tag" style="background:transparent;color:var(--muted-2);padding-left:0">' + step.en + '</span>' +
+          '</div>' +
+          ((isDone || isCurrent) ? '<p class="tl-detail">' + step.detail + '</p>' : '') +
+        '</div>';
+      tl.appendChild(item);
+    });
+  }
+
+  function renderOrder(order) {
+    document.getElementById("r-ref").textContent = order.ref;
+    document.getElementById("r-status-text").textContent = STATUS_TEXTS[order.currentStep];
+    document.getElementById("r-device").innerHTML = order.device + ' <small>IMEI / Serial: ' + order.imei + '</small>';
+    document.getElementById("r-symptoms").innerHTML = order.symptoms.map(s => '<span class="symptom-badge">' + s + '</span>').join("");
+    document.getElementById("r-when").textContent = order.appointment.date + "  เวลา " + order.appointment.time + " น.";
+    document.getElementById("r-branch").textContent = order.branch;
+
+    const totalSteps = STEPS.length;
+    const stepNum = order.currentStep + 1;
+    const pct = Math.round((stepNum / totalSteps) * 100);
+    document.getElementById("r-pct").innerHTML = pct + '<small>%</small>';
+    document.getElementById("r-step-label").textContent = "ขั้นตอนที่ " + stepNum + " / " + totalSteps;
+    // animate progress
+    const bar = document.getElementById("r-progress");
+    bar.style.width = "0%";
+    requestAnimationFrame(() => { setTimeout(() => bar.style.width = pct + "%", 50); });
+
+    renderTimeline(order);
+  }
+
+  // ---- Search ----
+  const form = document.getElementById("status-form");
+  const input = document.getElementById("ref-input");
+  const errorRow = document.getElementById("error-row");
+  const emptyWrap = document.getElementById("empty-wrap");
+  const result = document.getElementById("result");
+
+  function searchRef(raw) {
+    const ref = (raw || "").trim().toUpperCase();
+    errorRow.classList.remove("show");
+    if (!ref) {
+      input.focus();
+      return;
+    }
+    // case-insensitive match against keys
+    const key = Object.keys(ORDERS).find(k => k.toUpperCase() === ref);
+    if (!key) {
+      errorRow.classList.add("show");
+      result.classList.remove("show");
+      emptyWrap.style.display = "";
+      return;
+    }
+    renderOrder(ORDERS[key]);
+    emptyWrap.style.display = "none";
+    result.classList.add("show");
+    setTimeout(() => {
+      result.scrollIntoView ? null : null;  // avoid scrollIntoView
+      window.scrollTo({ top: result.offsetTop - 80, behavior: "smooth" });
+    }, 50);
+  }
+
+  form.addEventListener("submit", (e) => { e.preventDefault(); searchRef(input.value); });
+
+  document.querySelectorAll(".help-chip").forEach(b => {
+    b.addEventListener("click", () => {
+      input.value = b.dataset.fill;
+      searchRef(b.dataset.fill);
+    });
+  });
+
+  // deeplink: ?ref=XXX
+  const params = new URLSearchParams(location.search);
+  const initRef = params.get("ref");
+  if (initRef) { input.value = initRef; searchRef(initRef); }
+</script>
+<script>
+  (function(){
+    var tg=document.getElementById('theme-toggle');
+    function setTheme(t){ if(t==='dark')document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('imedic-theme',t);}catch(e){} }
+    if(tg) tg.addEventListener('click',function(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'; setTheme(cur==='dark'?'light':'dark'); });
+  })();
+</script>
+</body>
+</html>
